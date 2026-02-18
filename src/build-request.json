@@ -1,0 +1,42 @@
+{
+  "kind": "build_request",
+  "title": "Export project code as downloadable archive",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-9",
+      "text": "Generate a complete downloadable archive containing all project source code, including frontend (React/TypeScript), backend (Motoko), configuration files, and project metadata.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-final"
+        ],
+        "quotes": [
+          "export my code"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Archive includes all frontend source files from the frontend directory",
+        "Archive includes all backend source files (main.mo and any other .mo files)",
+        "Archive includes configuration files (package.json, tailwind.config.js, etc.)",
+        "Archive is provided in a standard compressed format (zip or tar.gz)",
+        "User can download the archive through the interface or receive a download link"
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not modify any existing functionality while preparing the export",
+    "Include all necessary files for the project to be reconstructed elsewhere",
+    "Preserve the existing directory structure in the archive"
+  ],
+  "nonGoals": [
+    "Setting up local development instructions or documentation",
+    "Including node_modules or build artifacts",
+    "Creating a migration path to other platforms",
+    "Adding WordPress compatibility or integration"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

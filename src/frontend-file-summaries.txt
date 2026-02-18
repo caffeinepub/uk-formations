@@ -1,0 +1,19 @@
+{
+  "frontend/src/components/ui/Section.tsx": "Reusable section wrapper component that provides consistent spacing and container width for page sections across the application.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for all backend operations including user profiles, order submission, order retrieval, and admin role checks.",
+  "frontend/src/pages/FormationWizardPage.tsx": "Multi-step wizard page that guides users through the company formation process with validation, progress tracking, and final submission to the backend.",
+  "frontend/src/pages/OrderConfirmationPage.tsx": "Order confirmation page that displays submission success, order reference number, and next steps after successful company formation application.",
+  "frontend/src/pages/admin/AdminOrdersPage.tsx": "Admin page displaying a table of all submitted formation orders with access control requiring authentication and admin role, using navigate function for routing.",
+  "frontend/src/pages/admin/AdminOrderDetailPage.tsx": "Admin page showing detailed view of a single formation order including all customer, company, and package information with access control.",
+  "frontend/src/components/Section.tsx": "Reusable section wrapper component that provides consistent spacing and container width for page sections across the application.",
+  "frontend/src/pages/HomePage.tsx": "Home page with hero section, benefits, how it works overview, and call-to-action for UK company formation services.",
+  "frontend/src/pages/PricingPage.tsx": "Pricing page displaying three package tiers with features, pricing, and package selection functionality that integrates with the formation wizard.",
+  "frontend/src/pages/HowItWorksPage.tsx": "Detailed explanation page covering the formation process steps, requirements, and expected timeline for UK company registration.",
+  "frontend/src/pages/FaqPage.tsx": "FAQ page with accordion-style expandable questions and answers about UK company formation services.",
+  "frontend/src/pages/ContactPage.tsx": "Contact page with a message form and contact information including email, phone, address, and business hours.",
+  "frontend/src/pages/legal/PrivacyPolicyPage.tsx": "Privacy policy page outlining data collection, usage, sharing, security, and user rights for the UK Formations service.",
+  "frontend/src/pages/legal/TermsOfServicePage.tsx": "Terms of service page detailing service agreement, responsibilities, fees, processing times, and legal terms for using UK Formations.",
+  "frontend/src/App.tsx": "Main app component with routing configuration including all public pages, admin pages, and the new admin export route.",
+  "frontend/src/components/layout/SiteLayout.tsx": "Site layout component with header navigation, mobile menu, footer, and admin navigation links including the new Export link for admin users.",
+  "frontend/src/pages/admin/AdminExportPage.tsx": "Admin-only page that displays project structure, code information, and instructions for accessing the deployed application code with proper authorization checks."
+}

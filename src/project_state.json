@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Build a UK-focused company formation website.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-create-a-uk-focused-company-formation-marketing-website-with-core-informational-pages-home-packages-pricing-how-it-works-faqs-contact-and-legal-pages-privacy-policy-and-terms-of-service-placeholders",
+      "title": "Create a UK-focused company formation marketing website with core informational pages: Home, Packages/Pricing, How It Works, FAQs, Contact, and Legal pages (Privacy Policy and Terms of Service placeholders).",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-multi-step-uk-company-formation-wizard-that-collects-the-typical-incorporation-details-company-name-s-preferences-company-type-e-g-private-limited-by-shares-registered-office-address-option-director-details-shareholders-share-allocation-psc-details-sic-codes-and-contact-email-phone",
+      "title": "Implement a multi-step UK company formation wizard that collects the typical incorporation details: company name(s) preferences, company type (e.g., private limited by shares), registered office address option, director details, shareholders/share allocation, PSC details, SIC codes, and contact email/phone.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-package-selection-e-g-basic-standard-premium-with-clear-inclusions-and-pricing-and-connect-the-selected-package-into-the-formation-wizard-and-final-submission-payload",
+      "title": "Add package selection (e.g., Basic/Standard/Premium) with clear inclusions and pricing, and connect the selected package into the formation wizard and final submission payload.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-simple-order-confirmation-experience-after-successful-submission-show-a-confirmation-page-with-a-unique-reference-id-and-a-summary-of-what-was-submitted",
+      "title": "Add a simple order confirmation experience: after successful submission, show a confirmation page with a unique reference ID and a summary of what was submitted.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-internal-admin-view-that-is-accessible-only-to-authenticated-users-internet-identity-to-review-the-list-of-submitted-formation-orders-and-view-order-details",
+      "title": "Add an internal admin view that is accessible only to authenticated users (Internet Identity) to review the list of submitted formation orders and view order details.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-coherent-professional-uk-corporate-visual-theme-distinct-style-across-all-pages-and-flows-including-typography-spacing-and-reusable-ui-patterns-cards-steps-forms-do-not-use-a-blue-purple-color-scheme",
+      "title": "Apply a coherent, professional UK corporate visual theme (distinct style) across all pages and flows, including typography, spacing, and reusable UI patterns (cards, steps, forms). Do not use a blue & purple color scheme.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-visual-assets-logo-and-hero-illustration-to-the-frontend-and-use-them-in-the-header-and-home-hero-section",
+      "title": "Add generated static visual assets (logo and hero illustration) to the frontend and use them in the header and Home hero section.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-a-complete-downloadable-archive-containing-all-project-source-code-including-frontend-react-typescript-backend-motoko-configuration-files-and-project-metadata",
+      "title": "Generate a complete downloadable archive containing all project source code, including frontend (React/TypeScript), backend (Motoko), configuration files, and project metadata.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create a UK company formation website (core site for forming UK companies).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Create backend data models and APIs to accept, validate, and persist formation order submissions, and to list submitted orders for later review.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    }
+  ],
+  "projectName": "UK Formations",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
