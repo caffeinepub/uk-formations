@@ -2,7 +2,7 @@ import { Link } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Section from '@/components/Section';
-import { CheckCircle2, Clock, Shield, FileText, Users, Building2 } from 'lucide-react';
+import { CheckCircle2, Clock, Shield, FileText, Users, Building2, MapPin, FileCheck, ArrowRight } from 'lucide-react';
 
 export default function HomePage() {
   const benefits = [
@@ -25,6 +25,37 @@ export default function HomePage() {
       icon: Users,
       title: 'Expert Support',
       description: 'Dedicated support throughout the process',
+    },
+  ];
+
+  const coreServices = [
+    {
+      icon: Building2,
+      title: 'Company Formation',
+      description: 'Register your UK limited company, LLP, or other business structure quickly and efficiently.',
+      image: '/assets/generated/service-formation.dim_120x120.png',
+      link: '/services/company-formation',
+    },
+    {
+      icon: MapPin,
+      title: 'Registered Office',
+      description: 'Professional business address with mail handling and forwarding services.',
+      image: '/assets/generated/service-office.dim_120x120.png',
+      link: '/services/registered-office',
+    },
+    {
+      icon: Users,
+      title: 'Business Support',
+      description: 'Company secretary, director services, and business bank account assistance.',
+      image: '/assets/generated/service-support.dim_120x120.png',
+      link: '/services/business-support',
+    },
+    {
+      icon: FileCheck,
+      title: 'Compliance Services',
+      description: 'VAT registration, PAYE setup, and annual confirmation statement filing.',
+      image: '/assets/generated/service-compliance.dim_120x120.png',
+      link: '/services/business-support',
     },
   ];
 
@@ -116,8 +147,46 @@ export default function HomePage() {
         </div>
       </Section>
 
-      {/* How It Works Section */}
+      {/* Core Services Section */}
       <Section className="bg-muted/30">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Services</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Comprehensive company formation and business support services to help you succeed.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {coreServices.map((service) => (
+            <Card key={service.title} className="border-2 hover:shadow-lg transition-shadow group">
+              <CardHeader>
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="w-16 h-16 mb-3 rounded-lg"
+                />
+                <CardTitle className="text-xl mb-2">{service.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <CardDescription className="text-base">{service.description}</CardDescription>
+                <Button asChild variant="ghost" size="sm" className="w-full group-hover:bg-muted">
+                  <Link to={service.link}>
+                    Learn More
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+        <div className="text-center mt-8">
+          <Button asChild variant="outline" size="lg">
+            <Link to="/services">View All Services</Link>
+          </Button>
+        </div>
+      </Section>
+
+      {/* How It Works Section */}
+      <Section>
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -142,30 +211,23 @@ export default function HomePage() {
         </div>
         <div className="text-center mt-12">
           <Button asChild size="lg">
-            <Link to="/how-it-works">Learn More</Link>
+            <Link to="/how-it-works">Learn More About Our Process</Link>
           </Button>
         </div>
       </Section>
 
       {/* CTA Section */}
-      <Section>
-        <Card className="bg-primary text-primary-foreground border-0">
-          <CardHeader className="text-center space-y-4 pb-8">
-            <Building2 className="h-16 w-16 mx-auto" />
-            <CardTitle className="text-3xl md:text-4xl">Ready to Start Your Business?</CardTitle>
-            <CardDescription className="text-primary-foreground/90 text-lg max-w-2xl mx-auto">
-              Join thousands of entrepreneurs who have successfully formed their UK companies with our service.
-              Get started today and have your company registered within 48 hours.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex justify-center pb-8">
-            <Button asChild size="lg" variant="secondary" className="text-base">
-              <Link to="/formation-wizard">Begin Your Formation Now</Link>
-            </Button>
-          </CardContent>
-        </Card>
+      <Section className="bg-primary text-primary-foreground">
+        <div className="text-center space-y-6">
+          <h2 className="text-3xl md:text-4xl font-bold">Ready to Start Your Business?</h2>
+          <p className="text-lg max-w-2xl mx-auto opacity-90">
+            Join thousands of entrepreneurs who have successfully formed their UK companies with our expert service.
+          </p>
+          <Button asChild size="lg" variant="secondary">
+            <Link to="/formation-wizard">Get Started Today</Link>
+          </Button>
+        </div>
       </Section>
     </div>
   );
 }
-

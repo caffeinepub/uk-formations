@@ -1,72 +1,59 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
-  "summary": "Build a UK-focused company formation website.",
-  "architectural_notes": [],
+  "projectStateVersion": 3,
+  "summary": "Company formations service website with comprehensive service offerings",
+  "architectural_notes": [
+    "Reference websites: yourcompanyformations.co.uk and 360companyformations.co.uk for service offerings structure"
+  ],
   "known_issues": [],
   "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Service category icon for Company Formation - modern geometric illustration in forest green (service-formation.dim_120x120.png)\n- Service category icon for Registered Office - building or address marker illustration in forest green (service-office.dim_120x120.png)\n- Service category icon for Business Support - handshake or support illustration in forest green (service-support.dim_120x120.png)\n- Service category icon for Compliance Services - checkmark shield illustration in forest green (service-compliance.dim_120x120.png)\n- Services hero banner - professional UK business office setting with subtle brand colors (services-hero.dim_1200x400.png)",
   "existing_features": [
     {
-      "id": "feature-create-a-uk-focused-company-formation-marketing-website-with-core-informational-pages-home-packages-pricing-how-it-works-faqs-contact-and-legal-pages-privacy-policy-and-terms-of-service-placeholders",
-      "title": "Create a UK-focused company formation marketing website with core informational pages: Home, Packages/Pricing, How It Works, FAQs, Contact, and Legal pages (Privacy Policy and Terms of Service placeholders).",
+      "id": "feature-create-a-new-services-page-that-lists-all-company-formation-and-business-support-services-offered-organized-into-clear-categories-e-g-company-formation-registered-office-services-business-support-compliance-services",
+      "title": "Create a new Services page that lists all company formation and business support services offered, organized into clear categories (e.g., Company Formation, Registered Office Services, Business Support, Compliance Services)",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-implement-a-multi-step-uk-company-formation-wizard-that-collects-the-typical-incorporation-details-company-name-s-preferences-company-type-e-g-private-limited-by-shares-registered-office-address-option-director-details-shareholders-share-allocation-psc-details-sic-codes-and-contact-email-phone",
-      "title": "Implement a multi-step UK company formation wizard that collects the typical incorporation details: company name(s) preferences, company type (e.g., private limited by shares), registered office address option, director details, shareholders/share allocation, PSC details, SIC codes, and contact email/phone.",
+      "id": "feature-expand-the-services-catalog-to-include-additional-formation-related-services-such-as-registered-office-address-service-business-address-service-mail-forwarding-director-service-company-secretary-service-vat-registration-paye-registration-and-business-bank-account-assistance",
+      "title": "Expand the services catalog to include additional formation-related services such as: registered office address service, business address service, mail forwarding, director service, company secretary service, VAT registration, PAYE registration, and business bank account assistance",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
     },
     {
-      "id": "feature-add-package-selection-e-g-basic-standard-premium-with-clear-inclusions-and-pricing-and-connect-the-selected-package-into-the-formation-wizard-and-final-submission-payload",
-      "title": "Add package selection (e.g., Basic/Standard/Premium) with clear inclusions and pricing, and connect the selected package into the formation wizard and final submission payload.",
+      "id": "feature-add-detailed-service-pages-for-major-service-offerings-company-formation-types-registered-office-business-support-that-explain-what-each-service-includes-pricing-tiers-and-benefits",
+      "title": "Add detailed service pages for major service offerings (company formation types, registered office, business support) that explain what each service includes, pricing tiers, and benefits",
       "reqIds": [
         "REQ-3"
       ],
       "version": 1
     },
     {
-      "id": "feature-add-a-simple-order-confirmation-experience-after-successful-submission-show-a-confirmation-page-with-a-unique-reference-id-and-a-summary-of-what-was-submitted",
-      "title": "Add a simple order confirmation experience: after successful submission, show a confirmation page with a unique reference ID and a summary of what was submitted.",
+      "id": "feature-update-the-home-page-to-feature-a-services-overview-section-showcasing-the-most-popular-or-core-services-with-brief-descriptions-and-links-to-detailed-service-pages",
+      "title": "Update the home page to feature a services overview section showcasing the most popular or core services with brief descriptions and links to detailed service pages",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-service-comparison-feature-that-allows-users-to-compare-different-formation-packages-or-service-tiers-side-by-side-with-feature-lists-and-pricing",
+      "title": "Add a service comparison feature that allows users to compare different formation packages or service tiers side-by-side with feature lists and pricing",
       "reqIds": [
         "REQ-5"
       ],
       "version": 1
     },
     {
-      "id": "feature-add-an-internal-admin-view-that-is-accessible-only-to-authenticated-users-internet-identity-to-review-the-list-of-submitted-formation-orders-and-view-order-details",
-      "title": "Add an internal admin view that is accessible only to authenticated users (Internet Identity) to review the list of submitted formation orders and view order details.",
+      "id": "feature-enhance-the-navigation-menu-to-include-a-services-dropdown-or-section-that-provides-quick-access-to-all-service-categories-and-popular-individual-services",
+      "title": "Enhance the navigation menu to include a Services dropdown or section that provides quick access to all service categories and popular individual services",
       "reqIds": [
         "REQ-6"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-apply-a-coherent-professional-uk-corporate-visual-theme-distinct-style-across-all-pages-and-flows-including-typography-spacing-and-reusable-ui-patterns-cards-steps-forms-do-not-use-a-blue-purple-color-scheme",
-      "title": "Apply a coherent, professional UK corporate visual theme (distinct style) across all pages and flows, including typography, spacing, and reusable UI patterns (cards, steps, forms). Do not use a blue & purple color scheme.",
-      "reqIds": [
-        "REQ-7"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-add-generated-static-visual-assets-logo-and-hero-illustration-to-the-frontend-and-use-them-in-the-header-and-home-hero-section",
-      "title": "Add generated static visual assets (logo and hero illustration) to the frontend and use them in the header and Home hero section.",
-      "reqIds": [
-        "REQ-8"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-generate-a-complete-downloadable-archive-containing-all-project-source-code-including-frontend-react-typescript-backend-motoko-configuration-files-and-project-metadata",
-      "title": "Generate a complete downloadable archive containing all project source code, including frontend (React/TypeScript), backend (Motoko), configuration files, and project metadata.",
-      "reqIds": [
-        "REQ-9"
       ],
       "version": 1
     }
@@ -74,16 +61,8 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Create a UK company formation website (core site for forming UK companies).",
+      "summary": "Add comprehensive services section based on reference websites (yourcompanyformations.co.uk and 360companyformations.co.uk)",
       "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-5",
-      "summary": "Create backend data models and APIs to accept, validate, and persist formation order submissions, and to list submitted orders for later review.",
-      "reqIds": [
-        "REQ-4"
-      ],
       "status": "pending"
     }
   ],

@@ -1,38 +1,137 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Export project code as downloadable archive",
+  "title": "Add comprehensive services section based on reference websites",
   "requirements": [
     {
-      "id": "REQ-9",
-      "summary": "Generate a complete downloadable archive containing all project source code for admin users",
+      "id": "REQ-1",
+      "summary": "Create a new Services page that lists all company formation and business support services offered, organized into clear categories",
       "acceptanceCriteria": [
-        "Archive includes all frontend source files from the frontend directory",
-        "Archive includes all backend source files (main.mo and any other .mo files)",
-        "Archive includes configuration files (package.json, tailwind.config.js, etc.)",
-        "Archive is provided in a standard compressed format (zip or tar.gz)",
-        "User can download the archive through the interface or receive a download link"
+        "Services page displays multiple service categories with clear headings",
+        "Each service category contains a list of individual services",
+        "Services are presented in a clean, organized layout similar to reference sites",
+        "Page is accessible from main navigation"
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/admin/AdminExportPage.tsx",
+          "path": "frontend/src/pages/ServicesPage.tsx",
           "operation": "create",
-          "description": "Create admin-only page that allows authorized administrators to export the complete project source code as a downloadable archive. Use the authorization component to ensure only admins can access this page by checking AccessControl.hasPermission for #admin role. Display a button to trigger the archive generation and download, showing loading state during generation and success/error messages. Include instructions about what is included in the export (frontend, backend, configuration files) and what is excluded (node_modules, build artifacts). Verify the authorization component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/hooks/useExportProject.ts",
-          "operation": "create",
-          "description": "Create a React hook that handles project export logic. Use fetch or the actor to call a backend method that generates and returns the project archive. Handle loading states, errors, and trigger browser download of the returned archive file. Include proper error handling for unauthorized access attempts and network failures."
+          "description": "Create a comprehensive Services page component that displays service categories (Company Formation, Registered Office Services, Business Support, Compliance Services) with organized service listings. Use the Section component for consistent layout. Include generated category icons from frontend/public/assets/generated/service-formation.dim_120x120.png, frontend/public/assets/generated/service-office.dim_120x120.png, frontend/public/assets/generated/service-support.dim_120x120.png, and frontend/public/assets/generated/service-compliance.dim_120x120.png. Include the hero banner from frontend/public/assets/generated/services-hero.dim_1200x400.png. Apply the forest green and charcoal color scheme from the theme."
         },
         {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Add a new admin-only route '/admin/export' that renders the AdminExportPage component. Place this route within the admin section of the router configuration, ensuring it follows the same authentication and authorization patterns as existing admin routes like '/admin/orders'."
+          "description": "Add a route registration for the new ServicesPage at path '/services' in the TanStack Router configuration, ensuring it uses the SiteLayout wrapper for consistent navigation and footer."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Expand the services catalog to include additional formation-related services",
+      "acceptanceCriteria": [
+        "Each additional service has a clear name and description",
+        "Services include key features or benefits",
+        "Pricing information is displayed where applicable",
+        "Services are organized logically within their categories"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/features/services/servicesCatalog.ts",
+          "operation": "create",
+          "description": "Create a services catalog data structure defining all service offerings including: registered office address service, business address service, mail forwarding, director service, company secretary service, VAT registration, PAYE registration, and business bank account assistance. Each service should include name, description, category, key features/benefits, and pricing where applicable. Structure similar to packagesCatalog.ts for consistency."
         },
+        {
+          "path": "frontend/src/pages/ServicesPage.tsx",
+          "operation": "modify",
+          "description": "Import and display the expanded services catalog from servicesCatalog.ts. Render each service with its name, description, features, and pricing in an organized card or list layout within the appropriate category section."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Add detailed service pages for major service offerings that explain what each service includes, pricing tiers, and benefits",
+      "acceptanceCriteria": [
+        "Each major service has its own dedicated page with comprehensive information",
+        "Pages include service descriptions, features, pricing, and call-to-action buttons",
+        "Navigation between related service pages is intuitive",
+        "Content is structured with clear headings and sections"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/services/CompanyFormationServicePage.tsx",
+          "operation": "create",
+          "description": "Create a detailed service page for Company Formation services. Include comprehensive descriptions of formation types (Ltd, LLP, etc.), pricing tiers, included features, benefits, and a CTA button linking to the formation wizard. Use Section component for layout consistency and apply theme colors."
+        },
+        {
+          "path": "frontend/src/pages/services/RegisteredOfficeServicePage.tsx",
+          "operation": "create",
+          "description": "Create a detailed service page for Registered Office services. Include service description, what's included, pricing options, benefits of using a registered office service, and CTA buttons. Use Section component and theme styling."
+        },
+        {
+          "path": "frontend/src/pages/services/BusinessSupportServicePage.tsx",
+          "operation": "create",
+          "description": "Create a detailed service page for Business Support services. Include descriptions of support offerings (secretary service, VAT/PAYE registration, bank account assistance), pricing, benefits, and CTAs. Use Section component and maintain design consistency."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add route registrations for the three detailed service pages at paths '/services/company-formation', '/services/registered-office', and '/services/business-support' in the TanStack Router configuration, all wrapped with SiteLayout."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Update the home page to feature a services overview section showcasing the most popular or core services",
+      "acceptanceCriteria": [
+        "Home page includes a prominent services section",
+        "Section highlights 4-6 key services with icons or visual elements",
+        "Each service card links to its detailed service page",
+        "Section integrates seamlessly with existing home page design"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Add a new services overview section to the HomePage between the benefits cards and the process steps. Display 4-6 core services (Company Formation, Registered Office, Business Support, Compliance) with the generated category icons (frontend/public/assets/generated/service-formation.dim_120x120.png, service-office.dim_120x120.png, service-support.dim_120x120.png, service-compliance.dim_120x120.png), brief descriptions, and links to their respective service pages. Use the existing Section component wrapper and maintain the forest green/charcoal theme."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Add a service comparison feature that allows users to compare different formation packages or service tiers side-by-side",
+      "acceptanceCriteria": [
+        "Comparison table displays multiple packages/services in columns",
+        "Feature rows clearly indicate what's included in each tier",
+        "Pricing is prominently displayed for each option",
+        "Users can select a package directly from the comparison view"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/services/ServiceComparisonTable.tsx",
+          "operation": "create",
+          "description": "Create a reusable ServiceComparisonTable component that displays packages or service tiers in a side-by-side comparison format. Include columns for each package/tier with pricing at the top, feature rows with checkmarks or text indicating inclusion, and selection buttons at the bottom. Style using theme colors and ensure responsive behavior for mobile views."
+        },
+        {
+          "path": "frontend/src/pages/services/CompanyFormationServicePage.tsx",
+          "operation": "modify",
+          "description": "Import and integrate the ServiceComparisonTable component to display the three formation packages (Basic, Standard, Premium) from packagesCatalog.ts in a comparison format. Wire selection buttons to update the formation draft and navigate to the formation wizard, similar to PricingPage.tsx functionality."
+        }
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "summary": "Enhance the navigation menu to include a Services dropdown or section that provides quick access to all service categories and popular individual services",
+      "acceptanceCriteria": [
+        "Main navigation includes a Services menu item",
+        "Dropdown or mega menu displays service categories",
+        "Users can navigate directly to specific services from the menu",
+        "Menu works consistently on both desktop and mobile views"
+      ],
+      "file_operations": [
         {
           "path": "frontend/src/components/layout/SiteLayout.tsx",
           "operation": "modify",
-          "description": "Add a navigation link to the Export page in the admin section of the site navigation. This link should only be visible to authenticated admin users. Position it logically within the existing admin navigation items, after the Orders link."
+          "description": "Add a Services navigation item to the main navigation menu with a dropdown/submenu containing links to the main Services page and the three detailed service pages (Company Formation, Registered Office, Business Support). Ensure the dropdown works on both desktop (hover or click) and mobile (within the mobile menu). Maintain existing navigation structure and styling consistency with current menu items (Home, Pricing, How It Works, FAQ, Contact)."
         }
       ]
     }

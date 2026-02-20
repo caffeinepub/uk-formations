@@ -12,6 +12,10 @@ import OrderConfirmationPage from './pages/OrderConfirmationPage';
 import AdminOrdersPage from './pages/admin/AdminOrdersPage';
 import AdminOrderDetailPage from './pages/admin/AdminOrderDetailPage';
 import AdminExportPage from './pages/admin/AdminExportPage';
+import ServicesPage from './pages/ServicesPage';
+import CompanyFormationServicePage from './pages/services/CompanyFormationServicePage';
+import RegisteredOfficeServicePage from './pages/services/RegisteredOfficeServicePage';
+import BusinessSupportServicePage from './pages/services/BusinessSupportServicePage';
 
 const rootRoute = createRootRoute({
   component: SiteLayout,
@@ -89,6 +93,30 @@ const adminExportRoute = createRoute({
   component: AdminExportPage,
 });
 
+const servicesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/services',
+  component: ServicesPage,
+});
+
+const companyFormationServiceRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/services/company-formation',
+  component: CompanyFormationServicePage,
+});
+
+const registeredOfficeServiceRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/services/registered-office',
+  component: RegisteredOfficeServicePage,
+});
+
+const businessSupportServiceRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/services/business-support',
+  component: BusinessSupportServicePage,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   pricingRoute,
@@ -102,6 +130,10 @@ const routeTree = rootRoute.addChildren([
   adminOrdersRoute,
   adminOrderDetailRoute,
   adminExportRoute,
+  servicesRoute,
+  companyFormationServiceRoute,
+  registeredOfficeServiceRoute,
+  businessSupportServiceRoute,
 ]);
 
 const router = createRouter({ routeTree });

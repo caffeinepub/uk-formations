@@ -1,10 +1,16 @@
 import { Outlet, Link, useNavigate } from '@tanstack/react-router';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { useInternetIdentity } from '../../hooks/useInternetIdentity';
 import { useGetCallerUserRole } from '../../hooks/useQueries';
 import { SiFacebook, SiX, SiLinkedin } from 'react-icons/si';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 export default function SiteLayout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -30,6 +36,13 @@ export default function SiteLayout() {
     { to: '/how-it-works', label: 'How It Works' },
     { to: '/faq', label: 'FAQ' },
     { to: '/contact', label: 'Contact' },
+  ];
+
+  const servicesLinks = [
+    { to: '/services', label: 'All Services' },
+    { to: '/services/company-formation', label: 'Company Formation' },
+    { to: '/services/registered-office', label: 'Registered Office' },
+    { to: '/services/business-support', label: 'Business Support' },
   ];
 
   const adminLinks = [
@@ -62,6 +75,27 @@ export default function SiteLayout() {
                 {link.label}
               </Link>
             ))}
+            
+            {/* Services Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors outline-none">
+                Services
+                <ChevronDown className="h-4 w-4" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                {servicesLinks.map((link) => (
+                  <DropdownMenuItem key={link.to} asChild>
+                    <Link
+                      to={link.to}
+                      className="w-full cursor-pointer"
+                    >
+                      {link.label}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             {isAdmin && (
               <>
                 {adminLinks.map((link) => (
@@ -116,21 +150,38 @@ export default function SiteLayout() {
                   {link.label}
                 </Link>
               ))}
+              
+              {/* Services submenu in mobile */}
+              <div className="border-t pt-2">
+                <p className="text-sm font-semibold mb-2">Services</p>
+                {servicesLinks.map((link) => (
+                  <Link
+                    key={link.to}
+                    to={link.to}
+                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2 pl-4 block"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+
               {isAdmin && (
-                <>
+                <div className="border-t pt-2">
+                  <p className="text-sm font-semibold mb-2">Admin</p>
                   {adminLinks.map((link) => (
                     <Link
                       key={link.to}
                       to={link.to}
-                      className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                      className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2 pl-4 block"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {link.label}
                     </Link>
                   ))}
-                </>
+                </div>
               )}
-              <div className="pt-3 space-y-2">
+              <div className="pt-3 space-y-2 border-t">
                 <Button
                   onClick={() => {
                     handleAuth();
@@ -178,6 +229,32 @@ export default function SiteLayout() {
               <h3 className="font-semibold mb-3">Services</h3>
               <ul className="space-y-2 text-sm">
                 <li>
+                  <Link to="/services" className="text-muted-foreground hover:text-foreground transition-colors">
+                    All Services
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/services/company-formation" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Company Formation
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/services/registered-office" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Registered Office
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/services/business-support" className="text-muted-foreground hover:text-foreground transition-colors">
+                    Business Support
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-semibold mb-3">Company</h3>
+              <ul className="space-y-2 text-sm">
+                <li>
                   <Link to="/pricing" className="text-muted-foreground hover:text-foreground transition-colors">
                     Pricing
                   </Link>
@@ -187,17 +264,6 @@ export default function SiteLayout() {
                     How It Works
                   </Link>
                 </li>
-                <li>
-                  <Link to="/formation-wizard" className="text-muted-foreground hover:text-foreground transition-colors">
-                    Start Formation
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="font-semibold mb-3">Support</h3>
-              <ul className="space-y-2 text-sm">
                 <li>
                   <Link to="/faq" className="text-muted-foreground hover:text-foreground transition-colors">
                     FAQ

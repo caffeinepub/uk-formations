@@ -1,44 +1,115 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-18T15:09:56.331Z",
+  "generatedAt": "2026-02-20T06:30:40.471Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 1,
-    "implemented": 1,
+    "total": 6,
+    "implemented": 6,
     "items": [
       {
-        "id": "REQ-9",
-        "summary": "Generate a complete downloadable archive containing all project source code, including frontend (React/TypeScript), backend (Motoko), configuration files, and project metadata.",
+        "id": "REQ-1",
+        "summary": "Create a new Services page that lists all company formation and business support services offered, organized into clear categories (e.g., Company Formation, Registered Office Services, Business Support, Compliance Services)",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/admin/AdminExportPage.tsx",
-          "frontend/src/hooks/useExportProject.ts",
-          "frontend/src/App.tsx",
+          "frontend/src/pages/ServicesPage.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/ServicesPage.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Expand the services catalog to include additional formation-related services such as: registered office address service, business address service, mail forwarding, director service, company secretary service, VAT registration, PAYE registration, and business bank account assistance",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/features/services/servicesCatalog.ts",
+          "frontend/src/pages/ServicesPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/features/services/servicesCatalog.ts",
+          "frontend/src/pages/ServicesPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Add detailed service pages for major service offerings (company formation types, registered office, business support) that explain what each service includes, pricing tiers, and benefits",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/services/CompanyFormationServicePage.tsx",
+          "frontend/src/pages/services/RegisteredOfficeServicePage.tsx",
+          "frontend/src/pages/services/BusinessSupportServicePage.tsx",
+          "frontend/src/App.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/services/CompanyFormationServicePage.tsx",
+          "frontend/src/pages/services/RegisteredOfficeServicePage.tsx",
+          "frontend/src/pages/services/BusinessSupportServicePage.tsx",
+          "frontend/src/App.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Update the home page to feature a services overview section showcasing the most popular or core services with brief descriptions and links to detailed service pages",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/HomePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/HomePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-5",
+        "summary": "Add a service comparison feature that allows users to compare different formation packages or service tiers side-by-side with feature lists and pricing",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/services/ServiceComparisonTable.tsx",
+          "frontend/src/pages/services/CompanyFormationServicePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/services/ServiceComparisonTable.tsx",
+          "frontend/src/pages/services/CompanyFormationServicePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-6",
+        "summary": "Enhance the navigation menu to include a Services dropdown or section that provides quick access to all service categories and popular individual services",
+        "status": "implemented",
+        "plannedFiles": [
           "frontend/src/components/layout/SiteLayout.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/admin/AdminExportPage.tsx",
-          "frontend/src/App.tsx",
           "frontend/src/components/layout/SiteLayout.tsx"
         ]
       }
     ]
   },
   "changedFiles": [
-    "backend/main.mo",
     "build-request.json",
-    "build-template/README.md",
     "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
+    "frontend/public/assets/generated/service-compliance.dim_120x120.png",
+    "frontend/public/assets/generated/service-formation.dim_120x120.png",
+    "frontend/public/assets/generated/service-office.dim_120x120.png",
+    "frontend/public/assets/generated/service-support.dim_120x120.png",
+    "frontend/public/assets/generated/services-hero.dim_1200x400.png",
     "frontend/src/App.tsx",
     "frontend/src/components/layout/SiteLayout.tsx",
-    "frontend/src/pages/admin/AdminExportPage.tsx",
+    "frontend/src/components/services/ServiceComparisonTable.tsx",
+    "frontend/src/features/services/servicesCatalog.ts",
+    "frontend/src/pages/HomePage.tsx",
+    "frontend/src/pages/ServicesPage.tsx",
+    "frontend/src/pages/services/BusinessSupportServicePage.tsx",
+    "frontend/src/pages/services/CompanyFormationServicePage.tsx",
+    "frontend/src/pages/services/RegisteredOfficeServicePage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",
