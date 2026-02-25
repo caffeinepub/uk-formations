@@ -1,0 +1,146 @@
+{
+  "kind": "build_request",
+  "title": "Add comprehensive services section based on reference websites",
+  "projectName": "UK Formations",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Create a new Services page that lists all company formation and business support services offered, organized into clear categories (e.g., Company Formation, Registered Office Services, Business Support, Compliance Services)",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-services-request"
+        ],
+        "quotes": [
+          "take reference of these two websites, and put everything here in my website as they have",
+          "regarding services"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Services page displays multiple service categories with clear headings",
+        "Each service category contains a list of individual services",
+        "Services are presented in a clean, organized layout similar to reference sites",
+        "Page is accessible from main navigation"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Expand the services catalog to include additional formation-related services such as: registered office address service, business address service, mail forwarding, director service, company secretary service, VAT registration, PAYE registration, and business bank account assistance",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-services-request"
+        ],
+        "quotes": [
+          "take reference of these two websites, and put everything here in my website as they have"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each additional service has a clear name and description",
+        "Services include key features or benefits",
+        "Pricing information is displayed where applicable",
+        "Services are organized logically within their categories"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Add detailed service pages for major service offerings (company formation types, registered office, business support) that explain what each service includes, pricing tiers, and benefits",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-services-request"
+        ],
+        "quotes": [
+          "put everything here in my website as they have"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Each major service has its own dedicated page with comprehensive information",
+        "Pages include service descriptions, features, pricing, and call-to-action buttons",
+        "Navigation between related service pages is intuitive",
+        "Content is structured with clear headings and sections"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Update the home page to feature a services overview section showcasing the most popular or core services with brief descriptions and links to detailed service pages",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-services-request"
+        ],
+        "quotes": [
+          "put everything here in my website as they have"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Home page includes a prominent services section",
+        "Section highlights 4-6 key services with icons or visual elements",
+        "Each service card links to its detailed service page",
+        "Section integrates seamlessly with existing home page design"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Add a service comparison feature that allows users to compare different formation packages or service tiers side-by-side with feature lists and pricing",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-services-request"
+        ],
+        "quotes": [
+          "take reference of these two websites"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Comparison table displays multiple packages/services in columns",
+        "Feature rows clearly indicate what's included in each tier",
+        "Pricing is prominently displayed for each option",
+        "Users can select a package directly from the comparison view"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Enhance the navigation menu to include a Services dropdown or section that provides quick access to all service categories and popular individual services",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-user-services-request"
+        ],
+        "quotes": [
+          "put everything here in my website as they have"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Main navigation includes a Services menu item",
+        "Dropdown or mega menu displays service categories",
+        "Users can navigate directly to specific services from the menu",
+        "Menu works consistently on both desktop and mobile views"
+      ]
+    }
+  ],
+  "constraints": [
+    "Use the existing forest green and charcoal color scheme defined in the theme",
+    "Maintain consistency with existing layout components (Section, SiteLayout)",
+    "Ensure all new pages are added to the TanStack Router configuration in App.tsx",
+    "Services content should be UK-focused and relevant to UK company formations"
+  ],
+  "nonGoals": [
+    "Integrating third-party booking or scheduling systems",
+    "Adding payment processing for individual services (beyond existing formation wizard flow)",
+    "Creating separate registration or login flows for services",
+    "Implementing real-time chat or customer support features",
+    "Modifying the existing formation wizard flow or backend order structure"
+  ],
+  "imageRequirements": {
+    "required": [
+      "Service category icon for Company Formation - modern geometric illustration in forest green (service-formation.dim_120x120.png)",
+      "Service category icon for Registered Office - building or address marker illustration in forest green (service-office.dim_120x120.png)",
+      "Service category icon for Business Support - handshake or support illustration in forest green (service-support.dim_120x120.png)",
+      "Service category icon for Compliance Services - checkmark shield illustration in forest green (service-compliance.dim_120x120.png)",
+      "Services hero banner - professional UK business office setting with subtle brand colors (services-hero.dim_1200x400.png)"
+    ],
+    "edits": []
+  }
+}
