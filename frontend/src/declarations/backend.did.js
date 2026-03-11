@@ -13,6 +13,10 @@ export const UserRole = IDL.Variant({
   'user' : IDL.Null,
   'guest' : IDL.Null,
 });
+export const NameAvailabilityResult = IDL.Record({
+  'isAvailable' : IDL.Bool,
+  'message' : IDL.Text,
+});
 export const FormationOrder = IDL.Record({
   'id' : IDL.Nat,
   'customerName' : IDL.Text,
@@ -37,6 +41,11 @@ export const SubmissionResponse = IDL.Record({
 export const idlService = IDL.Service({
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+  'checkNameAvailability' : IDL.Func(
+      [IDL.Text],
+      [NameAvailabilityResult],
+      ['query'],
+    ),
   'getAllOrders' : IDL.Func([], [IDL.Vec(FormationOrder)], ['query']),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
@@ -63,6 +72,10 @@ export const idlFactory = ({ IDL }) => {
     'user' : IDL.Null,
     'guest' : IDL.Null,
   });
+  const NameAvailabilityResult = IDL.Record({
+    'isAvailable' : IDL.Bool,
+    'message' : IDL.Text,
+  });
   const FormationOrder = IDL.Record({
     'id' : IDL.Nat,
     'customerName' : IDL.Text,
@@ -87,6 +100,11 @@ export const idlFactory = ({ IDL }) => {
   return IDL.Service({
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+    'checkNameAvailability' : IDL.Func(
+        [IDL.Text],
+        [NameAvailabilityResult],
+        ['query'],
+      ),
     'getAllOrders' : IDL.Func([], [IDL.Vec(FormationOrder)], ['query']),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),

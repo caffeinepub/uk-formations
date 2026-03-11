@@ -16,6 +16,9 @@ import ServicesPage from './pages/ServicesPage';
 import CompanyFormationServicePage from './pages/services/CompanyFormationServicePage';
 import RegisteredOfficeServicePage from './pages/services/RegisteredOfficeServicePage';
 import BusinessSupportServicePage from './pages/services/BusinessSupportServicePage';
+import VATRegistrationServicePage from './pages/services/VATRegistrationServicePage';
+import PAYERegistrationServicePage from './pages/services/PAYERegistrationServicePage';
+import NameCheckPage from './pages/NameCheckPage';
 
 const rootRoute = createRootRoute({
   component: SiteLayout,
@@ -117,6 +120,24 @@ const businessSupportServiceRoute = createRoute({
   component: BusinessSupportServicePage,
 });
 
+const vatRegistrationServiceRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/services/vat-registration',
+  component: VATRegistrationServicePage,
+});
+
+const payeRegistrationServiceRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/services/paye-registration',
+  component: PAYERegistrationServicePage,
+});
+
+const nameCheckRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/name-check',
+  component: NameCheckPage,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   pricingRoute,
@@ -134,6 +155,9 @@ const routeTree = rootRoute.addChildren([
   companyFormationServiceRoute,
   registeredOfficeServiceRoute,
   businessSupportServiceRoute,
+  vatRegistrationServiceRoute,
+  payeRegistrationServiceRoute,
+  nameCheckRoute,
 ]);
 
 const router = createRouter({ routeTree });

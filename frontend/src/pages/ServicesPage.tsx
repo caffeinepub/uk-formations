@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import Section from '@/components/Section';
 import { servicesCatalog, getServicesByCategory } from '@/features/services/servicesCatalog';
-import { Building2, MapPin, Users, FileCheck, ArrowRight } from 'lucide-react';
+import { Building2, MapPin, Users, FileCheck, Calculator, Briefcase, ArrowRight } from 'lucide-react';
 
 export default function ServicesPage() {
   const categories = [
@@ -42,6 +42,29 @@ export default function ServicesPage() {
     },
   ];
 
+  const taxServices = [
+    {
+      id: 'vat-registration',
+      title: 'VAT Registration',
+      description:
+        'Register your business for VAT with HMRC. We assess mandatory vs voluntary registration, advise on the best VAT scheme, and handle the full submission process on your behalf.',
+      icon: Calculator,
+      link: '/services/vat-registration' as const,
+      price: '£150.00',
+      badge: 'Popular',
+    },
+    {
+      id: 'paye-registration',
+      title: 'PAYE Registration',
+      description:
+        'Register as an employer with HMRC and set up your PAYE scheme. We handle the full registration, provide your employer reference number, and guide you through NI and income tax setup.',
+      icon: Briefcase,
+      link: '/services/paye-registration' as const,
+      price: '£180.00',
+      badge: null,
+    },
+  ];
+
   return (
     <div>
       {/* Hero Section */}
@@ -69,7 +92,7 @@ export default function ServicesPage() {
           {categories.map((category) => {
             const Icon = category.icon;
             const services = getServicesByCategory(category.id);
-            
+
             return (
               <Card key={category.id} className="border-2 hover:shadow-lg transition-shadow">
                 <CardHeader>
@@ -123,8 +146,52 @@ export default function ServicesPage() {
         </div>
       </Section>
 
-      {/* CTA Section */}
+      {/* Tax & Compliance Services */}
       <Section className="bg-muted/30">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Tax &amp; Compliance Services</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Stay on top of your HMRC obligations with our dedicated VAT and PAYE registration services.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          {taxServices.map((service) => {
+            const Icon = service.icon;
+            return (
+              <Card key={service.id} className="border-2 hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 bg-primary/10 rounded-lg">
+                      <Icon className="h-8 w-8 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <CardTitle className="text-xl">{service.title}</CardTitle>
+                        {service.badge && (
+                          <Badge variant="secondary" className="text-xs">{service.badge}</Badge>
+                        )}
+                      </div>
+                      <p className="text-2xl font-bold text-primary">{service.price}</p>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <CardDescription className="text-base">{service.description}</CardDescription>
+                  <Button asChild className="w-full">
+                    <Link to={service.link}>
+                      Learn More
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
+      </Section>
+
+      {/* CTA Section */}
+      <Section>
         <div className="text-center space-y-6">
           <h2 className="text-3xl md:text-4xl font-bold">Ready to Get Started?</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

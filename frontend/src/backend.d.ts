@@ -14,13 +14,6 @@ export interface FormationOrderInput {
     formationType: string;
     contactEmail: string;
 }
-export interface SubmissionResponse {
-    orderId: bigint;
-    confirmationMessage: string;
-}
-export interface UserProfile {
-    name: string;
-}
 export interface FormationOrder {
     id: bigint;
     customerName: string;
@@ -29,6 +22,17 @@ export interface FormationOrder {
     formationType: string;
     contactEmail: string;
 }
+export interface SubmissionResponse {
+    orderId: bigint;
+    confirmationMessage: string;
+}
+export interface UserProfile {
+    name: string;
+}
+export interface NameAvailabilityResult {
+    isAvailable: boolean;
+    message: string;
+}
 export enum UserRole {
     admin = "admin",
     user = "user",
@@ -36,6 +40,7 @@ export enum UserRole {
 }
 export interface backendInterface {
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
+    checkNameAvailability(name: string): Promise<NameAvailabilityResult>;
     getAllOrders(): Promise<Array<FormationOrder>>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;

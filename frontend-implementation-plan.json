@@ -1,137 +1,114 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Add comprehensive services section based on reference websites",
+  "title": "Add VAT Registration and PAYE Registration services under Services menu",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Create a new Services page that lists all company formation and business support services offered, organized into clear categories",
+      "summary": "Add a 'VAT Registration' entry to the services catalog under a tax/compliance category with comprehensive details covering mandatory vs voluntary registration, VAT scheme options, HMRC submission, VAT number provision, and ongoing support guidance",
       "acceptanceCriteria": [
-        "Services page displays multiple service categories with clear headings",
-        "Each service category contains a list of individual services",
-        "Services are presented in a clean, organized layout similar to reference sites",
-        "Page is accessible from main navigation"
+        "A VAT Registration service entry exists in the services catalog with title, description, features list, and price.",
+        "The service is categorised under compliance or a dedicated tax category."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/ServicesPage.tsx",
-          "operation": "create",
-          "description": "Create a comprehensive Services page component that displays service categories (Company Formation, Registered Office Services, Business Support, Compliance Services) with organized service listings. Use the Section component for consistent layout. Include generated category icons from frontend/public/assets/generated/service-formation.dim_120x120.png, frontend/public/assets/generated/service-office.dim_120x120.png, frontend/public/assets/generated/service-support.dim_120x120.png, and frontend/public/assets/generated/service-compliance.dim_120x120.png. Include the hero banner from frontend/public/assets/generated/services-hero.dim_1200x400.png. Apply the forest green and charcoal color scheme from the theme."
-        },
-        {
-          "path": "frontend/src/App.tsx",
+          "path": "frontend/src/features/services/servicesCatalog.ts",
           "operation": "modify",
-          "description": "Add a route registration for the new ServicesPage at path '/services' in the TanStack Router configuration, ensuring it uses the SiteLayout wrapper for consistent navigation and footer."
+          "description": "Add a new 'VAT Registration' service entry to the services catalog array with category 'compliance', title, description (covering mandatory vs voluntary registration, VAT scheme options including Standard, Flat Rate, and Cash Accounting), price (e.g., £150), and a features array listing: 'Mandatory vs voluntary registration assessment', 'VAT scheme options (Standard, Flat Rate, Cash Accounting)', 'Submission to HMRC on your behalf', 'VAT registration number provision', 'Ongoing VAT compliance guidance'. Model the entry structure on existing services in the catalog, ensuring all required Service interface fields are populated."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Expand the services catalog to include additional formation-related services",
+      "summary": "Add a 'PAYE Registration' entry to the services catalog under the same compliance/tax category with details covering employer PAYE scheme registration, employer reference number provision, NI and income tax setup guidance, and payroll compliance",
       "acceptanceCriteria": [
-        "Each additional service has a clear name and description",
-        "Services include key features or benefits",
-        "Pricing information is displayed where applicable",
-        "Services are organized logically within their categories"
+        "A PAYE Registration service entry exists in the services catalog with title, description, features list, and price.",
+        "The service is categorised in the same category as VAT Registration."
       ],
       "file_operations": [
         {
           "path": "frontend/src/features/services/servicesCatalog.ts",
-          "operation": "create",
-          "description": "Create a services catalog data structure defining all service offerings including: registered office address service, business address service, mail forwarding, director service, company secretary service, VAT registration, PAYE registration, and business bank account assistance. Each service should include name, description, category, key features/benefits, and pricing where applicable. Structure similar to packagesCatalog.ts for consistency."
-        },
-        {
-          "path": "frontend/src/pages/ServicesPage.tsx",
           "operation": "modify",
-          "description": "Import and display the expanded services catalog from servicesCatalog.ts. Render each service with its name, description, features, and pricing in an organized card or list layout within the appropriate category section."
+          "description": "Add a new 'PAYE Registration' service entry to the services catalog array with category 'compliance', title, description (covering employer PAYE scheme registration with HMRC, employer reference number provision, NI and income tax setup), price (e.g., £180), and a features array listing: 'Employer PAYE scheme registration with HMRC', 'Employer reference number provision', 'National Insurance setup guidance', 'Income tax setup and configuration', 'Payroll compliance advisory'. Use the same Service interface structure as existing catalog entries."
         }
       ]
     },
     {
       "id": "REQ-3",
-      "summary": "Add detailed service pages for major service offerings that explain what each service includes, pricing tiers, and benefits",
+      "summary": "Create a dedicated service detail page for VAT Registration presenting benefits, included features, pricing, and a call-to-action, following the layout pattern of RegisteredOfficeServicePage.tsx and BusinessSupportServicePage.tsx",
       "acceptanceCriteria": [
-        "Each major service has its own dedicated page with comprehensive information",
-        "Pages include service descriptions, features, pricing, and call-to-action buttons",
-        "Navigation between related service pages is intuitive",
-        "Content is structured with clear headings and sections"
+        "A `/services/vat-registration` route exists and renders the VAT Registration page.",
+        "The page displays benefits, included features, pricing, and a CTA.",
+        "The layout is consistent with other service detail pages."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/services/CompanyFormationServicePage.tsx",
+          "path": "frontend/src/pages/services/VATRegistrationServicePage.tsx",
           "operation": "create",
-          "description": "Create a detailed service page for Company Formation services. Include comprehensive descriptions of formation types (Ltd, LLP, etc.), pricing tiers, included features, benefits, and a CTA button linking to the formation wizard. Use Section component for layout consistency and apply theme colors."
-        },
-        {
-          "path": "frontend/src/pages/services/RegisteredOfficeServicePage.tsx",
-          "operation": "create",
-          "description": "Create a detailed service page for Registered Office services. Include service description, what's included, pricing options, benefits of using a registered office service, and CTA buttons. Use Section component and theme styling."
-        },
-        {
-          "path": "frontend/src/pages/services/BusinessSupportServicePage.tsx",
-          "operation": "create",
-          "description": "Create a detailed service page for Business Support services. Include descriptions of support offerings (secretary service, VAT/PAYE registration, bank account assistance), pricing, benefits, and CTAs. Use Section component and maintain design consistency."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Add route registrations for the three detailed service pages at paths '/services/company-formation', '/services/registered-office', and '/services/business-support' in the TanStack Router configuration, all wrapped with SiteLayout."
+          "description": "Create a new service detail page component for VAT Registration. Follow the layout pattern from RegisteredOfficeServicePage.tsx and BusinessSupportServicePage.tsx: include a hero section with title and description, a benefits section with at least 3 benefit cards (e.g., 'Expert VAT Advice', 'HMRC Liaison', 'Scheme Selection Support'), a detailed service description section explaining what's included (mandatory vs voluntary registration, scheme options, submission process, VAT number provision, ongoing support), a pricing section displaying the price from the catalog, and a clear call-to-action button. Use the Section component for consistent vertical spacing. Fetch the 'VAT Registration' service from the servicesCatalog by matching the title, and display its features and price. Ensure the page is fully responsive and matches the visual style of existing service pages."
         }
       ]
     },
     {
       "id": "REQ-4",
-      "summary": "Update the home page to feature a services overview section showcasing the most popular or core services",
+      "summary": "Create a dedicated service detail page for PAYE Registration presenting benefits, included features, pricing, and a call-to-action, following the same layout pattern as other service pages",
       "acceptanceCriteria": [
-        "Home page includes a prominent services section",
-        "Section highlights 4-6 key services with icons or visual elements",
-        "Each service card links to its detailed service page",
-        "Section integrates seamlessly with existing home page design"
+        "A `/services/paye-registration` route exists and renders the PAYE Registration page.",
+        "The page displays benefits, included features, pricing, and a CTA.",
+        "The layout is consistent with other service detail pages."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/pages/HomePage.tsx",
-          "operation": "modify",
-          "description": "Add a new services overview section to the HomePage between the benefits cards and the process steps. Display 4-6 core services (Company Formation, Registered Office, Business Support, Compliance) with the generated category icons (frontend/public/assets/generated/service-formation.dim_120x120.png, service-office.dim_120x120.png, service-support.dim_120x120.png, service-compliance.dim_120x120.png), brief descriptions, and links to their respective service pages. Use the existing Section component wrapper and maintain the forest green/charcoal theme."
+          "path": "frontend/src/pages/services/PAYERegistrationServicePage.tsx",
+          "operation": "create",
+          "description": "Create a new service detail page component for PAYE Registration. Follow the same layout pattern as VATRegistrationServicePage.tsx and other service pages: include a hero section with title and description, a benefits section with at least 3 benefit cards (e.g., 'Employer Registration', 'PAYE Compliance', 'Payroll Setup Support'), a detailed service description section explaining what's included (employer PAYE scheme registration, employer reference number, NI and income tax setup, payroll compliance), a pricing section displaying the price from the catalog, and a clear call-to-action button. Use the Section component for consistent vertical spacing. Fetch the 'PAYE Registration' service from the servicesCatalog by matching the title, and display its features and price. Ensure the page is fully responsive and matches the visual style of existing service pages."
         }
       ]
     },
     {
       "id": "REQ-5",
-      "summary": "Add a service comparison feature that allows users to compare different formation packages or service tiers side-by-side",
+      "summary": "Register the two new routes `/services/vat-registration` and `/services/paye-registration` in App.tsx, pointing to VATRegistrationServicePage and PAYERegistrationServicePage respectively",
       "acceptanceCriteria": [
-        "Comparison table displays multiple packages/services in columns",
-        "Feature rows clearly indicate what's included in each tier",
-        "Pricing is prominently displayed for each option",
-        "Users can select a package directly from the comparison view"
+        "Navigating to `/services/vat-registration` loads the VAT Registration page without a 404.",
+        "Navigating to `/services/paye-registration` loads the PAYE Registration page without a 404."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/components/services/ServiceComparisonTable.tsx",
-          "operation": "create",
-          "description": "Create a reusable ServiceComparisonTable component that displays packages or service tiers in a side-by-side comparison format. Include columns for each package/tier with pricing at the top, feature rows with checkmarks or text indicating inclusion, and selection buttons at the bottom. Style using theme colors and ensure responsive behavior for mobile views."
-        },
-        {
-          "path": "frontend/src/pages/services/CompanyFormationServicePage.tsx",
+          "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Import and integrate the ServiceComparisonTable component to display the three formation packages (Basic, Standard, Premium) from packagesCatalog.ts in a comparison format. Wire selection buttons to update the formation draft and navigate to the formation wizard, similar to PricingPage.tsx functionality."
+          "description": "Add two new Route entries in the router configuration: one for path '/services/vat-registration' importing and rendering VATRegistrationServicePage, and another for path '/services/paye-registration' importing and rendering PAYERegistrationServicePage. Place these routes alongside the existing service routes (e.g., after '/services/registered-office' and '/services/business-support'). Ensure the imports are added at the top of the file following the existing import pattern."
         }
       ]
     },
     {
       "id": "REQ-6",
-      "summary": "Enhance the navigation menu to include a Services dropdown or section that provides quick access to all service categories and popular individual services",
+      "summary": "Update the Services dropdown/navigation in SiteLayout.tsx to include links for 'VAT Registration' and 'PAYE Registration' alongside existing service links",
       "acceptanceCriteria": [
-        "Main navigation includes a Services menu item",
-        "Dropdown or mega menu displays service categories",
-        "Users can navigate directly to specific services from the menu",
-        "Menu works consistently on both desktop and mobile views"
+        "The Services menu/dropdown in the header contains a 'VAT Registration' link.",
+        "The Services menu/dropdown in the header contains a 'PAYE Registration' link.",
+        "Both links navigate to their respective pages."
       ],
       "file_operations": [
         {
           "path": "frontend/src/components/layout/SiteLayout.tsx",
           "operation": "modify",
-          "description": "Add a Services navigation item to the main navigation menu with a dropdown/submenu containing links to the main Services page and the three detailed service pages (Company Formation, Registered Office, Business Support). Ensure the dropdown works on both desktop (hover or click) and mobile (within the mobile menu). Maintain existing navigation structure and styling consistency with current menu items (Home, Pricing, How It Works, FAQ, Contact)."
+          "description": "Add two new Link elements to the Services dropdown menu in both the desktop navigation and mobile navigation sections: one for 'VAT Registration' linking to '/services/vat-registration' and another for 'PAYE Registration' linking to '/services/paye-registration'. Place these new links after the existing 'Business Support' link in the dropdown. Ensure consistent styling with the existing service links (using the same className patterns for hover states and text styles). Update both the desktop DropdownMenuContent section and the mobile sheet navigation section to maintain feature parity."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Update the services overview page to include cards for 'VAT Registration' and 'PAYE Registration', consistent in style with the existing service category cards, each linking to their respective detail pages",
+      "acceptanceCriteria": [
+        "The Services overview page displays a card for VAT Registration linking to `/services/vat-registration`.",
+        "The Services overview page displays a card for PAYE Registration linking to `/services/paye-registration`.",
+        "Cards match the visual style of existing service cards."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/ServicesPage.tsx",
+          "operation": "modify",
+          "description": "Add two new service cards to the services grid for 'VAT Registration' and 'PAYE Registration'. Each card should follow the same structure as the existing four category cards: include an appropriate icon (e.g., FileText or Calculator from lucide-react), the service title as a heading, a brief description (2-3 sentences summarizing the service), and a 'Learn More' link pointing to the respective service page ('/services/vat-registration' and '/services/paye-registration'). Maintain the same card styling with white background, rounded corners, shadow on hover, and padding. Add these cards to the existing grid layout, which may need to adjust to accommodate 6 cards instead of 4 (consider updating the grid-cols classes to grid-cols-1 md:grid-cols-2 lg:grid-cols-3 for a 2x3 layout)."
         }
       ]
     }

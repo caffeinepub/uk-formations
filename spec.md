@@ -1,14 +1,14 @@
 # Specification
 
 ## Summary
-**Goal:** Add a comprehensive services section to showcase all company formation and business support services offered by UK Formations.
+**Goal:** Add VAT Registration and PAYE Registration as new services under the Services menu, with catalog entries, dedicated detail pages, updated navigation, and overview page cards.
 
 **Planned changes:**
-- Create a new Services page with categorized service listings (Company Formation, Registered Office Services, Business Support, Compliance Services)
-- Expand service catalog to include registered office address, mail forwarding, director service, company secretary, VAT registration, PAYE registration, and business bank account assistance
-- Add detailed individual service pages for major offerings with descriptions, pricing tiers, and benefits
-- Update home page with a services overview section featuring core services
-- Add a service comparison feature for side-by-side package/tier comparison
-- Enhance navigation menu with a Services dropdown for quick access to all service categories
+- Add `VAT Registration` and `PAYE Registration` entries to the services catalog (`servicesCatalog.ts`) under a compliance/tax category, each with title, description, price, and feature list
+- Create `VATRegistrationServicePage.tsx` at route `/services/vat-registration` following existing service page layout
+- Create `PAYERegistrationServicePage.tsx` at route `/services/paye-registration` following existing service page layout
+- Register both new routes in `App.tsx`
+- Add `VAT Registration` and `PAYE Registration` links to the Services dropdown in `SiteLayout.tsx`
+- Add cards for both new services on the `ServicesPage.tsx` overview page
 
-**User-visible outcome:** Users can browse a comprehensive catalog of UK company formation and business support services, compare packages side-by-side, and navigate easily between service categories through an enhanced navigation menu.
+**User-visible outcome:** Users can browse and view VAT Registration and PAYE Registration services via the Services menu, the services overview page, and dedicated detail pages with benefits, features, pricing, and a call-to-action.

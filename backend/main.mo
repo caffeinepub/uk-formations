@@ -39,6 +39,11 @@ actor {
     confirmationMessage : Text;
   };
 
+  type NameAvailabilityResult = {
+    isAvailable : Bool;
+    message : Text;
+  };
+
   public type UserProfile = {
     name : Text;
   };
@@ -103,5 +108,26 @@ actor {
       Runtime.trap("Unauthorized: Only admins can access order details");
     };
     formationOrders.get(orderId);
+  };
+
+  public query ({ caller }) func checkNameAvailability(name : Text) : async NameAvailabilityResult {
+    let normalizedName = name.trim(#char(' '));
+    let isAvailable = not formationOrders.values().any(
+      func(order) {
+        order.businessName.trim(#char(' ')) == normalizedName;
+      }
+    );
+
+    if (isAvailable) {
+      {
+        isAvailable = true;
+        message = "The name '" # normalizedName # "' is available.";
+      };
+    } else {
+      {
+        isAvailable = false;
+        message = "The name '" # normalizedName # "' is already taken. Please choose another.";
+      };
+    };
   };
 };

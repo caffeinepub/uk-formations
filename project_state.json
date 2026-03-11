@@ -1,59 +1,66 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Company formations service website with comprehensive service offerings",
+  "summary": "Company formation website project. User wants to add business services (VAT Registration, PAYE Registration) under a 'Services' menu, referencing competitor sites for inspiration.",
   "architectural_notes": [
-    "Reference websites: yourcompanyformations.co.uk and 360companyformations.co.uk for service offerings structure"
+    "Services menu should include business service offerings (e.g. VAT Registration, PAYE Registration) similar to 360companyformations.co.uk and yourcompanyformations.co.uk"
   ],
   "known_issues": [],
   "isFixRequest": false,
-  "imageRequirements": "## Required Images\n- Service category icon for Company Formation - modern geometric illustration in forest green (service-formation.dim_120x120.png)\n- Service category icon for Registered Office - building or address marker illustration in forest green (service-office.dim_120x120.png)\n- Service category icon for Business Support - handshake or support illustration in forest green (service-support.dim_120x120.png)\n- Service category icon for Compliance Services - checkmark shield illustration in forest green (service-compliance.dim_120x120.png)\n- Services hero banner - professional UK business office setting with subtle brand colors (services-hero.dim_1200x400.png)",
   "existing_features": [
     {
-      "id": "feature-create-a-new-services-page-that-lists-all-company-formation-and-business-support-services-offered-organized-into-clear-categories-e-g-company-formation-registered-office-services-business-support-compliance-services",
-      "title": "Create a new Services page that lists all company formation and business support services offered, organized into clear categories (e.g., Company Formation, Registered Office Services, Business Support, Compliance Services)",
+      "id": "feature-add-a-vat-registration-entry-to-the-services-catalog-in-frontend-src-features-services-servicescatalog-ts-under-a-new-or-existing-compliance-or-tax-category-with-a-title-description-price-and-relevant-feature-list-covering-mandatory-vs-voluntary-registration-vat-scheme-options-standard-flat-rate-cash-accounting-submission-to-hmrc-vat-number-provision-and-ongoing-support-guidance-modelled-on-competitor-offerings-at-https-360companyformations-co-uk-and-https-www-yourcompanyformations-co-uk-account",
+      "title": "Add a 'VAT Registration' entry to the services catalog in `frontend/src/features/services/servicesCatalog.ts` under a new or existing 'compliance' or 'tax' category, with a title, description, price, and relevant feature list covering: mandatory vs voluntary registration, VAT scheme options (Standard, Flat Rate, Cash Accounting), submission to HMRC, VAT number provision, and ongoing support guidance — modelled on competitor offerings at https://360companyformations.co.uk/ and https://www.yourcompanyformations.co.uk/account/.",
       "reqIds": [
         "REQ-1"
       ],
       "version": 1
     },
     {
-      "id": "feature-expand-the-services-catalog-to-include-additional-formation-related-services-such-as-registered-office-address-service-business-address-service-mail-forwarding-director-service-company-secretary-service-vat-registration-paye-registration-and-business-bank-account-assistance",
-      "title": "Expand the services catalog to include additional formation-related services such as: registered office address service, business address service, mail forwarding, director service, company secretary service, VAT registration, PAYE registration, and business bank account assistance",
+      "id": "feature-add-a-paye-registration-entry-to-the-services-catalog-in-frontend-src-features-services-servicescatalog-ts-under-the-same-compliance-tax-category-with-a-title-description-price-and-relevant-feature-list-covering-employer-paye-scheme-registration-with-hmrc-employer-reference-number-provision-ni-and-income-tax-setup-guidance-and-payroll-compliance-notes",
+      "title": "Add a 'PAYE Registration' entry to the services catalog in `frontend/src/features/services/servicesCatalog.ts` under the same compliance/tax category, with a title, description, price, and relevant feature list covering: employer PAYE scheme registration with HMRC, employer reference number provision, NI and income tax setup guidance, and payroll compliance notes.",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
     },
     {
-      "id": "feature-add-detailed-service-pages-for-major-service-offerings-company-formation-types-registered-office-business-support-that-explain-what-each-service-includes-pricing-tiers-and-benefits",
-      "title": "Add detailed service pages for major service offerings (company formation types, registered office, business support) that explain what each service includes, pricing tiers, and benefits",
+      "id": "feature-create-a-new-dedicated-service-detail-page-frontend-src-pages-services-vatregistrationservicepage-tsx-for-vat-registration-presenting-the-service-benefits-a-clear-description-of-what-is-included-pricing-and-a-call-to-action-follow-the-same-layout-pattern-used-in-registeredofficeservicepage-tsx-and-businesssupportservicepage-tsx",
+      "title": "Create a new dedicated service detail page `frontend/src/pages/services/VATRegistrationServicePage.tsx` for VAT Registration, presenting the service benefits, a clear description of what is included, pricing, and a call-to-action. Follow the same layout pattern used in `RegisteredOfficeServicePage.tsx` and `BusinessSupportServicePage.tsx`.",
       "reqIds": [
         "REQ-3"
       ],
       "version": 1
     },
     {
-      "id": "feature-update-the-home-page-to-feature-a-services-overview-section-showcasing-the-most-popular-or-core-services-with-brief-descriptions-and-links-to-detailed-service-pages",
-      "title": "Update the home page to feature a services overview section showcasing the most popular or core services with brief descriptions and links to detailed service pages",
+      "id": "feature-create-a-new-dedicated-service-detail-page-frontend-src-pages-services-payeregistrationservicepage-tsx-for-paye-registration-presenting-the-service-benefits-a-clear-description-of-what-is-included-pricing-and-a-call-to-action-follow-the-same-layout-pattern-as-other-service-pages",
+      "title": "Create a new dedicated service detail page `frontend/src/pages/services/PAYERegistrationServicePage.tsx` for PAYE Registration, presenting the service benefits, a clear description of what is included, pricing, and a call-to-action. Follow the same layout pattern as other service pages.",
       "reqIds": [
         "REQ-4"
       ],
       "version": 1
     },
     {
-      "id": "feature-add-a-service-comparison-feature-that-allows-users-to-compare-different-formation-packages-or-service-tiers-side-by-side-with-feature-lists-and-pricing",
-      "title": "Add a service comparison feature that allows users to compare different formation packages or service tiers side-by-side with feature lists and pricing",
+      "id": "feature-register-the-two-new-routes-services-vat-registration-and-services-paye-registration-in-frontend-src-app-tsx-pointing-to-vatregistrationservicepage-and-payeregistrationservicepage-respectively",
+      "title": "Register the two new routes `/services/vat-registration` and `/services/paye-registration` in `frontend/src/App.tsx`, pointing to `VATRegistrationServicePage` and `PAYERegistrationServicePage` respectively.",
       "reqIds": [
         "REQ-5"
       ],
       "version": 1
     },
     {
-      "id": "feature-enhance-the-navigation-menu-to-include-a-services-dropdown-or-section-that-provides-quick-access-to-all-service-categories-and-popular-individual-services",
-      "title": "Enhance the navigation menu to include a Services dropdown or section that provides quick access to all service categories and popular individual services",
+      "id": "feature-update-the-services-dropdown-navigation-in-frontend-src-components-layout-sitelayout-tsx-to-include-links-for-vat-registration-pointing-to-services-vat-registration-and-paye-registration-pointing-to-services-paye-registration-alongside-existing-service-links",
+      "title": "Update the Services dropdown/navigation in `frontend/src/components/layout/SiteLayout.tsx` to include links for 'VAT Registration' (pointing to `/services/vat-registration`) and 'PAYE Registration' (pointing to `/services/paye-registration`) alongside existing service links.",
       "reqIds": [
         "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-services-overview-page-frontend-src-pages-servicespage-tsx-to-include-cards-for-vat-registration-and-paye-registration-consistent-in-style-with-the-existing-service-category-cards-each-linking-to-their-respective-detail-pages",
+      "title": "Update the services overview page `frontend/src/pages/ServicesPage.tsx` to include cards for 'VAT Registration' and 'PAYE Registration', consistent in style with the existing service category cards, each linking to their respective detail pages.",
+      "reqIds": [
+        "REQ-7"
       ],
       "version": 1
     }
@@ -61,12 +68,19 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Add comprehensive services section based on reference websites (yourcompanyformations.co.uk and 360companyformations.co.uk)",
+      "summary": "Add VAT Registration service under the 'Services' menu",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Add PAYE Registration service under the 'Services' menu",
       "reqIds": [],
       "status": "pending"
     }
   ],
-  "projectName": "UK Formations",
+  "gameProjectType": "none",
+  "projectName": "Company Formations Website",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }

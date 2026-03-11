@@ -96,13 +96,6 @@ export interface FormationOrderInput {
     formationType: string;
     contactEmail: string;
 }
-export interface SubmissionResponse {
-    orderId: bigint;
-    confirmationMessage: string;
-}
-export interface UserProfile {
-    name: string;
-}
 export interface FormationOrder {
     id: bigint;
     customerName: string;
@@ -110,6 +103,17 @@ export interface FormationOrder {
     businessName: string;
     formationType: string;
     contactEmail: string;
+}
+export interface SubmissionResponse {
+    orderId: bigint;
+    confirmationMessage: string;
+}
+export interface UserProfile {
+    name: string;
+}
+export interface NameAvailabilityResult {
+    isAvailable: boolean;
+    message: string;
 }
 export enum UserRole {
     admin = "admin",
@@ -119,6 +123,7 @@ export enum UserRole {
 export interface backendInterface {
     _initializeAccessControlWithSecret(userSecret: string): Promise<void>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
+    checkNameAvailability(name: string): Promise<NameAvailabilityResult>;
     getAllOrders(): Promise<Array<FormationOrder>>;
     getCallerUserProfile(): Promise<UserProfile | null>;
     getCallerUserRole(): Promise<UserRole>;
@@ -156,6 +161,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.assignCallerUserRole(arg0, to_candid_UserRole_n1(this._uploadFile, this._downloadFile, arg1));
+            return result;
+        }
+    }
+    async checkNameAvailability(arg0: string): Promise<NameAvailabilityResult> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.checkNameAvailability(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.checkNameAvailability(arg0);
             return result;
         }
     }

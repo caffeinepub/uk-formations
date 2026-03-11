@@ -168,33 +168,36 @@ export const servicesCatalog: Service[] = [
   {
     id: 'vat-registration',
     name: 'VAT Registration',
-    description: 'Register your business for VAT with HMRC efficiently and correctly.',
+    description:
+      'Register your business for VAT with HMRC efficiently and correctly. We assess whether registration is mandatory or voluntary for your business, advise on the best VAT scheme, and handle the full submission process on your behalf.',
     category: 'compliance',
     features: [
-      'VAT number application',
-      'HMRC submission',
-      'Threshold guidance',
-      'VAT scheme advice',
-      'Certificate of registration',
+      'Mandatory vs voluntary registration assessment',
+      'VAT scheme options (Standard, Flat Rate, Cash Accounting)',
+      'Submission to HMRC on your behalf',
+      'VAT registration number provision',
+      'Ongoing VAT compliance guidance',
     ],
     pricing: {
-      amount: 99.99,
+      amount: 150,
     },
     popular: true,
   },
   {
     id: 'paye-registration',
     name: 'PAYE Registration',
-    description: 'Register as an employer with HMRC to pay your employees through PAYE.',
+    description:
+      'Register as an employer with HMRC to pay your employees through PAYE. We handle the full employer PAYE scheme registration, provide your employer reference number, and guide you through National Insurance and income tax setup.',
     category: 'compliance',
     features: [
-      'Employer PAYE registration',
-      'HMRC submission',
-      'Employer reference number',
-      'Payroll guidance',
+      'Employer PAYE scheme registration with HMRC',
+      'Employer reference number provision',
+      'National Insurance setup guidance',
+      'Income tax setup and configuration',
+      'Payroll compliance advisory',
     ],
     pricing: {
-      amount: 79.99,
+      amount: 180,
     },
   },
   {

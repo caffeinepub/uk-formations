@@ -1,115 +1,107 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-20T06:30:40.471Z",
+  "generatedAt": "2026-03-03T13:02:48.443Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 6,
-    "implemented": 6,
+    "total": 7,
+    "implemented": 7,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Create a new Services page that lists all company formation and business support services offered, organized into clear categories (e.g., Company Formation, Registered Office Services, Business Support, Compliance Services)",
+        "summary": "Add a 'VAT Registration' entry to the services catalog in `frontend/src/features/services/servicesCatalog.ts` under a new or existing 'compliance' or 'tax' category, with a title, description, price, and relevant feature list covering: mandatory vs voluntary registration, VAT scheme options (Standard, Flat Rate, Cash Accounting), submission to HMRC, VAT number provision, and ongoing support guidance — modelled on competitor offerings at https://360companyformations.co.uk/ and https://www.yourcompanyformations.co.uk/account/.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/ServicesPage.tsx",
-          "frontend/src/App.tsx"
+          "frontend/src/features/services/servicesCatalog.ts"
         ],
         "matchedFiles": [
-          "frontend/src/pages/ServicesPage.tsx",
-          "frontend/src/App.tsx"
+          "frontend/src/features/services/servicesCatalog.ts"
         ]
       },
       {
         "id": "REQ-2",
-        "summary": "Expand the services catalog to include additional formation-related services such as: registered office address service, business address service, mail forwarding, director service, company secretary service, VAT registration, PAYE registration, and business bank account assistance",
+        "summary": "Add a 'PAYE Registration' entry to the services catalog in `frontend/src/features/services/servicesCatalog.ts` under the same compliance/tax category, with a title, description, price, and relevant feature list covering: employer PAYE scheme registration with HMRC, employer reference number provision, NI and income tax setup guidance, and payroll compliance notes.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/features/services/servicesCatalog.ts",
-          "frontend/src/pages/ServicesPage.tsx"
+          "frontend/src/features/services/servicesCatalog.ts"
         ],
         "matchedFiles": [
-          "frontend/src/features/services/servicesCatalog.ts",
-          "frontend/src/pages/ServicesPage.tsx"
+          "frontend/src/features/services/servicesCatalog.ts"
         ]
       },
       {
         "id": "REQ-3",
-        "summary": "Add detailed service pages for major service offerings (company formation types, registered office, business support) that explain what each service includes, pricing tiers, and benefits",
+        "summary": "Create a new dedicated service detail page `frontend/src/pages/services/VATRegistrationServicePage.tsx` for VAT Registration, presenting the service benefits, a clear description of what is included, pricing, and a call-to-action. Follow the same layout pattern used in `RegisteredOfficeServicePage.tsx` and `BusinessSupportServicePage.tsx`.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/services/CompanyFormationServicePage.tsx",
-          "frontend/src/pages/services/RegisteredOfficeServicePage.tsx",
-          "frontend/src/pages/services/BusinessSupportServicePage.tsx",
-          "frontend/src/App.tsx"
+          "frontend/src/pages/services/VATRegistrationServicePage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/services/CompanyFormationServicePage.tsx",
-          "frontend/src/pages/services/RegisteredOfficeServicePage.tsx",
-          "frontend/src/pages/services/BusinessSupportServicePage.tsx",
-          "frontend/src/App.tsx"
+          "frontend/src/pages/services/VATRegistrationServicePage.tsx"
         ]
       },
       {
         "id": "REQ-4",
-        "summary": "Update the home page to feature a services overview section showcasing the most popular or core services with brief descriptions and links to detailed service pages",
+        "summary": "Create a new dedicated service detail page `frontend/src/pages/services/PAYERegistrationServicePage.tsx` for PAYE Registration, presenting the service benefits, a clear description of what is included, pricing, and a call-to-action. Follow the same layout pattern as other service pages.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/pages/HomePage.tsx"
+          "frontend/src/pages/services/PAYERegistrationServicePage.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/pages/HomePage.tsx"
+          "frontend/src/pages/services/PAYERegistrationServicePage.tsx"
         ]
       },
       {
         "id": "REQ-5",
-        "summary": "Add a service comparison feature that allows users to compare different formation packages or service tiers side-by-side with feature lists and pricing",
+        "summary": "Register the two new routes `/services/vat-registration` and `/services/paye-registration` in `frontend/src/App.tsx`, pointing to `VATRegistrationServicePage` and `PAYERegistrationServicePage` respectively.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/services/ServiceComparisonTable.tsx",
-          "frontend/src/pages/services/CompanyFormationServicePage.tsx"
+          "frontend/src/App.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/components/services/ServiceComparisonTable.tsx",
-          "frontend/src/pages/services/CompanyFormationServicePage.tsx"
+          "frontend/src/App.tsx"
         ]
       },
       {
         "id": "REQ-6",
-        "summary": "Enhance the navigation menu to include a Services dropdown or section that provides quick access to all service categories and popular individual services",
+        "summary": "Update the Services dropdown/navigation in `frontend/src/components/layout/SiteLayout.tsx` to include links for 'VAT Registration' (pointing to `/services/vat-registration`) and 'PAYE Registration' (pointing to `/services/paye-registration`) alongside existing service links.",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/components/layout/SiteLayout.tsx"
         ],
         "matchedFiles": [
           "frontend/src/components/layout/SiteLayout.tsx"
+        ]
+      },
+      {
+        "id": "REQ-7",
+        "summary": "Update the services overview page `frontend/src/pages/ServicesPage.tsx` to include cards for 'VAT Registration' and 'PAYE Registration', consistent in style with the existing service category cards, each linking to their respective detail pages.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/ServicesPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/ServicesPage.tsx"
         ]
       }
     ]
   },
   "changedFiles": [
     "build-request.json",
+    "build-template/README.md",
     "caffeine.lock.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/service-compliance.dim_120x120.png",
-    "frontend/public/assets/generated/service-formation.dim_120x120.png",
-    "frontend/public/assets/generated/service-office.dim_120x120.png",
-    "frontend/public/assets/generated/service-support.dim_120x120.png",
-    "frontend/public/assets/generated/services-hero.dim_1200x400.png",
     "frontend/src/App.tsx",
     "frontend/src/components/layout/SiteLayout.tsx",
-    "frontend/src/components/services/ServiceComparisonTable.tsx",
     "frontend/src/features/services/servicesCatalog.ts",
-    "frontend/src/pages/HomePage.tsx",
     "frontend/src/pages/ServicesPage.tsx",
-    "frontend/src/pages/services/BusinessSupportServicePage.tsx",
-    "frontend/src/pages/services/CompanyFormationServicePage.tsx",
-    "frontend/src/pages/services/RegisteredOfficeServicePage.tsx",
+    "frontend/src/pages/services/PAYERegistrationServicePage.tsx",
+    "frontend/src/pages/services/VATRegistrationServicePage.tsx",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

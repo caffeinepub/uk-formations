@@ -2,11 +2,10 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-create-a-new-services-page-that-lists-all-company-formation-and-business-support-services-offered-organized-into-clear-categories-e-g-company-formation-registered-office-services-business-support-compliance-services",
-      "featureTitle": "Create a new Services page that lists all company formation and business support services offered, organized into clear categories (e.g., Company Formation, Registered Office Services, Business Support, Compliance Services)",
+      "featureId": "feature-add-a-vat-registration-entry-to-the-services-catalog-in-frontend-src-features-services-servicescatalog-ts-under-a-new-or-existing-compliance-or-tax-category-with-a-title-description-price-and-relevant-feature-list-covering-mandatory-vs-voluntary-registration-vat-scheme-options-standard-flat-rate-cash-accounting-submission-to-hmrc-vat-number-provision-and-ongoing-support-guidance-modelled-on-competitor-offerings-at-https-360companyformations-co-uk-and-https-www-yourcompanyformations-co-uk-account",
+      "featureTitle": "Add a 'VAT Registration' entry to the services catalog in `frontend/src/features/services/servicesCatalog.ts` under a new or existing 'compliance' or 'tax' category, with a title, description, price, and relevant feature list covering: mandatory vs voluntary registration, VAT scheme options (Standard, Flat Rate, Cash Accounting), submission to HMRC, VAT number provision, and ongoing support guidance — modelled on competitor offerings at https://360companyformations.co.uk/ and https://www.yourcompanyformations.co.uk/account/.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/pages/ServicesPage.tsx"
+        "frontend/src/features/services/servicesCatalog.ts"
       ],
       "components": [
         "authorization@4.0.0",
@@ -22,11 +21,10 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-expand-the-services-catalog-to-include-additional-formation-related-services-such-as-registered-office-address-service-business-address-service-mail-forwarding-director-service-company-secretary-service-vat-registration-paye-registration-and-business-bank-account-assistance",
-      "featureTitle": "Expand the services catalog to include additional formation-related services such as: registered office address service, business address service, mail forwarding, director service, company secretary service, VAT registration, PAYE registration, and business bank account assistance",
+      "featureId": "feature-add-a-paye-registration-entry-to-the-services-catalog-in-frontend-src-features-services-servicescatalog-ts-under-the-same-compliance-tax-category-with-a-title-description-price-and-relevant-feature-list-covering-employer-paye-scheme-registration-with-hmrc-employer-reference-number-provision-ni-and-income-tax-setup-guidance-and-payroll-compliance-notes",
+      "featureTitle": "Add a 'PAYE Registration' entry to the services catalog in `frontend/src/features/services/servicesCatalog.ts` under the same compliance/tax category, with a title, description, price, and relevant feature list covering: employer PAYE scheme registration with HMRC, employer reference number provision, NI and income tax setup guidance, and payroll compliance notes.",
       "files": [
-        "frontend/src/features/services/servicesCatalog.ts",
-        "frontend/src/pages/ServicesPage.tsx"
+        "frontend/src/features/services/servicesCatalog.ts"
       ],
       "components": [
         "authorization@4.0.0",
@@ -42,13 +40,10 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-add-detailed-service-pages-for-major-service-offerings-company-formation-types-registered-office-business-support-that-explain-what-each-service-includes-pricing-tiers-and-benefits",
-      "featureTitle": "Add detailed service pages for major service offerings (company formation types, registered office, business support) that explain what each service includes, pricing tiers, and benefits",
+      "featureId": "feature-create-a-new-dedicated-service-detail-page-frontend-src-pages-services-vatregistrationservicepage-tsx-for-vat-registration-presenting-the-service-benefits-a-clear-description-of-what-is-included-pricing-and-a-call-to-action-follow-the-same-layout-pattern-used-in-registeredofficeservicepage-tsx-and-businesssupportservicepage-tsx",
+      "featureTitle": "Create a new dedicated service detail page `frontend/src/pages/services/VATRegistrationServicePage.tsx` for VAT Registration, presenting the service benefits, a clear description of what is included, pricing, and a call-to-action. Follow the same layout pattern used in `RegisteredOfficeServicePage.tsx` and `BusinessSupportServicePage.tsx`.",
       "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/pages/services/BusinessSupportServicePage.tsx",
-        "frontend/src/pages/services/CompanyFormationServicePage.tsx",
-        "frontend/src/pages/services/RegisteredOfficeServicePage.tsx"
+        "frontend/src/pages/services/VATRegistrationServicePage.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -64,10 +59,10 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-update-the-home-page-to-feature-a-services-overview-section-showcasing-the-most-popular-or-core-services-with-brief-descriptions-and-links-to-detailed-service-pages",
-      "featureTitle": "Update the home page to feature a services overview section showcasing the most popular or core services with brief descriptions and links to detailed service pages",
+      "featureId": "feature-create-a-new-dedicated-service-detail-page-frontend-src-pages-services-payeregistrationservicepage-tsx-for-paye-registration-presenting-the-service-benefits-a-clear-description-of-what-is-included-pricing-and-a-call-to-action-follow-the-same-layout-pattern-as-other-service-pages",
+      "featureTitle": "Create a new dedicated service detail page `frontend/src/pages/services/PAYERegistrationServicePage.tsx` for PAYE Registration, presenting the service benefits, a clear description of what is included, pricing, and a call-to-action. Follow the same layout pattern as other service pages.",
       "files": [
-        "frontend/src/pages/HomePage.tsx"
+        "frontend/src/pages/services/PAYERegistrationServicePage.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -83,11 +78,10 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-add-a-service-comparison-feature-that-allows-users-to-compare-different-formation-packages-or-service-tiers-side-by-side-with-feature-lists-and-pricing",
-      "featureTitle": "Add a service comparison feature that allows users to compare different formation packages or service tiers side-by-side with feature lists and pricing",
+      "featureId": "feature-register-the-two-new-routes-services-vat-registration-and-services-paye-registration-in-frontend-src-app-tsx-pointing-to-vatregistrationservicepage-and-payeregistrationservicepage-respectively",
+      "featureTitle": "Register the two new routes `/services/vat-registration` and `/services/paye-registration` in `frontend/src/App.tsx`, pointing to `VATRegistrationServicePage` and `PAYERegistrationServicePage` respectively.",
       "files": [
-        "frontend/src/components/services/ServiceComparisonTable.tsx",
-        "frontend/src/pages/services/CompanyFormationServicePage.tsx"
+        "frontend/src/App.tsx"
       ],
       "components": [
         "authorization@4.0.0",
@@ -103,8 +97,8 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-enhance-the-navigation-menu-to-include-a-services-dropdown-or-section-that-provides-quick-access-to-all-service-categories-and-popular-individual-services",
-      "featureTitle": "Enhance the navigation menu to include a Services dropdown or section that provides quick access to all service categories and popular individual services",
+      "featureId": "feature-update-the-services-dropdown-navigation-in-frontend-src-components-layout-sitelayout-tsx-to-include-links-for-vat-registration-pointing-to-services-vat-registration-and-paye-registration-pointing-to-services-paye-registration-alongside-existing-service-links",
+      "featureTitle": "Update the Services dropdown/navigation in `frontend/src/components/layout/SiteLayout.tsx` to include links for 'VAT Registration' (pointing to `/services/vat-registration`) and 'PAYE Registration' (pointing to `/services/paye-registration`) alongside existing service links.",
       "files": [
         "frontend/src/components/layout/SiteLayout.tsx"
       ],
@@ -118,6 +112,25 @@
       ],
       "testIds": [
         "REQ-6"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-the-services-overview-page-frontend-src-pages-servicespage-tsx-to-include-cards-for-vat-registration-and-paye-registration-consistent-in-style-with-the-existing-service-category-cards-each-linking-to-their-respective-detail-pages",
+      "featureTitle": "Update the services overview page `frontend/src/pages/ServicesPage.tsx` to include cards for 'VAT Registration' and 'PAYE Registration', consistent in style with the existing service category cards, each linking to their respective detail pages.",
+      "files": [
+        "frontend/src/pages/ServicesPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
       ],
       "confidence": "high"
     }

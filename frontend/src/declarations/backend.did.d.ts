@@ -25,6 +25,10 @@ export interface FormationOrderInput {
   'formationType' : string,
   'contactEmail' : string,
 }
+export interface NameAvailabilityResult {
+  'isAvailable' : boolean,
+  'message' : string,
+}
 export interface SubmissionResponse {
   'orderId' : bigint,
   'confirmationMessage' : string,
@@ -36,6 +40,7 @@ export type UserRole = { 'admin' : null } |
 export interface _SERVICE {
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
+  'checkNameAvailability' : ActorMethod<[string], NameAvailabilityResult>,
   'getAllOrders' : ActorMethod<[], Array<FormationOrder>>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,

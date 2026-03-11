@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
-import { FormationOrderInput, SubmissionResponse, FormationOrder, UserProfile, UserRole } from '../backend';
+import { FormationOrderInput, SubmissionResponse, FormationOrder, UserProfile, UserRole, NameAvailabilityResult } from '../backend';
 
 export function useGetCallerUserRole() {
   const { actor, isFetching } = useActor();
@@ -100,3 +100,16 @@ export function useIsCallerAdmin() {
   });
 }
 
+export function useCheckNameAvailability(name: string, enabled: boolean) {
+  const { actor, isFetching } = useActor();
+
+  return useQuery<NameAvailabilityResult>({
+    queryKey: ['nameAvailability', name],
+    queryFn: async () => {
+      if (!actor) throw new Error('Actor not available');
+      return actor.checkNameAvailability(name);
+    },
+    enabled: !!actor && !isFetching && enabled && name.trim().length > 0,
+    retry: false,
+  });
+}
