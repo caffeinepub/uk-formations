@@ -2,7 +2,7 @@ export interface Service {
   id: string;
   name: string;
   description: string;
-  category: 'formation' | 'office' | 'support' | 'compliance';
+  category: "formation" | "office" | "support" | "compliance";
   features: string[];
   pricing?: {
     amount: number;
@@ -15,49 +15,52 @@ export interface Service {
 export const servicesCatalog: Service[] = [
   // Company Formation Services
   {
-    id: 'ltd-formation',
-    name: 'Limited Company Formation',
-    description: 'Register your private limited company with Companies House quickly and efficiently.',
-    category: 'formation',
+    id: "ltd-formation",
+    name: "Limited Company Formation",
+    description:
+      "Register your private limited company with Companies House quickly and efficiently.",
+    category: "formation",
     features: [
-      'Companies House registration',
-      'Certificate of Incorporation',
-      'Memorandum & Articles of Association',
-      'Share certificates',
-      'Same-day registration available',
+      "Companies House registration",
+      "Certificate of Incorporation",
+      "Memorandum & Articles of Association",
+      "Share certificates",
+      "Same-day registration available",
     ],
     pricing: {
       amount: 29.99,
-      note: 'Plus Companies House fee',
+      note: "Plus Companies House fee",
     },
     popular: true,
   },
   {
-    id: 'llp-formation',
-    name: 'LLP Formation',
-    description: 'Form a Limited Liability Partnership ideal for professional services and partnerships.',
-    category: 'formation',
+    id: "llp-formation",
+    name: "LLP Formation",
+    description:
+      "Form a Limited Liability Partnership ideal for professional services and partnerships.",
+    category: "formation",
     features: [
-      'LLP registration with Companies House',
-      'Certificate of Incorporation',
-      'LLP Agreement template',
-      'Designated member appointments',
+      "LLP registration with Companies House",
+      "Certificate of Incorporation",
+      "LLP Agreement template",
+      "Designated member appointments",
     ],
     pricing: {
       amount: 39.99,
-      note: 'Plus Companies House fee',
+      note: "Plus Companies House fee",
     },
   },
   {
-    id: 'ready-made-company',
-    name: 'Ready-Made Company',
-    description: 'Purchase a pre-registered company and start trading immediately.',
-    category: 'formation',
+    id: "ready-made-company",
+    name: "Ready-Made Company",
+    description:
+      "Purchase a pre-registered company and start trading immediately.",
+    category: "formation",
     features: [
-      'Instant availability',
-      'Clean trading history',
-      'All incorporation documents',
-      'Name change service included',
+      "Instant availability",
+      "Clean trading history",
+      "All incorporation documents",
+      "Name change service included",
     ],
     pricing: {
       amount: 99.99,
@@ -65,100 +68,105 @@ export const servicesCatalog: Service[] = [
   },
   // Registered Office Services
   {
-    id: 'registered-office',
-    name: 'Registered Office Address',
-    description: 'Professional UK business address for your company registration and official correspondence.',
-    category: 'office',
+    id: "registered-office",
+    name: "Registered Office Address",
+    description:
+      "Professional UK business address for your company registration and official correspondence.",
+    category: "office",
     features: [
-      'London or regional address options',
-      'Mail forwarding service',
-      'Companies House compliant',
-      'Privacy protection',
-      'Instant setup',
+      "London or regional address options",
+      "Mail forwarding service",
+      "Companies House compliant",
+      "Privacy protection",
+      "Instant setup",
     ],
     pricing: {
       amount: 49.99,
-      period: 'per year',
+      period: "per year",
     },
     popular: true,
   },
   {
-    id: 'business-address',
-    name: 'Business Address Service',
-    description: 'Use our prestigious business address for your marketing and correspondence.',
-    category: 'office',
+    id: "business-address",
+    name: "Business Address Service",
+    description:
+      "Use our prestigious business address for your marketing and correspondence.",
+    category: "office",
     features: [
-      'Prime business location',
-      'Mail handling and forwarding',
-      'Telephone answering available',
-      'Meeting room access',
+      "Prime business location",
+      "Mail handling and forwarding",
+      "Telephone answering available",
+      "Meeting room access",
     ],
     pricing: {
       amount: 79.99,
-      period: 'per year',
+      period: "per year",
     },
   },
   {
-    id: 'mail-forwarding',
-    name: 'Mail Forwarding',
-    description: 'Receive and forward your business mail to any UK or international address.',
-    category: 'office',
+    id: "mail-forwarding",
+    name: "Mail Forwarding",
+    description:
+      "Receive and forward your business mail to any UK or international address.",
+    category: "office",
     features: [
-      'Weekly or daily forwarding',
-      'Scan and email service',
-      'Secure mail storage',
-      'International forwarding available',
+      "Weekly or daily forwarding",
+      "Scan and email service",
+      "Secure mail storage",
+      "International forwarding available",
     ],
     pricing: {
       amount: 29.99,
-      period: 'per month',
+      period: "per month",
     },
   },
   // Business Support Services
   {
-    id: 'company-secretary',
-    name: 'Company Secretary Service',
-    description: 'Professional company secretary to handle your statutory obligations and compliance.',
-    category: 'support',
+    id: "company-secretary",
+    name: "Company Secretary Service",
+    description:
+      "Professional company secretary to handle your statutory obligations and compliance.",
+    category: "support",
     features: [
-      'Annual return filing',
-      'Statutory register maintenance',
-      'Board meeting minutes',
-      'Compliance monitoring',
-      'Companies House liaison',
+      "Annual return filing",
+      "Statutory register maintenance",
+      "Board meeting minutes",
+      "Compliance monitoring",
+      "Companies House liaison",
     ],
     pricing: {
       amount: 199.99,
-      period: 'per year',
+      period: "per year",
     },
   },
   {
-    id: 'director-service',
-    name: 'Nominee Director Service',
-    description: 'Appoint a professional nominee director for your company.',
-    category: 'support',
+    id: "director-service",
+    name: "Nominee Director Service",
+    description: "Appoint a professional nominee director for your company.",
+    category: "support",
     features: [
-      'Experienced professional directors',
-      'Full indemnity insurance',
-      'Confidentiality agreement',
-      'Regular reporting',
+      "Experienced professional directors",
+      "Full indemnity insurance",
+      "Confidentiality agreement",
+      "Regular reporting",
     ],
     pricing: {
       amount: 499.99,
-      period: 'per year',
+      period: "per year",
     },
   },
   {
-    id: 'bank-account',
-    name: 'Business Bank Account Assistance',
-    description: 'Expert guidance to help you open a UK business bank account quickly.',
-    category: 'support',
+    id: "bank-account",
+    name: "Business Bank Account Assistance",
+    description:
+      "Expert guidance to help you open a UK business bank account quickly.",
+    category: "support",
     features: [
-      'Application preparation',
-      'Document review',
-      'Bank introductions',
-      'Multiple bank options',
-      'Fast-track service',
+      "Application preparation",
+      "Document review",
+      "Bank introductions",
+      "Multiple bank options",
+      "Fast-track service",
     ],
     pricing: {
       amount: 149.99,
@@ -166,56 +174,60 @@ export const servicesCatalog: Service[] = [
   },
   // Compliance Services
   {
-    id: 'vat-registration',
-    name: 'VAT Registration',
-    description: 'Register your business for VAT with HMRC efficiently and correctly.',
-    category: 'compliance',
+    id: "vat-registration",
+    name: "VAT Registration",
+    description:
+      "Register your business for VAT with HMRC efficiently and correctly. We assess whether registration is mandatory or voluntary for your business, advise on the best VAT scheme, and handle the full submission process on your behalf.",
+    category: "compliance",
     features: [
-      'VAT number application',
-      'HMRC submission',
-      'Threshold guidance',
-      'VAT scheme advice',
-      'Certificate of registration',
+      "Mandatory vs voluntary registration assessment",
+      "VAT scheme options (Standard, Flat Rate, Cash Accounting)",
+      "Submission to HMRC on your behalf",
+      "VAT registration number provision",
+      "Ongoing VAT compliance guidance",
     ],
     pricing: {
-      amount: 99.99,
+      amount: 150,
     },
     popular: true,
   },
   {
-    id: 'paye-registration',
-    name: 'PAYE Registration',
-    description: 'Register as an employer with HMRC to pay your employees through PAYE.',
-    category: 'compliance',
+    id: "paye-registration",
+    name: "PAYE Registration",
+    description:
+      "Register as an employer with HMRC to pay your employees through PAYE. We handle the full employer PAYE scheme registration, provide your employer reference number, and guide you through National Insurance and income tax setup.",
+    category: "compliance",
     features: [
-      'Employer PAYE registration',
-      'HMRC submission',
-      'Employer reference number',
-      'Payroll guidance',
+      "Employer PAYE scheme registration with HMRC",
+      "Employer reference number provision",
+      "National Insurance setup guidance",
+      "Income tax setup and configuration",
+      "Payroll compliance advisory",
     ],
     pricing: {
-      amount: 79.99,
+      amount: 180,
     },
   },
   {
-    id: 'confirmation-statement',
-    name: 'Confirmation Statement Filing',
-    description: 'Annual confirmation statement filing service to keep your company compliant.',
-    category: 'compliance',
+    id: "confirmation-statement",
+    name: "Confirmation Statement Filing",
+    description:
+      "Annual confirmation statement filing service to keep your company compliant.",
+    category: "compliance",
     features: [
-      'Annual statement preparation',
-      'Companies House filing',
-      'Accuracy guarantee',
-      'Deadline reminders',
+      "Annual statement preparation",
+      "Companies House filing",
+      "Accuracy guarantee",
+      "Deadline reminders",
     ],
     pricing: {
       amount: 39.99,
-      period: 'per year',
+      period: "per year",
     },
   },
 ];
 
-export const getServicesByCategory = (category: Service['category']) => {
+export const getServicesByCategory = (category: Service["category"]) => {
   return servicesCatalog.filter((service) => service.category === category);
 };
 

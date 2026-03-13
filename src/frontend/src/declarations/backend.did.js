@@ -13,45 +13,113 @@ export const UserRole = IDL.Variant({
   'user' : IDL.Null,
   'guest' : IDL.Null,
 });
+export const NameAvailabilityResult = IDL.Record({
+  'isAvailable' : IDL.Bool,
+  'message' : IDL.Text,
+});
+export const ShoppingItem = IDL.Record({
+  'productName' : IDL.Text,
+  'currency' : IDL.Text,
+  'quantity' : IDL.Nat,
+  'priceInCents' : IDL.Nat,
+  'productDescription' : IDL.Text,
+});
 export const FormationOrder = IDL.Record({
   'id' : IDL.Nat,
   'customerName' : IDL.Text,
-  'additionalDetails' : IDL.Text,
-  'businessName' : IDL.Text,
-  'formationType' : IDL.Text,
+  'sicCodes' : IDL.Vec(IDL.Text),
+  'registeredOfficeAddress' : IDL.Text,
+  'packageSelected' : IDL.Text,
+  'directorDetails' : IDL.Text,
+  'pscDetails' : IDL.Text,
+  'shareholderDetails' : IDL.Text,
   'contactEmail' : IDL.Text,
+  'companyName' : IDL.Text,
+  'contactDetails' : IDL.Text,
 });
 export const UserProfile = IDL.Record({ 'name' : IDL.Text });
+export const StripeSessionStatus = IDL.Variant({
+  'completed' : IDL.Record({
+    'userPrincipal' : IDL.Opt(IDL.Text),
+    'response' : IDL.Text,
+  }),
+  'failed' : IDL.Record({ 'error' : IDL.Text }),
+});
+export const StripeConfiguration = IDL.Record({
+  'allowedCountries' : IDL.Vec(IDL.Text),
+  'secretKey' : IDL.Text,
+});
 export const FormationOrderInput = IDL.Record({
   'customerName' : IDL.Text,
-  'additionalDetails' : IDL.Text,
-  'businessName' : IDL.Text,
-  'formationType' : IDL.Text,
+  'sicCodes' : IDL.Vec(IDL.Text),
+  'registeredOfficeAddress' : IDL.Text,
+  'packageSelected' : IDL.Text,
+  'directorDetails' : IDL.Text,
+  'pscDetails' : IDL.Text,
+  'shareholderDetails' : IDL.Text,
   'contactEmail' : IDL.Text,
+  'companyName' : IDL.Text,
+  'contactDetails' : IDL.Text,
 });
 export const SubmissionResponse = IDL.Record({
   'orderId' : IDL.Nat,
   'confirmationMessage' : IDL.Text,
 });
+export const http_header = IDL.Record({
+  'value' : IDL.Text,
+  'name' : IDL.Text,
+});
+export const http_request_result = IDL.Record({
+  'status' : IDL.Nat,
+  'body' : IDL.Vec(IDL.Nat8),
+  'headers' : IDL.Vec(http_header),
+});
+export const TransformationInput = IDL.Record({
+  'context' : IDL.Vec(IDL.Nat8),
+  'response' : http_request_result,
+});
+export const TransformationOutput = IDL.Record({
+  'status' : IDL.Nat,
+  'body' : IDL.Vec(IDL.Nat8),
+  'headers' : IDL.Vec(http_header),
+});
 
 export const idlService = IDL.Service({
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+  'checkNameAvailability' : IDL.Func(
+      [IDL.Text],
+      [NameAvailabilityResult],
+      ['query'],
+    ),
+  'createCheckoutSession' : IDL.Func(
+      [IDL.Vec(ShoppingItem), IDL.Text, IDL.Text],
+      [IDL.Text],
+      [],
+    ),
   'getAllOrders' : IDL.Func([], [IDL.Vec(FormationOrder)], ['query']),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
   'getOrderById' : IDL.Func([IDL.Nat], [IDL.Opt(FormationOrder)], ['query']),
+  'getStripeSessionStatus' : IDL.Func([IDL.Text], [StripeSessionStatus], []),
   'getUserProfile' : IDL.Func(
       [IDL.Principal],
       [IDL.Opt(UserProfile)],
       ['query'],
     ),
   'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+  'isStripeConfigured' : IDL.Func([], [IDL.Bool], []),
   'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+  'setStripeConfiguration' : IDL.Func([StripeConfiguration], [], []),
   'submitFormationOrder' : IDL.Func(
       [FormationOrderInput],
       [SubmissionResponse],
       [],
+    ),
+  'transform' : IDL.Func(
+      [TransformationInput],
+      [TransformationOutput],
+      ['query'],
     ),
 });
 
@@ -63,45 +131,110 @@ export const idlFactory = ({ IDL }) => {
     'user' : IDL.Null,
     'guest' : IDL.Null,
   });
+  const NameAvailabilityResult = IDL.Record({
+    'isAvailable' : IDL.Bool,
+    'message' : IDL.Text,
+  });
+  const ShoppingItem = IDL.Record({
+    'productName' : IDL.Text,
+    'currency' : IDL.Text,
+    'quantity' : IDL.Nat,
+    'priceInCents' : IDL.Nat,
+    'productDescription' : IDL.Text,
+  });
   const FormationOrder = IDL.Record({
     'id' : IDL.Nat,
     'customerName' : IDL.Text,
-    'additionalDetails' : IDL.Text,
-    'businessName' : IDL.Text,
-    'formationType' : IDL.Text,
+    'sicCodes' : IDL.Vec(IDL.Text),
+    'registeredOfficeAddress' : IDL.Text,
+    'packageSelected' : IDL.Text,
+    'directorDetails' : IDL.Text,
+    'pscDetails' : IDL.Text,
+    'shareholderDetails' : IDL.Text,
     'contactEmail' : IDL.Text,
+    'companyName' : IDL.Text,
+    'contactDetails' : IDL.Text,
   });
   const UserProfile = IDL.Record({ 'name' : IDL.Text });
+  const StripeSessionStatus = IDL.Variant({
+    'completed' : IDL.Record({
+      'userPrincipal' : IDL.Opt(IDL.Text),
+      'response' : IDL.Text,
+    }),
+    'failed' : IDL.Record({ 'error' : IDL.Text }),
+  });
+  const StripeConfiguration = IDL.Record({
+    'allowedCountries' : IDL.Vec(IDL.Text),
+    'secretKey' : IDL.Text,
+  });
   const FormationOrderInput = IDL.Record({
     'customerName' : IDL.Text,
-    'additionalDetails' : IDL.Text,
-    'businessName' : IDL.Text,
-    'formationType' : IDL.Text,
+    'sicCodes' : IDL.Vec(IDL.Text),
+    'registeredOfficeAddress' : IDL.Text,
+    'packageSelected' : IDL.Text,
+    'directorDetails' : IDL.Text,
+    'pscDetails' : IDL.Text,
+    'shareholderDetails' : IDL.Text,
     'contactEmail' : IDL.Text,
+    'companyName' : IDL.Text,
+    'contactDetails' : IDL.Text,
   });
   const SubmissionResponse = IDL.Record({
     'orderId' : IDL.Nat,
     'confirmationMessage' : IDL.Text,
   });
+  const http_header = IDL.Record({ 'value' : IDL.Text, 'name' : IDL.Text });
+  const http_request_result = IDL.Record({
+    'status' : IDL.Nat,
+    'body' : IDL.Vec(IDL.Nat8),
+    'headers' : IDL.Vec(http_header),
+  });
+  const TransformationInput = IDL.Record({
+    'context' : IDL.Vec(IDL.Nat8),
+    'response' : http_request_result,
+  });
+  const TransformationOutput = IDL.Record({
+    'status' : IDL.Nat,
+    'body' : IDL.Vec(IDL.Nat8),
+    'headers' : IDL.Vec(http_header),
+  });
   
   return IDL.Service({
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+    'checkNameAvailability' : IDL.Func(
+        [IDL.Text],
+        [NameAvailabilityResult],
+        ['query'],
+      ),
+    'createCheckoutSession' : IDL.Func(
+        [IDL.Vec(ShoppingItem), IDL.Text, IDL.Text],
+        [IDL.Text],
+        [],
+      ),
     'getAllOrders' : IDL.Func([], [IDL.Vec(FormationOrder)], ['query']),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
     'getOrderById' : IDL.Func([IDL.Nat], [IDL.Opt(FormationOrder)], ['query']),
+    'getStripeSessionStatus' : IDL.Func([IDL.Text], [StripeSessionStatus], []),
     'getUserProfile' : IDL.Func(
         [IDL.Principal],
         [IDL.Opt(UserProfile)],
         ['query'],
       ),
     'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
+    'isStripeConfigured' : IDL.Func([], [IDL.Bool], []),
     'saveCallerUserProfile' : IDL.Func([UserProfile], [], []),
+    'setStripeConfiguration' : IDL.Func([StripeConfiguration], [], []),
     'submitFormationOrder' : IDL.Func(
         [FormationOrderInput],
         [SubmissionResponse],
         [],
+      ),
+    'transform' : IDL.Func(
+        [TransformationInput],
+        [TransformationOutput],
+        ['query'],
       ),
   });
 };

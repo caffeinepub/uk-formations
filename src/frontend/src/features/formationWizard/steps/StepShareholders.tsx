@@ -1,10 +1,16 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { FormationDraft, Shareholder } from '../formationDraft';
-import { ValidationErrors } from '../validation';
-import { Plus, Trash2 } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Plus, Trash2 } from "lucide-react";
+import type { FormationDraft, Shareholder } from "../formationDraft";
+import type { ValidationErrors } from "../validation";
 
 interface StepShareholdersProps {
   draft: FormationDraft;
@@ -12,28 +18,39 @@ interface StepShareholdersProps {
   errors: ValidationErrors;
 }
 
-export default function StepShareholders({ draft, updateDraft, errors }: StepShareholdersProps) {
+export default function StepShareholders({
+  draft,
+  updateDraft,
+  errors,
+}: StepShareholdersProps) {
   const addShareholder = () => {
     const newShareholder: Shareholder = {
       id: Date.now().toString(),
-      name: '',
+      name: "",
       shares: 0,
-      shareClass: 'Ordinary',
+      shareClass: "Ordinary",
     };
     updateDraft({ shareholders: [...draft.shareholders, newShareholder] });
   };
 
   const removeShareholder = (id: string) => {
-    updateDraft({ shareholders: draft.shareholders.filter((s) => s.id !== id) });
+    updateDraft({
+      shareholders: draft.shareholders.filter((s) => s.id !== id),
+    });
   };
 
   const updateShareholder = (id: string, updates: Partial<Shareholder>) => {
     updateDraft({
-      shareholders: draft.shareholders.map((s) => (s.id === id ? { ...s, ...updates } : s)),
+      shareholders: draft.shareholders.map((s) =>
+        s.id === id ? { ...s, ...updates } : s,
+      ),
     });
   };
 
-  const totalAllocated = draft.shareholders.reduce((sum, s) => sum + (s.shares || 0), 0);
+  const totalAllocated = draft.shareholders.reduce(
+    (sum, s) => sum + (s.shares || 0),
+    0,
+  );
 
   return (
     <div className="space-y-6">
@@ -41,7 +58,8 @@ export default function StepShareholders({ draft, updateDraft, errors }: StepSha
         <CardHeader>
           <CardTitle>Share Capital</CardTitle>
           <CardDescription>
-            Define your company's share structure. Most companies start with 100 shares at £1 each.
+            Define your company's share structure. Most companies start with 100
+            shares at £1 each.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -52,7 +70,11 @@ export default function StepShareholders({ draft, updateDraft, errors }: StepSha
                 id="totalShares"
                 type="number"
                 value={draft.totalShares}
-                onChange={(e) => updateDraft({ totalShares: parseInt(e.target.value) || 0 })}
+                onChange={(e) =>
+                  updateDraft({
+                    totalShares: Number.parseInt(e.target.value) || 0,
+                  })
+                }
               />
             </div>
             <div className="space-y-2">
@@ -61,7 +83,11 @@ export default function StepShareholders({ draft, updateDraft, errors }: StepSha
                 id="shareCapital"
                 type="number"
                 value={draft.shareCapital}
-                onChange={(e) => updateDraft({ shareCapital: parseInt(e.target.value) || 0 })}
+                onChange={(e) =>
+                  updateDraft({
+                    shareCapital: Number.parseInt(e.target.value) || 0,
+                  })
+                }
               />
             </div>
           </div>
@@ -72,15 +98,25 @@ export default function StepShareholders({ draft, updateDraft, errors }: StepSha
         <CardHeader>
           <CardTitle>Shareholders</CardTitle>
           <CardDescription>
-            Add shareholders and allocate shares. Shareholders can be individuals or companies.
+            Add shareholders and allocate shares. Shareholders can be
+            individuals or companies.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {errors.shareholders && <p className="text-sm text-destructive mb-4">{errors.shareholders}</p>}
-          {errors.totalShares && <p className="text-sm text-destructive mb-4">{errors.totalShares}</p>}
+          {errors.shareholders && (
+            <p className="text-sm text-destructive mb-4">
+              {errors.shareholders}
+            </p>
+          )}
+          {errors.totalShares && (
+            <p className="text-sm text-destructive mb-4">
+              {errors.totalShares}
+            </p>
+          )}
           <div className="mb-4 p-3 bg-muted rounded-lg">
             <p className="text-sm">
-              <span className="font-semibold">Allocated:</span> {totalAllocated} of {draft.totalShares} shares
+              <span className="font-semibold">Allocated:</span> {totalAllocated}{" "}
+              of {draft.totalShares} shares
             </p>
           </div>
           <Button onClick={addShareholder} variant="outline" className="w-full">
@@ -111,34 +147,50 @@ export default function StepShareholders({ draft, updateDraft, errors }: StepSha
               <Input
                 id={`shareholder${index}Name`}
                 value={shareholder.name}
-                onChange={(e) => updateShareholder(shareholder.id, { name: e.target.value })}
+                onChange={(e) =>
+                  updateShareholder(shareholder.id, { name: e.target.value })
+                }
                 placeholder="Full name or company name"
               />
               {errors[`shareholder${index}Name`] && (
-                <p className="text-sm text-destructive">{errors[`shareholder${index}Name`]}</p>
+                <p className="text-sm text-destructive">
+                  {errors[`shareholder${index}Name`]}
+                </p>
               )}
             </div>
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor={`shareholder${index}Shares`}>Number of Shares *</Label>
+                <Label htmlFor={`shareholder${index}Shares`}>
+                  Number of Shares *
+                </Label>
                 <Input
                   id={`shareholder${index}Shares`}
                   type="number"
-                  value={shareholder.shares || ''}
+                  value={shareholder.shares || ""}
                   onChange={(e) =>
-                    updateShareholder(shareholder.id, { shares: parseInt(e.target.value) || 0 })
+                    updateShareholder(shareholder.id, {
+                      shares: Number.parseInt(e.target.value) || 0,
+                    })
                   }
                 />
                 {errors[`shareholder${index}Shares`] && (
-                  <p className="text-sm text-destructive">{errors[`shareholder${index}Shares`]}</p>
+                  <p className="text-sm text-destructive">
+                    {errors[`shareholder${index}Shares`]}
+                  </p>
                 )}
               </div>
               <div className="space-y-2">
-                <Label htmlFor={`shareholder${index}ShareClass`}>Share Class</Label>
+                <Label htmlFor={`shareholder${index}ShareClass`}>
+                  Share Class
+                </Label>
                 <Input
                   id={`shareholder${index}ShareClass`}
                   value={shareholder.shareClass}
-                  onChange={(e) => updateShareholder(shareholder.id, { shareClass: e.target.value })}
+                  onChange={(e) =>
+                    updateShareholder(shareholder.id, {
+                      shareClass: e.target.value,
+                    })
+                  }
                 />
               </div>
             </div>
@@ -148,4 +200,3 @@ export default function StepShareholders({ draft, updateDraft, errors }: StepSha
     </div>
   );
 }
-

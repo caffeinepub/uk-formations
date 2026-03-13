@@ -1,7 +1,7 @@
-import { FormationDraft } from './formationDraft';
-import { FormationOrderInput } from '../../backend';
+import type { FormationOrderInput } from "../../backend";
+import type { FormationDraft } from "./formationDraft";
 
-const CONFIRMATION_KEY = 'uk-formations-confirmation';
+const CONFIRMATION_KEY = "uk-formations-confirmation";
 
 export interface OrderConfirmation {
   orderId: number;
@@ -11,30 +11,35 @@ export interface OrderConfirmation {
   timestamp: string;
 }
 
-export function convertDraftToOrderInput(draft: FormationDraft): FormationOrderInput {
-  const additionalDetails = JSON.stringify({
-    package: draft.selectedPackage,
+export function convertDraftToOrderInput(
+  draft: FormationDraft,
+): FormationOrderInput {
+  const contactDetails = JSON.stringify({
+    name: draft.contactName,
+    phone: draft.contactPhone,
     companyNamePreferences: draft.companyNamePreferences,
     companyType: draft.companyType,
     registeredOffice: {
       option: draft.registeredOfficeOption,
-      address: draft.registeredOfficeAddress,
       postcode: draft.registeredOfficePostcode,
     },
-    directors: draft.directors,
-    shareholders: draft.shareholders,
     totalShares: draft.totalShares,
     shareCapital: draft.shareCapital,
-    pscs: draft.pscs,
-    sicCodes: draft.sicCodes,
+    package: draft.selectedPackage,
   });
 
   return {
-    customerName: draft.contactName || 'Not provided',
+    customerName: draft.contactName || "Not provided",
     contactEmail: draft.contactEmail,
-    formationType: draft.companyType,
-    businessName: draft.companyNamePreferences[0] || 'Not provided',
-    additionalDetails,
+    companyName: draft.companyNamePreferences[0] || "Not provided",
+    packageSelected: draft.selectedPackage?.name || "Not selected",
+    registeredOfficeAddress:
+      draft.registeredOfficeAddress || draft.registeredOfficePostcode || "",
+    directorDetails: JSON.stringify(draft.directors),
+    shareholderDetails: JSON.stringify(draft.shareholders),
+    pscDetails: JSON.stringify(draft.pscs),
+    sicCodes: draft.sicCodes || [],
+    contactDetails,
   };
 }
 
@@ -42,7 +47,7 @@ export function saveConfirmation(confirmation: OrderConfirmation) {
   try {
     sessionStorage.setItem(CONFIRMATION_KEY, JSON.stringify(confirmation));
   } catch (error) {
-    console.error('Failed to save confirmation:', error);
+    console.error("Failed to save confirmation:", error);
   }
 }
 
@@ -53,7 +58,7 @@ export function loadConfirmation(): OrderConfirmation | null {
       return JSON.parse(stored);
     }
   } catch (error) {
-    console.error('Failed to load confirmation:', error);
+    console.error("Failed to load confirmation:", error);
   }
   return null;
 }
@@ -62,7 +67,6 @@ export function clearConfirmation() {
   try {
     sessionStorage.removeItem(CONFIRMATION_KEY);
   } catch (error) {
-    console.error('Failed to clear confirmation:', error);
+    console.error("Failed to clear confirmation:", error);
   }
 }
-

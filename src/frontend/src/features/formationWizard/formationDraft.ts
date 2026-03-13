@@ -40,7 +40,7 @@ export interface FormationDraft {
   companyType: string;
 
   // Step 2: Registered Office
-  registeredOfficeOption: 'own' | 'service';
+  registeredOfficeOption: "own" | "service";
   registeredOfficeAddress: string;
   registeredOfficePostcode: string;
 
@@ -66,19 +66,18 @@ export interface FormationDraft {
 
 export const defaultFormationDraft: FormationDraft = {
   selectedPackage: null,
-  companyNamePreferences: ['', '', ''],
-  companyType: 'private-limited-shares',
-  registeredOfficeOption: 'own',
-  registeredOfficeAddress: '',
-  registeredOfficePostcode: '',
+  companyNamePreferences: ["", "", ""],
+  companyType: "private-limited-shares",
+  registeredOfficeOption: "own",
+  registeredOfficeAddress: "",
+  registeredOfficePostcode: "",
   directors: [],
   shareholders: [],
   totalShares: 100,
   shareCapital: 100,
   pscs: [],
   sicCodes: [],
-  contactName: '',
-  contactEmail: '',
-  contactPhone: '',
+  contactName: "",
+  contactEmail: "",
+  contactPhone: "",
 };
-

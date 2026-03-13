@@ -13,40 +13,93 @@ import type { Principal } from '@icp-sdk/core/principal';
 export interface FormationOrder {
   'id' : bigint,
   'customerName' : string,
-  'additionalDetails' : string,
-  'businessName' : string,
-  'formationType' : string,
+  'sicCodes' : Array<string>,
+  'registeredOfficeAddress' : string,
+  'packageSelected' : string,
+  'directorDetails' : string,
+  'pscDetails' : string,
+  'shareholderDetails' : string,
   'contactEmail' : string,
+  'companyName' : string,
+  'contactDetails' : string,
 }
 export interface FormationOrderInput {
   'customerName' : string,
-  'additionalDetails' : string,
-  'businessName' : string,
-  'formationType' : string,
+  'sicCodes' : Array<string>,
+  'registeredOfficeAddress' : string,
+  'packageSelected' : string,
+  'directorDetails' : string,
+  'pscDetails' : string,
+  'shareholderDetails' : string,
   'contactEmail' : string,
+  'companyName' : string,
+  'contactDetails' : string,
 }
+export interface NameAvailabilityResult {
+  'isAvailable' : boolean,
+  'message' : string,
+}
+export interface ShoppingItem {
+  'productName' : string,
+  'currency' : string,
+  'quantity' : bigint,
+  'priceInCents' : bigint,
+  'productDescription' : string,
+}
+export interface StripeConfiguration {
+  'allowedCountries' : Array<string>,
+  'secretKey' : string,
+}
+export type StripeSessionStatus = {
+    'completed' : { 'userPrincipal' : [] | [string], 'response' : string }
+  } |
+  { 'failed' : { 'error' : string } };
 export interface SubmissionResponse {
   'orderId' : bigint,
   'confirmationMessage' : string,
+}
+export interface TransformationInput {
+  'context' : Uint8Array,
+  'response' : http_request_result,
+}
+export interface TransformationOutput {
+  'status' : bigint,
+  'body' : Uint8Array,
+  'headers' : Array<http_header>,
 }
 export interface UserProfile { 'name' : string }
 export type UserRole = { 'admin' : null } |
   { 'user' : null } |
   { 'guest' : null };
+export interface http_header { 'value' : string, 'name' : string }
+export interface http_request_result {
+  'status' : bigint,
+  'body' : Uint8Array,
+  'headers' : Array<http_header>,
+}
 export interface _SERVICE {
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
+  'checkNameAvailability' : ActorMethod<[string], NameAvailabilityResult>,
+  'createCheckoutSession' : ActorMethod<
+    [Array<ShoppingItem>, string, string],
+    string
+  >,
   'getAllOrders' : ActorMethod<[], Array<FormationOrder>>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfile]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
   'getOrderById' : ActorMethod<[bigint], [] | [FormationOrder]>,
+  'getStripeSessionStatus' : ActorMethod<[string], StripeSessionStatus>,
   'getUserProfile' : ActorMethod<[Principal], [] | [UserProfile]>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
+  'isStripeConfigured' : ActorMethod<[], boolean>,
   'saveCallerUserProfile' : ActorMethod<[UserProfile], undefined>,
+  'setStripeConfiguration' : ActorMethod<[StripeConfiguration], undefined>,
   'submitFormationOrder' : ActorMethod<
     [FormationOrderInput],
     SubmissionResponse
   >,
+  'transform' : ActorMethod<[TransformationInput], TransformationOutput>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

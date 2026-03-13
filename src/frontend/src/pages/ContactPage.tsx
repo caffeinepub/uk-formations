@@ -1,51 +1,57 @@
-import Section from '@/components/Section';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
-import { Mail, Phone, MapPin, Clock } from 'lucide-react';
-import { useState } from 'react';
+import Section from "@/components/Section";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { useState } from "react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // This is a placeholder - in a real app, you would send this to a backend
-    alert('Thank you for your message. We will get back to you soon!');
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    alert("Thank you for your message. We will get back to you soon!");
+    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
   };
 
   const contactInfo = [
     {
       icon: Mail,
-      title: 'Email',
-      content: 'info@ukformations.co.uk',
-      link: 'mailto:info@ukformations.co.uk',
+      title: "Email",
+      content: "info@ukformations.co.uk",
+      link: "mailto:info@ukformations.co.uk",
     },
     {
       icon: Phone,
-      title: 'Phone',
-      content: '+44 20 1234 5678',
-      link: 'tel:+442012345678',
+      title: "Phone",
+      content: "+44 20 1234 5678",
+      link: "tel:+442012345678",
     },
     {
       icon: MapPin,
-      title: 'Address',
-      content: '123 Business Street, London, EC1A 1BB',
+      title: "Address",
+      content: "123 Business Street, London, EC1A 1BB",
       link: null,
     },
     {
       icon: Clock,
-      title: 'Business Hours',
-      content: 'Monday - Friday: 9:00 AM - 6:00 PM',
+      title: "Business Hours",
+      content: "Monday - Friday: 9:00 AM - 6:00 PM",
       link: null,
     },
   ];
@@ -56,8 +62,9 @@ export default function ContactPage() {
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Have questions about forming your UK company? Our team is here to help. Send us a message and we
-            will get back to you as soon as possible.
+            Have questions about forming your UK company? Our team is here to
+            help. Send us a message and we will get back to you as soon as
+            possible.
           </p>
         </div>
       </Section>
@@ -80,7 +87,9 @@ export default function ContactPage() {
                       <Input
                         id="name"
                         value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, name: e.target.value })
+                        }
                         required
                       />
                     </div>
@@ -90,7 +99,9 @@ export default function ContactPage() {
                         id="email"
                         type="email"
                         value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
                         required
                       />
                     </div>
@@ -102,7 +113,9 @@ export default function ContactPage() {
                         id="phone"
                         type="tel"
                         value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, phone: e.target.value })
+                        }
                       />
                     </div>
                     <div className="space-y-2">
@@ -110,7 +123,9 @@ export default function ContactPage() {
                       <Input
                         id="subject"
                         value={formData.subject}
-                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, subject: e.target.value })
+                        }
                         required
                       />
                     </div>
@@ -121,7 +136,9 @@ export default function ContactPage() {
                       id="message"
                       rows={6}
                       value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      onChange={(e) =>
+                        setFormData({ ...formData, message: e.target.value })
+                      }
                       required
                     />
                   </div>
@@ -154,7 +171,9 @@ export default function ContactPage() {
                           {info.content}
                         </a>
                       ) : (
-                        <p className="text-sm text-muted-foreground">{info.content}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {info.content}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -168,8 +187,8 @@ export default function ContactPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  We typically respond to all inquiries within 24 hours during business days. For urgent
-                  matters, please call us directly.
+                  We typically respond to all inquiries within 24 hours during
+                  business days. For urgent matters, please call us directly.
                 </p>
               </CardContent>
             </Card>
@@ -179,4 +198,3 @@ export default function ContactPage() {
     </div>
   );
 }
-

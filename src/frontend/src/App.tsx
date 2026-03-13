@@ -1,21 +1,32 @@
-import { RouterProvider, createRouter, createRoute, createRootRoute } from '@tanstack/react-router';
-import SiteLayout from './components/layout/SiteLayout';
-import HomePage from './pages/HomePage';
-import PricingPage from './pages/PricingPage';
-import HowItWorksPage from './pages/HowItWorksPage';
-import FaqPage from './pages/FaqPage';
-import ContactPage from './pages/ContactPage';
-import PrivacyPolicyPage from './pages/legal/PrivacyPolicyPage';
-import TermsOfServicePage from './pages/legal/TermsOfServicePage';
-import FormationWizardPage from './pages/FormationWizardPage';
-import OrderConfirmationPage from './pages/OrderConfirmationPage';
-import AdminOrdersPage from './pages/admin/AdminOrdersPage';
-import AdminOrderDetailPage from './pages/admin/AdminOrderDetailPage';
-import AdminExportPage from './pages/admin/AdminExportPage';
-import ServicesPage from './pages/ServicesPage';
-import CompanyFormationServicePage from './pages/services/CompanyFormationServicePage';
-import RegisteredOfficeServicePage from './pages/services/RegisteredOfficeServicePage';
-import BusinessSupportServicePage from './pages/services/BusinessSupportServicePage';
+import {
+  RouterProvider,
+  createRootRoute,
+  createRoute,
+  createRouter,
+} from "@tanstack/react-router";
+import SiteLayout from "./components/layout/SiteLayout";
+import ContactPage from "./pages/ContactPage";
+import FaqPage from "./pages/FaqPage";
+import FormationWizardPage from "./pages/FormationWizardPage";
+import HomePage from "./pages/HomePage";
+import HowItWorksPage from "./pages/HowItWorksPage";
+import NameCheckPage from "./pages/NameCheckPage";
+import OrderConfirmationPage from "./pages/OrderConfirmationPage";
+import PaymentFailurePage from "./pages/PaymentFailurePage";
+import PaymentSuccessPage from "./pages/PaymentSuccessPage";
+import PricingPage from "./pages/PricingPage";
+import ServicesPage from "./pages/ServicesPage";
+import StartFormationPage from "./pages/StartFormationPage";
+import AdminExportPage from "./pages/admin/AdminExportPage";
+import AdminOrderDetailPage from "./pages/admin/AdminOrderDetailPage";
+import AdminOrdersPage from "./pages/admin/AdminOrdersPage";
+import PrivacyPolicyPage from "./pages/legal/PrivacyPolicyPage";
+import TermsOfServicePage from "./pages/legal/TermsOfServicePage";
+import BusinessSupportServicePage from "./pages/services/BusinessSupportServicePage";
+import CompanyFormationServicePage from "./pages/services/CompanyFormationServicePage";
+import PAYERegistrationServicePage from "./pages/services/PAYERegistrationServicePage";
+import RegisteredOfficeServicePage from "./pages/services/RegisteredOfficeServicePage";
+import VATRegistrationServicePage from "./pages/services/VATRegistrationServicePage";
 
 const rootRoute = createRootRoute({
   component: SiteLayout,
@@ -23,98 +34,134 @@ const rootRoute = createRootRoute({
 
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/',
+  path: "/",
   component: HomePage,
 });
 
 const pricingRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/pricing',
+  path: "/pricing",
   component: PricingPage,
 });
 
 const howItWorksRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/how-it-works',
+  path: "/how-it-works",
   component: HowItWorksPage,
 });
 
 const faqRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/faq',
+  path: "/faq",
   component: FaqPage,
 });
 
 const contactRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/contact',
+  path: "/contact",
   component: ContactPage,
 });
 
 const privacyRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/privacy',
+  path: "/privacy",
   component: PrivacyPolicyPage,
 });
 
 const termsRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/terms',
+  path: "/terms",
   component: TermsOfServicePage,
 });
 
 const wizardRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/formation-wizard',
+  path: "/formation-wizard",
   component: FormationWizardPage,
 });
 
 const confirmationRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/confirmation',
+  path: "/confirmation",
   component: OrderConfirmationPage,
 });
 
 const adminOrdersRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/admin/orders',
+  path: "/admin/orders",
   component: AdminOrdersPage,
 });
 
 const adminOrderDetailRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/admin/orders/$orderId',
+  path: "/admin/orders/$orderId",
   component: AdminOrderDetailPage,
 });
 
 const adminExportRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/admin/export',
+  path: "/admin/export",
   component: AdminExportPage,
 });
 
 const servicesRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/services',
+  path: "/services",
   component: ServicesPage,
 });
 
 const companyFormationServiceRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/services/company-formation',
+  path: "/services/company-formation",
   component: CompanyFormationServicePage,
 });
 
 const registeredOfficeServiceRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/services/registered-office',
+  path: "/services/registered-office",
   component: RegisteredOfficeServicePage,
 });
 
 const businessSupportServiceRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: '/services/business-support',
+  path: "/services/business-support",
   component: BusinessSupportServicePage,
+});
+
+const vatRegistrationServiceRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/services/vat-registration",
+  component: VATRegistrationServicePage,
+});
+
+const payeRegistrationServiceRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/services/paye-registration",
+  component: PAYERegistrationServicePage,
+});
+
+const nameCheckRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/name-check",
+  component: NameCheckPage,
+});
+
+const startFormationRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/start-formation",
+  component: StartFormationPage,
+});
+
+const paymentSuccessRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/payment-success",
+  component: PaymentSuccessPage,
+});
+
+const paymentFailureRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/payment-failure",
+  component: PaymentFailurePage,
 });
 
 const routeTree = rootRoute.addChildren([
@@ -134,11 +181,17 @@ const routeTree = rootRoute.addChildren([
   companyFormationServiceRoute,
   registeredOfficeServiceRoute,
   businessSupportServiceRoute,
+  vatRegistrationServiceRoute,
+  payeRegistrationServiceRoute,
+  nameCheckRoute,
+  startFormationRoute,
+  paymentSuccessRoute,
+  paymentFailureRoute,
 ]);
 
 const router = createRouter({ routeTree });
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router;
   }

@@ -1,11 +1,17 @@
-import { Link, useNavigate } from '@tanstack/react-router';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import Section from '@/components/Section';
-import { Check } from 'lucide-react';
-import { useFormationDraft } from '../features/formationWizard/useFormationDraft';
-import { packages } from '../features/packages/packagesCatalog';
+import Section from "@/components/Section";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { Check } from "lucide-react";
+import { useFormationDraft } from "../features/formationWizard/useFormationDraft";
+import { packages } from "../features/packages/packagesCatalog";
 
 export default function PricingPage() {
   const navigate = useNavigate();
@@ -21,7 +27,7 @@ export default function PricingPage() {
           price: selectedPackage.price,
         },
       });
-      navigate({ to: '/formation-wizard' });
+      navigate({ to: "/formation-wizard" });
     }
   };
 
@@ -29,10 +35,12 @@ export default function PricingPage() {
     <div>
       <Section className="bg-gradient-to-b from-muted/50 to-background">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Choose Your Formation Package</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Choose Your Formation Package
+          </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Select the package that best suits your business needs. All packages include Companies House
-            registration and essential documentation.
+            Select the package that best suits your business needs. All packages
+            include Companies House registration and essential documentation.
           </p>
         </div>
 
@@ -41,11 +49,15 @@ export default function PricingPage() {
             <Card
               key={pkg.id}
               className={`relative ${
-                pkg.popular ? 'border-primary border-2 shadow-medium' : 'border-2'
+                pkg.popular
+                  ? "border-primary border-2 shadow-medium"
+                  : "border-2"
               }`}
             >
               {pkg.popular && (
-                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">Most Popular</Badge>
+                <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">
+                  Most Popular
+                </Badge>
               )}
               <CardHeader className="text-center pb-8">
                 <CardTitle className="text-2xl mb-2">{pkg.name}</CardTitle>
@@ -53,7 +65,9 @@ export default function PricingPage() {
                   <span className="text-4xl font-bold">£{pkg.price}</span>
                   <span className="text-muted-foreground"> + VAT</span>
                 </div>
-                <CardDescription className="text-base">{pkg.description}</CardDescription>
+                <CardDescription className="text-base">
+                  {pkg.description}
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <ul className="space-y-3">
@@ -67,10 +81,12 @@ export default function PricingPage() {
                 <Button
                   onClick={() => handleSelectPackage(pkg.id)}
                   className="w-full"
-                  variant={pkg.popular ? 'default' : 'outline'}
+                  variant={pkg.popular ? "default" : "outline"}
                   size="lg"
                 >
-                  {draft.selectedPackage?.id === pkg.id ? 'Selected' : 'Select Package'}
+                  {draft.selectedPackage?.id === pkg.id
+                    ? "Selected"
+                    : "Select Package"}
                 </Button>
               </CardContent>
             </Card>
@@ -89,4 +105,3 @@ export default function PricingPage() {
     </div>
   );
 }
-

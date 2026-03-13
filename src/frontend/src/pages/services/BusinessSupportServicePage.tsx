@@ -1,34 +1,46 @@
-import { Link } from '@tanstack/react-router';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import Section from '@/components/Section';
-import { getServicesByCategory } from '@/features/services/servicesCatalog';
-import { CheckCircle2, Users, FileText, Briefcase, TrendingUp } from 'lucide-react';
+import Section from "@/components/Section";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { getServicesByCategory } from "@/features/services/servicesCatalog";
+import { Link } from "@tanstack/react-router";
+import {
+  Briefcase,
+  CheckCircle2,
+  FileText,
+  TrendingUp,
+  Users,
+} from "lucide-react";
 
 export default function BusinessSupportServicePage() {
-  const supportServices = getServicesByCategory('support');
-  const complianceServices = getServicesByCategory('compliance');
+  const supportServices = getServicesByCategory("support");
+  const complianceServices = getServicesByCategory("compliance");
 
   const benefits = [
     {
       icon: Users,
-      title: 'Expert Guidance',
-      description: 'Professional support from experienced business advisors',
+      title: "Expert Guidance",
+      description: "Professional support from experienced business advisors",
     },
     {
       icon: FileText,
-      title: 'Compliance Management',
-      description: 'Stay on top of all statutory requirements and deadlines',
+      title: "Compliance Management",
+      description: "Stay on top of all statutory requirements and deadlines",
     },
     {
       icon: Briefcase,
-      title: 'Time Saving',
-      description: 'Focus on growing your business while we handle the admin',
+      title: "Time Saving",
+      description: "Focus on growing your business while we handle the admin",
     },
     {
       icon: TrendingUp,
-      title: 'Business Growth',
-      description: 'Access services that help your business scale and succeed',
+      title: "Business Growth",
+      description: "Access services that help your business scale and succeed",
     },
   ];
 
@@ -41,7 +53,9 @@ export default function BusinessSupportServicePage() {
             Business Support Services
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground">
-            Comprehensive business support and compliance services to help your company thrive. From company secretarial services to VAT registration, we've got you covered.
+            Comprehensive business support and compliance services to help your
+            company thrive. From company secretarial services to VAT
+            registration, we've got you covered.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <Button asChild size="lg">
@@ -57,9 +71,12 @@ export default function BusinessSupportServicePage() {
       {/* Benefits Section */}
       <Section>
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose Our Support Services?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Why Choose Our Support Services?
+          </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Let our experts handle the complexities of running a business so you can focus on what matters most.
+            Let our experts handle the complexities of running a business so you
+            can focus on what matters most.
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -70,7 +87,9 @@ export default function BusinessSupportServicePage() {
                 <CardTitle className="text-xl">{benefit.title}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-base">{benefit.description}</CardDescription>
+                <CardDescription className="text-base">
+                  {benefit.description}
+                </CardDescription>
               </CardContent>
             </Card>
           ))}
@@ -80,9 +99,12 @@ export default function BusinessSupportServicePage() {
       {/* Support Services Section */}
       <Section className="bg-muted/30">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Business Support Services</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Business Support Services
+          </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Professional services to support your business operations and growth.
+            Professional services to support your business operations and
+            growth.
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-6">
@@ -90,12 +112,17 @@ export default function BusinessSupportServicePage() {
             <Card key={service.id} className="border-2">
               <CardHeader>
                 <CardTitle className="text-xl">{service.name}</CardTitle>
-                <CardDescription className="text-base">{service.description}</CardDescription>
+                <CardDescription className="text-base">
+                  {service.description}
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <ul className="space-y-2">
-                  {service.features.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-2 text-sm">
+                  {service.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-start gap-2 text-sm"
+                    >
                       <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
                       <span>{feature}</span>
                     </li>
@@ -107,7 +134,9 @@ export default function BusinessSupportServicePage() {
                       £{service.pricing.amount.toFixed(2)}
                     </p>
                     {service.pricing.period && (
-                      <p className="text-sm text-muted-foreground mt-1">{service.pricing.period}</p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {service.pricing.period}
+                      </p>
                     )}
                   </div>
                 )}
@@ -120,7 +149,9 @@ export default function BusinessSupportServicePage() {
       {/* Compliance Services Section */}
       <Section>
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Compliance Services</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Compliance Services
+          </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Stay compliant with HMRC and Companies House requirements.
           </p>
@@ -130,12 +161,17 @@ export default function BusinessSupportServicePage() {
             <Card key={service.id} className="border-2">
               <CardHeader>
                 <CardTitle className="text-xl">{service.name}</CardTitle>
-                <CardDescription className="text-base">{service.description}</CardDescription>
+                <CardDescription className="text-base">
+                  {service.description}
+                </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <ul className="space-y-2">
-                  {service.features.map((feature, index) => (
-                    <li key={index} className="flex items-start gap-2 text-sm">
+                  {service.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-start gap-2 text-sm"
+                    >
                       <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
                       <span>{feature}</span>
                     </li>
@@ -147,7 +183,9 @@ export default function BusinessSupportServicePage() {
                       £{service.pricing.amount.toFixed(2)}
                     </p>
                     {service.pricing.period && (
-                      <p className="text-sm text-muted-foreground mt-1">{service.pricing.period}</p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        {service.pricing.period}
+                      </p>
                     )}
                   </div>
                 )}
@@ -160,9 +198,12 @@ export default function BusinessSupportServicePage() {
       {/* CTA Section */}
       <Section className="bg-primary text-primary-foreground">
         <div className="text-center space-y-6">
-          <h2 className="text-3xl md:text-4xl font-bold">Let Us Support Your Business</h2>
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Let Us Support Your Business
+          </h2>
           <p className="text-lg max-w-2xl mx-auto opacity-90">
-            Get expert help with all aspects of running your UK business. Contact us today to discuss your needs.
+            Get expert help with all aspects of running your UK business.
+            Contact us today to discuss your needs.
           </p>
           <Button asChild size="lg" variant="secondary">
             <Link to="/contact">Contact Us</Link>

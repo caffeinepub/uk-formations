@@ -1,11 +1,24 @@
-import { useNavigate } from '@tanstack/react-router';
-import { useInternetIdentity } from '../../hooks/useInternetIdentity';
-import { useIsCallerAdmin } from '../../hooks/useQueries';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Download, Code, FileCode, Folder, AlertCircle, CheckCircle2 } from 'lucide-react';
-import { useState } from 'react';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { useNavigate } from "@tanstack/react-router";
+import {
+  AlertCircle,
+  CheckCircle2,
+  Code,
+  Download,
+  FileCode,
+  Folder,
+} from "lucide-react";
+import { useState } from "react";
+import { useInternetIdentity } from "../../hooks/useInternetIdentity";
+import { useIsCallerAdmin } from "../../hooks/useQueries";
 
 export default function AdminExportPage() {
   const navigate = useNavigate();
@@ -22,11 +35,12 @@ export default function AdminExportPage() {
           <AlertCircle className="h-4 w-4" />
           <AlertTitle>Authentication Required</AlertTitle>
           <AlertDescription>
-            You must be logged in to access this page. Please log in and try again.
+            You must be logged in to access this page. Please log in and try
+            again.
           </AlertDescription>
         </Alert>
         <div className="mt-6">
-          <Button onClick={() => navigate({ to: '/' })}>Go to Home</Button>
+          <Button onClick={() => navigate({ to: "/" })}>Go to Home</Button>
         </div>
       </div>
     );
@@ -37,7 +51,7 @@ export default function AdminExportPage() {
       <div className="container py-12">
         <div className="flex items-center justify-center">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
             <p className="text-muted-foreground">Verifying permissions...</p>
           </div>
         </div>
@@ -52,11 +66,12 @@ export default function AdminExportPage() {
           <AlertCircle className="h-4 w-4" />
           <AlertTitle>Access Denied</AlertTitle>
           <AlertDescription>
-            You do not have permission to access this page. Only administrators can export project code.
+            You do not have permission to access this page. Only administrators
+            can export project code.
           </AlertDescription>
         </Alert>
         <div className="mt-6">
-          <Button onClick={() => navigate({ to: '/' })}>Go to Home</Button>
+          <Button onClick={() => navigate({ to: "/" })}>Go to Home</Button>
         </div>
       </div>
     );
@@ -119,9 +134,10 @@ export default function AdminExportPage() {
           <AlertCircle className="h-4 w-4" />
           <AlertTitle>About Code Export</AlertTitle>
           <AlertDescription>
-            Your application is deployed on the Internet Computer blockchain. The code is permanently stored and
-            accessible through the canister. Below you'll find information about your project structure and how to
-            access the source code.
+            Your application is deployed on the Internet Computer blockchain.
+            The code is permanently stored and accessible through the canister.
+            Below you'll find information about your project structure and how
+            to access the source code.
           </AlertDescription>
         </Alert>
 
@@ -240,16 +256,19 @@ export default function AdminExportPage() {
             <div>
               <h4 className="font-semibold mb-2">Your Application is Live:</h4>
               <p className="text-sm text-muted-foreground mb-3">
-                Your code is deployed and running on the Internet Computer. The application is accessible at your
-                current URL and will remain online permanently.
+                Your code is deployed and running on the Internet Computer. The
+                application is accessible at your current URL and will remain
+                online permanently.
               </p>
             </div>
 
             <div>
               <h4 className="font-semibold mb-2">Code Preservation:</h4>
               <p className="text-sm text-muted-foreground mb-3">
-                All source code is stored in the deployment system. Your frontend and backend code, along with all
-                configuration files, are preserved and can be accessed through the Caffeine.ai platform.
+                All source code is stored in the deployment system. Your
+                frontend and backend code, along with all configuration files,
+                are preserved and can be accessed through the Caffeine.ai
+                platform.
               </p>
             </div>
 
@@ -267,19 +286,23 @@ export default function AdminExportPage() {
               <AlertCircle className="h-4 w-4" />
               <AlertTitle>Need Local Development?</AlertTitle>
               <AlertDescription>
-                To set up a local development environment, you'll need to install the DFINITY SDK (dfx), Node.js, and
-                run the setup commands specified in package.json. Your canister will need to be redeployed locally for
-                development.
+                To set up a local development environment, you'll need to
+                install the DFINITY SDK (dfx), Node.js, and run the setup
+                commands specified in package.json. Your canister will need to
+                be redeployed locally for development.
               </AlertDescription>
             </Alert>
           </CardContent>
         </Card>
 
         <div className="flex gap-4">
-          <Button onClick={() => navigate({ to: '/admin/orders' })} variant="outline">
+          <Button
+            onClick={() => navigate({ to: "/admin/orders" })}
+            variant="outline"
+          >
             Back to Orders
           </Button>
-          <Button onClick={() => navigate({ to: '/' })} variant="outline">
+          <Button onClick={() => navigate({ to: "/" })} variant="outline">
             Go to Home
           </Button>
         </div>

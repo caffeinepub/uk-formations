@@ -1,15 +1,21 @@
-import { useParams, Link } from '@tanstack/react-router';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import Section from '@/components/Section';
-import { useGetOrderById } from '../../hooks/useQueries';
-import { useInternetIdentity } from '../../hooks/useInternetIdentity';
-import { Loader2, ArrowLeft } from 'lucide-react';
+import Section from "@/components/Section";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Link, useParams } from "@tanstack/react-router";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import { useInternetIdentity } from "../../hooks/useInternetIdentity";
+import { useGetOrderById } from "../../hooks/useQueries";
 
 export default function AdminOrderDetailPage() {
-  const { orderId } = useParams({ from: '/admin/orders/$orderId' });
+  const { orderId } = useParams({ from: "/admin/orders/$orderId" });
   const { identity } = useInternetIdentity();
   const orderIdBigInt = orderId ? BigInt(orderId) : null;
   const { data: order, isLoading, error } = useGetOrderById(orderIdBigInt);
@@ -20,7 +26,9 @@ export default function AdminOrderDetailPage() {
         <Card>
           <CardHeader>
             <CardTitle>Access Denied</CardTitle>
-            <CardDescription>Please log in to access the admin area.</CardDescription>
+            <CardDescription>
+              Please log in to access the admin area.
+            </CardDescription>
           </CardHeader>
         </Card>
       </Section>
@@ -34,7 +42,8 @@ export default function AdminOrderDetailPage() {
           <CardHeader>
             <CardTitle>Access Denied</CardTitle>
             <CardDescription>
-              You do not have permission to access this page. Only administrators can view order details.
+              You do not have permission to access this page. Only
+              administrators can view order details.
             </CardDescription>
           </CardHeader>
         </Card>
@@ -58,7 +67,9 @@ export default function AdminOrderDetailPage() {
         <Card>
           <CardHeader>
             <CardTitle>Order Not Found</CardTitle>
-            <CardDescription>The requested order could not be found.</CardDescription>
+            <CardDescription>
+              The requested order could not be found.
+            </CardDescription>
           </CardHeader>
           <CardContent>
             <Button asChild>
@@ -73,11 +84,14 @@ export default function AdminOrderDetailPage() {
     );
   }
 
-  let additionalDetails: any = {};
+  // Parse extended data stored in contactDetails JSON
+  let extraDetails: any = {};
   try {
-    additionalDetails = JSON.parse(order.additionalDetails);
+    if (order.contactDetails) {
+      extraDetails = JSON.parse(order.contactDetails);
+    }
   } catch (e) {
-    console.error('Failed to parse additional details:', e);
+    console.error("Failed to parse contact details:", e);
   }
 
   return (
@@ -90,7 +104,9 @@ export default function AdminOrderDetailPage() {
               Back to Orders
             </Link>
           </Button>
-          <h1 className="text-4xl font-bold mb-2">Order #{order.id.toString()}</h1>
+          <h1 className="text-4xl font-bold mb-2">
+            Order #{order.id.toString()}
+          </h1>
           <p className="text-muted-foreground">View complete order details</p>
         </div>
       </Section>
@@ -104,11 +120,15 @@ export default function AdminOrderDetailPage() {
             <CardContent className="space-y-4">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <p className="text-sm font-semibold text-muted-foreground mb-1">Customer Name</p>
+                  <p className="text-sm font-semibold text-muted-foreground mb-1">
+                    Customer Name
+                  </p>
                   <p>{order.customerName}</p>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-muted-foreground mb-1">Contact Email</p>
+                  <p className="text-sm font-semibold text-muted-foreground mb-1">
+                    Contact Email
+                  </p>
                   <p>{order.contactEmail}</p>
                 </div>
               </div>
@@ -121,20 +141,35 @@ export default function AdminOrderDetailPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <p className="text-sm font-semibold text-muted-foreground mb-1">Business Name</p>
-                <p className="text-lg font-semibold">{order.businessName}</p>
+                <p className="text-sm font-semibold text-muted-foreground mb-1">
+                  Company Name
+                </p>
+                <p className="text-lg font-semibold">{order.companyName}</p>
               </div>
               <Separator />
               <div>
-                <p className="text-sm font-semibold text-muted-foreground mb-1">Formation Type</p>
+                <p className="text-sm font-semibold text-muted-foreground mb-1">
+                  Package Selected
+                </p>
                 <Badge variant="secondary" className="capitalize">
-                  {order.formationType.replace(/-/g, ' ')}
+                  {order.packageSelected}
                 </Badge>
               </div>
+              {order.registeredOfficeAddress && (
+                <>
+                  <Separator />
+                  <div>
+                    <p className="text-sm font-semibold text-muted-foreground mb-1">
+                      Registered Office
+                    </p>
+                    <p>{order.registeredOfficeAddress}</p>
+                  </div>
+                </>
+              )}
             </CardContent>
           </Card>
 
-          {additionalDetails.package && (
+          {extraDetails.package && (
             <Card>
               <CardHeader>
                 <CardTitle>Package Details</CardTitle>
@@ -142,11 +177,17 @@ export default function AdminOrderDetailPage() {
               <CardContent>
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="font-semibold text-lg">{additionalDetails.package.name}</p>
-                    <p className="text-sm text-muted-foreground">Formation package</p>
+                    <p className="font-semibold text-lg">
+                      {extraDetails.package.name}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      Formation package
+                    </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-2xl font-bold">£{additionalDetails.package.price}</p>
+                    <p className="text-2xl font-bold">
+                      £{extraDetails.package.price}
+                    </p>
                     <p className="text-sm text-muted-foreground">+ VAT</p>
                   </div>
                 </div>
@@ -154,82 +195,53 @@ export default function AdminOrderDetailPage() {
             </Card>
           )}
 
-          {additionalDetails.companyNamePreferences && (
+          {extraDetails.companyNamePreferences && (
             <Card>
               <CardHeader>
                 <CardTitle>Company Name Preferences</CardTitle>
               </CardHeader>
               <CardContent>
                 <ol className="list-decimal list-inside space-y-1">
-                  {additionalDetails.companyNamePreferences
+                  {extraDetails.companyNamePreferences
                     .filter((name: string) => name.trim())
-                    .map((name: string, index: number) => (
-                      <li key={index}>{name}</li>
+                    .map((name: string) => (
+                      <li key={name}>{name}</li>
                     ))}
                 </ol>
               </CardContent>
             </Card>
           )}
 
-          {additionalDetails.directors && additionalDetails.directors.length > 0 && (
+          {order.directorDetails && (
             <Card>
               <CardHeader>
-                <CardTitle>Directors ({additionalDetails.directors.length})</CardTitle>
+                <CardTitle>Directors</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                {additionalDetails.directors.map((director: any, index: number) => (
-                  <div key={director.id}>
-                    {index > 0 && <Separator className="my-4" />}
-                    <div className="space-y-2">
-                      <p className="font-semibold">
-                        {director.firstName} {director.lastName}
-                      </p>
-                      <div className="grid grid-cols-2 gap-2 text-sm text-muted-foreground">
-                        <div>
-                          <span className="font-medium">DOB:</span> {director.dateOfBirth}
-                        </div>
-                        <div>
-                          <span className="font-medium">Nationality:</span> {director.nationality}
-                        </div>
-                        {director.occupation && (
-                          <div className="col-span-2">
-                            <span className="font-medium">Occupation:</span> {director.occupation}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              <CardContent>
+                <DirectorsList raw={order.directorDetails} />
               </CardContent>
             </Card>
           )}
 
-          {additionalDetails.shareholders && additionalDetails.shareholders.length > 0 && (
+          {order.shareholderDetails && (
             <Card>
               <CardHeader>
-                <CardTitle>Shareholders ({additionalDetails.shareholders.length})</CardTitle>
+                <CardTitle>Shareholders</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2">
-                {additionalDetails.shareholders.map((shareholder: any) => (
-                  <div key={shareholder.id} className="flex justify-between items-center">
-                    <span>{shareholder.name}</span>
-                    <Badge variant="secondary">
-                      {shareholder.shares} {shareholder.shareClass} shares
-                    </Badge>
-                  </div>
-                ))}
+              <CardContent>
+                <ShareholdersList raw={order.shareholderDetails} />
               </CardContent>
             </Card>
           )}
 
-          {additionalDetails.sicCodes && additionalDetails.sicCodes.length > 0 && (
+          {order.sicCodes && order.sicCodes.length > 0 && (
             <Card>
               <CardHeader>
                 <CardTitle>SIC Codes</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  {additionalDetails.sicCodes.map((code: string) => (
+                  {order.sicCodes.map((code: string) => (
                     <Badge key={code} variant="secondary">
                       {code}
                     </Badge>
@@ -244,3 +256,87 @@ export default function AdminOrderDetailPage() {
   );
 }
 
+function DirectorsList({ raw }: { raw: string }) {
+  let directors: any[] = [];
+  try {
+    directors = JSON.parse(raw);
+  } catch {
+    return (
+      <p className="text-sm text-muted-foreground">
+        No director data available.
+      </p>
+    );
+  }
+  if (!Array.isArray(directors) || directors.length === 0) {
+    return (
+      <p className="text-sm text-muted-foreground">No directors listed.</p>
+    );
+  }
+  return (
+    <div className="space-y-4">
+      {directors.map((director: any, index: number) => (
+        <div key={director.id ?? index}>
+          {index > 0 && <Separator className="my-4" />}
+          <div className="space-y-2">
+            <p className="font-semibold">
+              {director.firstName} {director.lastName}
+            </p>
+            <div className="grid grid-cols-2 gap-2 text-sm text-muted-foreground">
+              {director.dateOfBirth && (
+                <div>
+                  <span className="font-medium">DOB:</span>{" "}
+                  {director.dateOfBirth}
+                </div>
+              )}
+              {director.nationality && (
+                <div>
+                  <span className="font-medium">Nationality:</span>{" "}
+                  {director.nationality}
+                </div>
+              )}
+              {director.occupation && (
+                <div className="col-span-2">
+                  <span className="font-medium">Occupation:</span>{" "}
+                  {director.occupation}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ShareholdersList({ raw }: { raw: string }) {
+  let shareholders: any[] = [];
+  try {
+    shareholders = JSON.parse(raw);
+  } catch {
+    return (
+      <p className="text-sm text-muted-foreground">
+        No shareholder data available.
+      </p>
+    );
+  }
+  if (!Array.isArray(shareholders) || shareholders.length === 0) {
+    return (
+      <p className="text-sm text-muted-foreground">No shareholders listed.</p>
+    );
+  }
+  return (
+    <div className="space-y-2">
+      {shareholders.map((shareholder: any, index: number) => (
+        <div
+          key={shareholder.id ?? index}
+          className="flex justify-between items-center"
+        >
+          <span>{shareholder.name}</span>
+          <Badge variant="secondary">
+            {shareholder.shares} {shareholder.shareClass} shares
+          </Badge>
+        </div>
+      ))}
+    </div>
+  );
+}

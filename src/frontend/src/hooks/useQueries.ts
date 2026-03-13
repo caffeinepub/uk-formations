@@ -1,14 +1,21 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useActor } from './useActor';
-import { FormationOrderInput, SubmissionResponse, FormationOrder, UserProfile, UserRole } from '../backend';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import type {
+  FormationOrder,
+  FormationOrderInput,
+  NameAvailabilityResult,
+  SubmissionResponse,
+  UserProfile,
+  UserRole,
+} from "../backend";
+import { useActor } from "./useActor";
 
 export function useGetCallerUserRole() {
   const { actor, isFetching } = useActor();
 
   return useQuery<UserRole>({
-    queryKey: ['callerUserRole'],
+    queryKey: ["callerUserRole"],
     queryFn: async () => {
-      if (!actor) return 'guest' as UserRole;
+      if (!actor) return "guest" as UserRole;
       return actor.getCallerUserRole();
     },
     enabled: !!actor && !isFetching,
@@ -19,9 +26,9 @@ export function useGetCallerUserProfile() {
   const { actor, isFetching: actorFetching } = useActor();
 
   const query = useQuery<UserProfile | null>({
-    queryKey: ['currentUserProfile'],
+    queryKey: ["currentUserProfile"],
     queryFn: async () => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.getCallerUserProfile();
     },
     enabled: !!actor && !actorFetching,
@@ -41,11 +48,11 @@ export function useSaveCallerUserProfile() {
 
   return useMutation({
     mutationFn: async (profile: UserProfile) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.saveCallerUserProfile(profile);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['currentUserProfile'] });
+      queryClient.invalidateQueries({ queryKey: ["currentUserProfile"] });
     },
   });
 }
@@ -55,7 +62,7 @@ export function useSubmitFormationOrder() {
 
   return useMutation<SubmissionResponse, Error, FormationOrderInput>({
     mutationFn: async (orderInput: FormationOrderInput) => {
-      if (!actor) throw new Error('Actor not available');
+      if (!actor) throw new Error("Actor not available");
       return actor.submitFormationOrder(orderInput);
     },
   });
@@ -65,7 +72,7 @@ export function useGetAllOrders() {
   const { actor, isFetching } = useActor();
 
   return useQuery<FormationOrder[]>({
-    queryKey: ['allOrders'],
+    queryKey: ["allOrders"],
     queryFn: async () => {
       if (!actor) return [];
       return actor.getAllOrders();
@@ -78,7 +85,7 @@ export function useGetOrderById(orderId: bigint | null) {
   const { actor, isFetching } = useActor();
 
   return useQuery<FormationOrder | null>({
-    queryKey: ['order', orderId?.toString()],
+    queryKey: ["order", orderId?.toString()],
     queryFn: async () => {
       if (!actor || !orderId) return null;
       return actor.getOrderById(orderId);
@@ -91,7 +98,7 @@ export function useIsCallerAdmin() {
   const { actor, isFetching } = useActor();
 
   return useQuery<boolean>({
-    queryKey: ['isCallerAdmin'],
+    queryKey: ["isCallerAdmin"],
     queryFn: async () => {
       if (!actor) return false;
       return actor.isCallerAdmin();
@@ -100,3 +107,16 @@ export function useIsCallerAdmin() {
   });
 }
 
+export function useCheckNameAvailability(name: string, enabled: boolean) {
+  const { actor, isFetching } = useActor();
+
+  return useQuery<NameAvailabilityResult>({
+    queryKey: ["nameAvailability", name],
+    queryFn: async () => {
+      if (!actor) throw new Error("Actor not available");
+      return actor.checkNameAvailability(name);
+    },
+    enabled: !!actor && !isFetching && enabled && name.trim().length > 0,
+    retry: false,
+  });
+}
