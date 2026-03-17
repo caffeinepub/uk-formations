@@ -8,10 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  getServicesByCategory,
-  servicesCatalog,
-} from "@/features/services/servicesCatalog";
+import { getServicesByCategory } from "@/features/services/servicesCatalog";
 import { Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -31,7 +28,6 @@ export default function ServicesPage() {
       description:
         "Professional company registration services for all UK business types",
       icon: Building2,
-      image: "/assets/generated/service-formation.dim_120x120.png",
       link: "/services/company-formation" as const,
     },
     {
@@ -40,7 +36,6 @@ export default function ServicesPage() {
       description:
         "Professional business addresses and mail handling solutions",
       icon: MapPin,
-      image: "/assets/generated/service-office.dim_120x120.png",
       link: "/services/registered-office" as const,
     },
     {
@@ -48,7 +43,6 @@ export default function ServicesPage() {
       title: "Business Support",
       description: "Expert support services to help your business thrive",
       icon: Users,
-      image: "/assets/generated/service-support.dim_120x120.png",
       link: "/services/business-support" as const,
     },
     {
@@ -57,7 +51,6 @@ export default function ServicesPage() {
       description:
         "Stay compliant with all UK business regulations and requirements",
       icon: FileCheck,
-      image: "/assets/generated/service-compliance.dim_120x120.png",
       link: "/services/business-support" as const,
     },
   ];
@@ -103,7 +96,19 @@ export default function ServicesPage() {
             src="/assets/generated/services-hero.dim_1200x400.png"
             alt="Our Services"
             className="w-full h-full object-cover"
+            onError={(e) => {
+              const target = e.currentTarget;
+              target.style.display = "none";
+              const fallback = target.nextElementSibling as HTMLElement | null;
+              if (fallback) fallback.style.display = "flex";
+            }}
           />
+          <div
+            style={{ display: "none" }}
+            className="w-full h-full bg-primary/10 items-center justify-center"
+          >
+            <Building2 className="h-16 w-16 text-primary/40" />
+          </div>
         </div>
       </Section>
 
@@ -121,11 +126,9 @@ export default function ServicesPage() {
               >
                 <CardHeader>
                   <div className="flex items-start gap-4 mb-4">
-                    <img
-                      src={category.image}
-                      alt={category.title}
-                      className="w-16 h-16 rounded-lg"
-                    />
+                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Icon className="h-7 w-7 text-primary" />
+                    </div>
                     <div className="flex-1">
                       <CardTitle className="text-2xl mb-2">
                         {category.title}
@@ -252,7 +255,7 @@ export default function ServicesPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg">
-              <Link to="/formation-wizard">Start Your Formation</Link>
+              <Link to="/start-formation">Start Your Formation</Link>
             </Button>
             <Button asChild variant="outline" size="lg">
               <Link to="/contact">Contact Us</Link>

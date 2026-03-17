@@ -1,3 +1,4 @@
+import ContactChatbot from "@/components/ContactChatbot";
 import Section from "@/components/Section";
 import { Button } from "@/components/ui/button";
 import {
@@ -193,6 +194,18 @@ export default function ContactPage() {
               </CardContent>
             </Card>
           </div>
+        </div>
+      </Section>
+
+      <Section className="bg-muted/30">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold mb-3">Chat With Us</h2>
+          <p className="text-muted-foreground">
+            Get instant answers to your company formation questions
+          </p>
+        </div>
+        <div className="max-w-2xl mx-auto">
+          <ContactChatbot />
         </div>
       </Section>
     </div>

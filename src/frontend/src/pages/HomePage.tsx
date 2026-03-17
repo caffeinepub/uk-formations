@@ -50,7 +50,6 @@ export default function HomePage() {
       title: "Company Formation",
       description:
         "Register your UK limited company, LLP, or other business structure quickly and efficiently.",
-      image: "/assets/generated/service-formation.dim_120x120.png",
       link: "/services/company-formation",
     },
     {
@@ -58,7 +57,6 @@ export default function HomePage() {
       title: "Registered Office",
       description:
         "Professional business address with mail handling and forwarding services.",
-      image: "/assets/generated/service-office.dim_120x120.png",
       link: "/services/registered-office",
     },
     {
@@ -66,7 +64,6 @@ export default function HomePage() {
       title: "Business Support",
       description:
         "Company secretary, director services, and business bank account assistance.",
-      image: "/assets/generated/service-support.dim_120x120.png",
       link: "/services/business-support",
     },
     {
@@ -74,7 +71,6 @@ export default function HomePage() {
       title: "Compliance Services",
       description:
         "VAT registration, PAYE setup, and annual confirmation statement filing.",
-      image: "/assets/generated/service-compliance.dim_120x120.png",
       link: "/services/business-support",
     },
   ];
@@ -151,8 +147,21 @@ export default function HomePage() {
             <img
               src="/assets/generated/uk-formations-hero.dim_1600x900.png"
               alt="UK Company Formation"
-              className="w-full h-auto rounded-lg shadow-medium"
+              className="w-full h-auto rounded-lg shadow-lg"
+              onError={(e) => {
+                const target = e.currentTarget;
+                target.style.display = "none";
+                const fallback =
+                  target.nextElementSibling as HTMLElement | null;
+                if (fallback) fallback.style.display = "flex";
+              }}
             />
+            <div
+              style={{ display: "none" }}
+              className="w-full aspect-video rounded-lg bg-primary/10 flex items-center justify-center"
+            >
+              <Building2 className="h-24 w-24 text-primary/40" />
+            </div>
           </div>
         </div>
       </Section>
@@ -201,11 +210,9 @@ export default function HomePage() {
               className="border-2 hover:shadow-lg transition-shadow group"
             >
               <CardHeader>
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-16 h-16 mb-3 rounded-lg"
-                />
+                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+                  <service.icon className="h-7 w-7 text-primary" />
+                </div>
                 <CardTitle className="text-xl mb-2">{service.title}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">

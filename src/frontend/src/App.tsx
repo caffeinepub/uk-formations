@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-router";
 import SiteLayout from "./components/layout/SiteLayout";
 import ContactPage from "./pages/ContactPage";
+import DashboardPage from "./pages/DashboardPage";
 import FaqPage from "./pages/FaqPage";
 import FormationWizardPage from "./pages/FormationWizardPage";
 import HomePage from "./pages/HomePage";
@@ -164,6 +165,12 @@ const paymentFailureRoute = createRoute({
   component: PaymentFailurePage,
 });
 
+const dashboardRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/dashboard",
+  component: DashboardPage,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   pricingRoute,
@@ -187,6 +194,7 @@ const routeTree = rootRoute.addChildren([
   startFormationRoute,
   paymentSuccessRoute,
   paymentFailureRoute,
+  dashboardRoute,
 ]);
 
 const router = createRouter({ routeTree });

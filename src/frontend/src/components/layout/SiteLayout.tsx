@@ -7,9 +7,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Link, Outlet, useNavigate } from "@tanstack/react-router";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { Building2, ChevronDown, LayoutDashboard, Menu, X } from "lucide-react";
 import { useState } from "react";
-import { SiFacebook, SiLinkedin, SiX } from "react-icons/si";
 import { useInternetIdentity } from "../../hooks/useInternetIdentity";
 import { useGetCallerUserRole } from "../../hooks/useQueries";
 
@@ -22,20 +21,18 @@ export default function SiteLayout() {
   const isAuthenticated = !!identity;
   const isAdmin = userRole === "admin";
 
-  const handleAuth = async () => {
-    if (isAuthenticated) {
-      await clear();
-      navigate({ to: "/" });
-    } else {
-      await login();
-    }
+  const handleLogout = async () => {
+    await clear();
+    navigate({ to: "/" });
+  };
+
+  const handleLogin = async () => {
+    await login();
   };
 
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/pricing", label: "Pricing" },
-    { to: "/how-it-works", label: "How It Works" },
-    { to: "/name-check", label: "Name Check" },
     { to: "/faq", label: "FAQ" },
     { to: "/contact", label: "Contact" },
   ];
@@ -62,12 +59,27 @@ export default function SiteLayout() {
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
-          <Link to="/" className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-2">
             <img
               src="/assets/generated/uk-formations-logo.dim_512x512.png"
               alt="UK Formations"
               className="h-10 w-auto"
+              onError={(e) => {
+                e.currentTarget.style.display = "none";
+                const fallback = e.currentTarget
+                  .nextElementSibling as HTMLElement | null;
+                if (fallback) fallback.style.display = "flex";
+              }}
             />
+            <div
+              style={{ display: "none" }}
+              className="h-10 items-center gap-2"
+            >
+              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+                <Building2 className="h-5 w-5 text-primary-foreground" />
+              </div>
+              <span className="font-bold text-lg">UK Formations</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -82,6 +94,17 @@ export default function SiteLayout() {
                 {link.label}
               </Link>
             ))}
+
+            {isAuthenticated && (
+              <Link
+                to="/dashboard"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                activeProps={{ className: "text-foreground" }}
+                data-ocid="nav.dashboard.link"
+              >
+                My Account
+              </Link>
+            )}
 
             {/* Services Dropdown */}
             <DropdownMenu>
@@ -124,19 +147,35 @@ export default function SiteLayout() {
               ))}
           </nav>
 
-          <div className="hidden md:flex items-center space-x-3">
-            <Button
-              onClick={handleAuth}
-              variant={isAuthenticated ? "outline" : "default"}
-              size="sm"
-              disabled={loginStatus === "logging-in"}
-            >
-              {loginStatus === "logging-in"
-                ? "Logging in..."
-                : isAuthenticated
-                  ? "Logout"
-                  : "Login"}
-            </Button>
+          <div className="hidden md:flex items-center space-x-2">
+            {isAuthenticated ? (
+              <>
+                <Button asChild variant="outline" size="sm" className="gap-1.5">
+                  <Link to="/dashboard" data-ocid="header.dashboard.button">
+                    <LayoutDashboard className="h-4 w-4" />
+                    My Account
+                  </Link>
+                </Button>
+                <Button
+                  onClick={handleLogout}
+                  variant="ghost"
+                  size="sm"
+                  data-ocid="header.logout.button"
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <Button
+                onClick={handleLogin}
+                variant="outline"
+                size="sm"
+                disabled={loginStatus === "logging-in"}
+                data-ocid="header.login.button"
+              >
+                {loginStatus === "logging-in" ? "Logging in..." : "Login"}
+              </Button>
+            )}
             <Button asChild size="sm">
               <Link to="/formation-wizard">Start Formation</Link>
             </Button>
@@ -171,6 +210,17 @@ export default function SiteLayout() {
                   {link.label}
                 </Link>
               ))}
+
+              {isAuthenticated && (
+                <Link
+                  to="/dashboard"
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                  data-ocid="nav.mobile.dashboard.link"
+                >
+                  My Account
+                </Link>
+              )}
 
               {/* Services submenu in mobile */}
               <div className="border-t pt-2">
@@ -216,22 +266,48 @@ export default function SiteLayout() {
                 </div>
               )}
               <div className="pt-3 space-y-2 border-t">
-                <Button
-                  onClick={() => {
-                    handleAuth();
-                    setMobileMenuOpen(false);
-                  }}
-                  variant={isAuthenticated ? "outline" : "default"}
-                  className="w-full"
-                  size="sm"
-                  disabled={loginStatus === "logging-in"}
-                >
-                  {loginStatus === "logging-in"
-                    ? "Logging in..."
-                    : isAuthenticated
-                      ? "Logout"
-                      : "Login"}
-                </Button>
+                {isAuthenticated ? (
+                  <>
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="w-full gap-2"
+                      size="sm"
+                    >
+                      <Link
+                        to="/dashboard"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <LayoutDashboard className="h-4 w-4" />
+                        My Account
+                      </Link>
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        handleLogout();
+                        setMobileMenuOpen(false);
+                      }}
+                      variant="ghost"
+                      className="w-full"
+                      size="sm"
+                    >
+                      Logout
+                    </Button>
+                  </>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      handleLogin();
+                      setMobileMenuOpen(false);
+                    }}
+                    variant="outline"
+                    className="w-full"
+                    size="sm"
+                    disabled={loginStatus === "logging-in"}
+                  >
+                    {loginStatus === "logging-in" ? "Logging in..." : "Login"}
+                  </Button>
+                )}
                 <Button asChild className="w-full" size="sm">
                   <Link
                     to="/formation-wizard"
@@ -256,11 +332,25 @@ export default function SiteLayout() {
         <div className="container py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-3">
-              <img
-                src="/assets/generated/uk-formations-logo.dim_512x512.png"
-                alt="UK Formations"
-                className="h-8 w-auto"
-              />
+              <div className="flex items-center gap-2">
+                <img
+                  src="/assets/generated/uk-formations-logo.dim_512x512.png"
+                  alt="UK Formations"
+                  className="h-8 w-auto"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                    const fallback = e.currentTarget
+                      .nextElementSibling as HTMLElement | null;
+                    if (fallback) fallback.style.display = "flex";
+                  }}
+                />
+                <div style={{ display: "none" }} className="items-center gap-2">
+                  <div className="w-7 h-7 rounded bg-primary flex items-center justify-center">
+                    <Building2 className="h-4 w-4 text-primary-foreground" />
+                  </div>
+                  <span className="font-bold">UK Formations</span>
+                </div>
+              </div>
               <p className="text-sm text-muted-foreground">
                 Professional UK company formation services made simple.
               </p>
@@ -399,28 +489,28 @@ export default function SiteLayout() {
                   href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                   aria-label="Facebook"
                 >
-                  <SiFacebook className="h-4 w-4" />
+                  Facebook
                 </a>
                 <a
                   href="https://x.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                   aria-label="X (Twitter)"
                 >
-                  <SiX className="h-4 w-4" />
+                  X
                 </a>
                 <a
                   href="https://linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                   aria-label="LinkedIn"
                 >
-                  <SiLinkedin className="h-4 w-4" />
+                  LinkedIn
                 </a>
               </div>
               <p className="text-sm text-muted-foreground">

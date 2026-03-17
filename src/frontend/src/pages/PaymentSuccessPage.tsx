@@ -4,10 +4,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { useNavigate } from "@tanstack/react-router";
 import { Building2, CheckCircle2, ChevronRight, Package } from "lucide-react";
+import { useEffect, useRef } from "react";
 import { packages } from "../features/packages/packagesCatalog";
+import { saveOrder } from "../utils/orderHistory";
 
 export default function PaymentSuccessPage() {
   const navigate = useNavigate();
+  const savedRef = useRef(false);
 
   let session: {
     token?: string;
@@ -26,16 +29,31 @@ export default function PaymentSuccessPage() {
     ? packages.find((p) => p.id === session?.packageId)
     : null;
 
+  useEffect(() => {
+    if (savedRef.current || !session) return;
+    savedRef.current = true;
+    saveOrder({
+      id: session.token ?? crypto.randomUUID(),
+      companyName: session.companyName ?? "Unknown Company",
+      packageSelected:
+        selectedPackage?.name ?? session.packageId ?? "Unknown Package",
+      serviceType: "Company Formation",
+      date: new Date().toISOString(),
+      amountPaid: selectedPackage ? selectedPackage.price * 1.2 : 0,
+      status: "completed",
+    });
+  }, [session, selectedPackage]);
+
   return (
     <div>
       <Section className="bg-gradient-to-b from-muted/50 to-background">
         <div className="max-w-lg mx-auto py-12">
           <div className="text-center mb-8">
             <div
-              className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 dark:bg-green-950/40 mb-6"
+              className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-6"
               data-ocid="payment_success.panel"
             >
-              <CheckCircle2 className="h-10 w-10 text-green-600 dark:text-green-400" />
+              <CheckCircle2 className="h-10 w-10 text-primary" />
             </div>
             <h1 className="text-3xl font-bold mb-3">Payment Successful!</h1>
             <p className="text-muted-foreground">
