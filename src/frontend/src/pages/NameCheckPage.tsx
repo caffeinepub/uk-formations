@@ -114,13 +114,13 @@ export default function NameCheckPage() {
                 </div>
               ) : result ? (
                 result.isAvailable ? (
-                  <div className="flex items-start gap-4 p-5 rounded-lg border-2 border-green-500/40 bg-green-50 dark:bg-green-950/20">
-                    <CheckCircle2 className="h-6 w-6 text-green-600 dark:text-green-400 shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-4 p-5 rounded-lg border-2 border-blue-500/40 bg-blue-50 dark:bg-blue-950/20">
+                    <CheckCircle2 className="h-6 w-6 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-semibold text-green-700 dark:text-green-400">
+                      <p className="font-semibold text-blue-700 dark:text-blue-400">
                         Name Available
                       </p>
-                      <p className="text-sm text-green-700/80 dark:text-green-400/80 mt-1">
+                      <p className="text-sm text-blue-700/80 dark:text-blue-400/80 mt-1">
                         {result.message}
                       </p>
                       <p className="text-sm text-muted-foreground mt-3">

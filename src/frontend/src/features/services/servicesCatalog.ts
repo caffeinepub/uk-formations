@@ -2,7 +2,7 @@ export interface Service {
   id: string;
   name: string;
   description: string;
-  category: "formation" | "office" | "support" | "compliance";
+  category: "formation" | "office" | "support" | "compliance" | "additional";
   features: string[];
   pricing?: {
     amount: number;
@@ -16,7 +16,7 @@ export const servicesCatalog: Service[] = [
   // Company Formation Services
   {
     id: "ltd-formation",
-    name: "Limited Company Formation",
+    name: "Limited Company (Ltd) by Shares",
     description:
       "Register your private limited company with Companies House quickly and efficiently.",
     category: "formation",
@@ -27,10 +27,6 @@ export const servicesCatalog: Service[] = [
       "Share certificates",
       "Same-day registration available",
     ],
-    pricing: {
-      amount: 29.99,
-      note: "Plus Companies House fee",
-    },
     popular: true,
   },
   {
@@ -45,140 +41,205 @@ export const servicesCatalog: Service[] = [
       "LLP Agreement template",
       "Designated member appointments",
     ],
-    pricing: {
-      amount: 39.99,
-      note: "Plus Companies House fee",
-    },
   },
   {
-    id: "ready-made-company",
-    name: "Ready-Made Company",
+    id: "ltd-guarantee",
+    name: "Limited by Guarantee",
     description:
-      "Purchase a pre-registered company and start trading immediately.",
+      "Register a company limited by guarantee, ideal for non-profits, charities, and clubs.",
     category: "formation",
     features: [
-      "Instant availability",
-      "Clean trading history",
-      "All incorporation documents",
-      "Name change service included",
+      "Companies House registration",
+      "Certificate of Incorporation",
+      "Memorandum & Articles of Association",
+      "Suitable for charities & non-profits",
     ],
-    pricing: {
-      amount: 99.99,
-    },
   },
-  // Registered Office Services
+  // Address Services
   {
     id: "registered-office",
-    name: "Registered Office Address",
+    name: "Registered Office",
     description:
-      "Professional UK business address for your company registration and official correspondence.",
+      "A professional London registered office address for your company registration and HMRC correspondence.",
     category: "office",
     features: [
-      "London or regional address options",
-      "Mail forwarding service",
-      "Companies House compliant",
-      "Privacy protection",
-      "Instant setup",
+      "Registered Office Address",
+      "Free Mail Forwarding",
+      "Free Scan and Email",
+      "Free Mail Collection",
+      "Mail Sorted Daily",
     ],
     pricing: {
-      amount: 49.99,
+      amount: 44.99,
       period: "per year",
     },
     popular: true,
   },
   {
-    id: "business-address",
-    name: "Business Address Service",
+    id: "registered-office-plus",
+    name: "Registered Office+",
     description:
-      "Use our prestigious business address for your marketing and correspondence.",
+      "Everything in Registered Office plus unlimited directors service address.",
     category: "office",
     features: [
-      "Prime business location",
-      "Mail handling and forwarding",
-      "Telephone answering available",
-      "Meeting room access",
+      "Registered Office Address",
+      "Free Mail Forwarding",
+      "Free Scan and Email",
+      "Free Mail Collection",
+      "Mail Sorted Daily",
+      "Unlimited Directors Service Address",
     ],
     pricing: {
-      amount: 79.99,
+      amount: 59.99,
       period: "per year",
     },
   },
   {
-    id: "mail-forwarding",
-    name: "Mail Forwarding",
+    id: "mailing-address",
+    name: "Mailing Address",
     description:
-      "Receive and forward your business mail to any UK or international address.",
+      "A professional mailing address for all your business correspondence.",
     category: "office",
     features: [
-      "Weekly or daily forwarding",
-      "Scan and email service",
-      "Secure mail storage",
-      "International forwarding available",
+      "Free Mail Forwarding",
+      "Free Scan and Email",
+      "Free Mail Collection",
+      "Mail Sorted Daily",
+      "Business Mail Forwarding",
     ],
     pricing: {
-      amount: 29.99,
-      period: "per month",
+      amount: 169.99,
+      period: "per year",
     },
   },
-  // Business Support Services
   {
-    id: "company-secretary",
-    name: "Company Secretary Service",
+    id: "virtual-office",
+    name: "Virtual Office",
     description:
-      "Professional company secretary to handle your statutory obligations and compliance.",
-    category: "support",
+      "The complete virtual office solution with all mail and address services included.",
+    category: "office",
     features: [
-      "Annual return filing",
-      "Statutory register maintenance",
-      "Board meeting minutes",
-      "Compliance monitoring",
-      "Companies House liaison",
+      "Registered Office Address",
+      "Free Mail Forwarding",
+      "Free Scan and Email",
+      "Free Mail Collection",
+      "Mail Sorted Daily",
+      "Unlimited Directors Service Address",
+      "Business Mail Forwarding",
     ],
     pricing: {
       amount: 199.99,
       period: "per year",
     },
   },
+  // Additional Services
   {
-    id: "director-service",
-    name: "Nominee Director Service",
-    description: "Appoint a professional nominee director for your company.",
-    category: "support",
+    id: "business-telephone-answering",
+    name: "Business Telephone – With Call Answering",
+    description:
+      "A dedicated business telephone number with professional call answering service.",
+    category: "additional",
     features: [
-      "Experienced professional directors",
-      "Full indemnity insurance",
-      "Confidentiality agreement",
-      "Regular reporting",
+      "Dedicated UK business number",
+      "Professional call answering",
+      "Messages forwarded by email",
+      "Customised greeting",
     ],
     pricing: {
-      amount: 499.99,
+      amount: 239.99,
       period: "per year",
     },
   },
   {
-    id: "bank-account",
-    name: "Business Bank Account Assistance",
+    id: "business-telephone-forwarding",
+    name: "Business Telephone – Number Forwarding",
     description:
-      "Expert guidance to help you open a UK business bank account quickly.",
-    category: "support",
+      "A dedicated business telephone number with call forwarding to your chosen number.",
+    category: "additional",
     features: [
-      "Application preparation",
-      "Document review",
-      "Bank introductions",
-      "Multiple bank options",
-      "Fast-track service",
+      "Dedicated UK business number",
+      "Call forwarding to any UK number",
+      "Voicemail included",
     ],
     pricing: {
-      amount: 149.99,
+      amount: 10.41,
+      period: "per month",
     },
   },
-  // Compliance Services
+  {
+    id: "confirmation-statement",
+    name: "Confirmation Statement",
+    description:
+      "Annual confirmation statement filing service to keep your company compliant with Companies House.",
+    category: "additional",
+    features: [
+      "Preparation and filing",
+      "Companies House submission",
+      "Accuracy guarantee",
+      "Deadline reminders",
+    ],
+    pricing: {
+      amount: 53.19,
+      period: "per submission",
+    },
+  },
+  {
+    id: "dormant-company-accounts",
+    name: "Dormant Company Accounts",
+    description:
+      "Filing of dormant company accounts with Companies House and HMRC.",
+    category: "additional",
+    features: [
+      "Dormant accounts preparation",
+      "Companies House filing",
+      "HMRC submission",
+      "Deadline management",
+    ],
+    pricing: {
+      amount: 49.99,
+      period: "per year",
+    },
+  },
+  {
+    id: "company-name-change",
+    name: "Company Name Change",
+    description:
+      "Change your registered company name with Companies House quickly and accurately.",
+    category: "additional",
+    features: [
+      "Companies House name change filing",
+      "New certificate of incorporation",
+      "Updated memorandum & articles",
+      "Confirmation of change",
+    ],
+    pricing: {
+      amount: 34.99,
+      period: "per change",
+    },
+  },
+  {
+    id: "director-appointment-resignation",
+    name: "Director Appointment & Resignation",
+    description:
+      "File director appointments or resignations with Companies House on your behalf.",
+    category: "additional",
+    features: [
+      "Appointment or resignation filing",
+      "Companies House submission",
+      "Updated statutory register",
+      "Confirmation certificate",
+    ],
+    pricing: {
+      amount: 19.99,
+      period: "per submission",
+    },
+  },
   {
     id: "vat-registration",
     name: "VAT Registration",
     description:
-      "Register your business for VAT with HMRC efficiently and correctly. We assess whether registration is mandatory or voluntary for your business, advise on the best VAT scheme, and handle the full submission process on your behalf.",
-    category: "compliance",
+      "Register your business for VAT with HMRC. We assess mandatory vs voluntary registration, advise on the best VAT scheme, and handle the full submission process.",
+    category: "additional",
     features: [
       "Mandatory vs voluntary registration assessment",
       "VAT scheme options (Standard, Flat Rate, Cash Accounting)",
@@ -187,15 +248,17 @@ export const servicesCatalog: Service[] = [
       "Ongoing VAT compliance guidance",
     ],
     pricing: {
-      amount: 150,
+      amount: 39.99,
+      period: "per registration",
     },
     popular: true,
   },
+  // Compliance (legacy, keep for PAYE page)
   {
     id: "paye-registration",
     name: "PAYE Registration",
     description:
-      "Register as an employer with HMRC to pay your employees through PAYE. We handle the full employer PAYE scheme registration, provide your employer reference number, and guide you through National Insurance and income tax setup.",
+      "Register as an employer with HMRC and set up your PAYE scheme. We handle the full registration and provide your employer reference number.",
     category: "compliance",
     features: [
       "Employer PAYE scheme registration with HMRC",
@@ -205,24 +268,8 @@ export const servicesCatalog: Service[] = [
       "Payroll compliance advisory",
     ],
     pricing: {
-      amount: 180,
-    },
-  },
-  {
-    id: "confirmation-statement",
-    name: "Confirmation Statement Filing",
-    description:
-      "Annual confirmation statement filing service to keep your company compliant.",
-    category: "compliance",
-    features: [
-      "Annual statement preparation",
-      "Companies House filing",
-      "Accuracy guarantee",
-      "Deadline reminders",
-    ],
-    pricing: {
-      amount: 39.99,
-      period: "per year",
+      amount: 49.99,
+      period: "per registration",
     },
   },
 ];

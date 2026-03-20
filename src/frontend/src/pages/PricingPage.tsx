@@ -44,7 +44,7 @@ export default function PricingPage() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {packages.map((pkg) => (
             <Card
               key={pkg.id}
@@ -59,22 +59,22 @@ export default function PricingPage() {
                   Most Popular
                 </Badge>
               )}
-              <CardHeader className="text-center pb-8">
-                <CardTitle className="text-2xl mb-2">{pkg.name}</CardTitle>
-                <div className="mb-4">
-                  <span className="text-4xl font-bold">£{pkg.price}</span>
-                  <span className="text-muted-foreground"> + VAT</span>
+              <CardHeader className="text-center pb-4 pt-5 px-4">
+                <CardTitle className="text-lg mb-1">{pkg.name}</CardTitle>
+                <div className="mb-3">
+                  <span className="text-3xl font-bold">£{pkg.price}</span>
+                  <span className="text-muted-foreground text-sm"> + VAT</span>
                 </div>
-                <CardDescription className="text-base">
+                <CardDescription className="text-sm">
                   {pkg.description}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-6">
-                <ul className="space-y-3">
+              <CardContent className="space-y-4 px-4 pb-5">
+                <ul className="space-y-2">
                   {pkg.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2">
-                      <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">{feature}</span>
+                      <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                      <span className="text-xs">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -82,7 +82,7 @@ export default function PricingPage() {
                   onClick={() => handleSelectPackage(pkg.id)}
                   className="w-full"
                   variant={pkg.popular ? "default" : "outline"}
-                  size="lg"
+                  size="sm"
                 >
                   {draft.selectedPackage?.id === pkg.id
                     ? "Selected"

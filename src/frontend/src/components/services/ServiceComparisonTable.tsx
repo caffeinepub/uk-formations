@@ -1,80 +1,176 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { useFormationDraft } from "@/features/formationWizard/useFormationDraft";
+import { packages } from "@/features/packages/packagesCatalog";
 import { useNavigate } from "@tanstack/react-router";
-import { CheckCircle2, X } from "lucide-react";
+import { Check, X } from "lucide-react";
 import { useState } from "react";
 
-interface Package {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-  popular?: boolean;
-  features: {
-    name: string;
-    included: boolean | string;
-  }[];
-}
-
-const packages: Package[] = [
+const featureRows = [
   {
-    id: "basic",
-    name: "Basic",
-    price: 29.99,
-    description: "Essential formation package",
-    features: [
-      { name: "Company Registration", included: true },
-      { name: "Certificate of Incorporation", included: true },
-      { name: "Memorandum & Articles", included: true },
-      { name: "Share Certificates", included: true },
-      { name: "Same Day Registration", included: false },
-      { name: "Registered Office (1 year)", included: false },
-      { name: "Business Bank Account Assistance", included: false },
-      { name: "Company Secretary Service", included: false },
-    ],
+    name: "Company Formation (excl. CH £100 fee)",
+    digital: true,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
   },
   {
-    id: "standard",
-    name: "Standard",
-    price: 79.99,
-    description: "Most popular choice",
-    popular: true,
-    features: [
-      { name: "Company Registration", included: true },
-      { name: "Certificate of Incorporation", included: true },
-      { name: "Memorandum & Articles", included: true },
-      { name: "Share Certificates", included: true },
-      { name: "Same Day Registration", included: true },
-      { name: "Registered Office (1 year)", included: true },
-      { name: "Business Bank Account Assistance", included: false },
-      { name: "Company Secretary Service", included: false },
-    ],
+    name: "FREE Fast Track Business Bank Account",
+    digital: true,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
   },
   {
-    id: "premium",
-    name: "Premium",
-    price: 199.99,
-    description: "Complete business package",
-    features: [
-      { name: "Company Registration", included: true },
-      { name: "Certificate of Incorporation", included: true },
-      { name: "Memorandum & Articles", included: true },
-      { name: "Share Certificates", included: true },
-      { name: "Same Day Registration", included: true },
-      { name: "Registered Office (1 year)", included: true },
-      { name: "Business Bank Account Assistance", included: true },
-      { name: "Company Secretary Service", included: "1 year" },
-    ],
+    name: "FREE .co.uk Domain Name",
+    digital: true,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "FREE Lifetime Secretarial Support",
+    digital: true,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "FREE Online Company Portal",
+    digital: true,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "FREE Deadline Reminder Service",
+    digital: true,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "10% off Business Insurance",
+    digital: true,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "Discount on Bookkeeping Software",
+    digital: true,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "Digital Certificate of Incorporation",
+    digital: true,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "Digital Memorandum & Articles",
+    digital: true,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "Digital Share Certificate",
+    digital: true,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "Digital Company Register",
+    digital: false,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "Digital Company Incorporation Minutes",
+    digital: false,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "Printed Certificate of Incorporation",
+    digital: false,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "Printed Share Certificate",
+    digital: false,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "Printed Memorandum & Articles",
+    digital: false,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "Printed Company Register",
+    digital: false,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "Expert Pre-Submission Review",
+    digital: false,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "GDPR Compliance Pack",
+    digital: false,
+    digitalPrint: true,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "London Registered Office (3 months)",
+    digital: false,
+    digitalPrint: false,
+    printPlus: true,
+    allIncl: true,
+  },
+  {
+    name: "London Directors Service Address (12 months)",
+    digital: false,
+    digitalPrint: false,
+    printPlus: false,
+    allIncl: true,
+  },
+  {
+    name: "London Business Mail Forwarding (3 months)",
+    digital: false,
+    digitalPrint: false,
+    printPlus: false,
+    allIncl: true,
+  },
+  {
+    name: "VAT Registration with HMRC (Optional)",
+    digital: false,
+    digitalPrint: false,
+    printPlus: false,
+    allIncl: true,
   },
 ];
+
+const pkgKeys = ["digital", "digitalPrint", "printPlus", "allIncl"] as const;
 
 export default function ServiceComparisonTable() {
   const navigate = useNavigate();
@@ -93,132 +189,67 @@ export default function ServiceComparisonTable() {
         },
       });
     }
-    navigate({ to: "/formation-wizard" });
+    navigate({ to: "/start-formation" });
   };
 
   return (
-    <div className="w-full">
-      {/* Desktop View */}
-      <div className="hidden lg:block overflow-x-auto">
-        <div className="grid grid-cols-4 gap-6 min-w-[900px]">
-          {/* Feature Column */}
-          <div className="space-y-4">
-            <div className="h-48" /> {/* Spacer for header */}
-            {packages[0].features.map((feature) => (
-              <div
-                key={feature.name}
-                className="h-12 flex items-center font-medium text-sm"
-              >
-                {feature.name}
-              </div>
-            ))}
-            <div className="h-16" /> {/* Spacer for button */}
-          </div>
-
-          {/* Package Columns */}
-          {packages.map((pkg) => (
-            <Card
-              key={pkg.id}
-              className={`border-2 ${pkg.popular ? "border-primary shadow-lg" : ""}`}
-            >
-              <CardHeader className="text-center pb-8 h-48">
-                {pkg.popular && (
-                  <Badge className="mb-2 w-fit mx-auto">Most Popular</Badge>
-                )}
-                <CardTitle className="text-2xl mb-2">{pkg.name}</CardTitle>
-                <CardDescription className="mb-4">
-                  {pkg.description}
-                </CardDescription>
-                <div className="text-3xl font-bold text-primary">
-                  £{pkg.price.toFixed(2)}
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  + Companies House fee
-                </p>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {pkg.features.map((feature) => (
-                  <div
-                    key={feature.name}
-                    className="h-12 flex items-center justify-center"
-                  >
-                    {feature.included === true ? (
-                      <CheckCircle2 className="h-5 w-5 text-primary" />
-                    ) : feature.included === false ? (
-                      <X className="h-5 w-5 text-muted-foreground" />
-                    ) : (
-                      <span className="text-sm font-medium">
-                        {feature.included}
-                      </span>
-                    )}
-                  </div>
-                ))}
-                <div className="pt-4 h-16">
-                  <Button
-                    onClick={() => handleSelectPackage(pkg.id)}
-                    className="w-full"
-                    variant={pkg.popular ? "default" : "outline"}
-                  >
-                    Select {pkg.name}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-
-      {/* Mobile/Tablet View */}
-      <div className="lg:hidden space-y-6">
-        {packages.map((pkg) => (
-          <Card
-            key={pkg.id}
-            className={`border-2 ${pkg.popular ? "border-primary shadow-lg" : ""}`}
-          >
-            <CardHeader className="text-center">
-              {pkg.popular && (
-                <Badge className="mb-2 w-fit mx-auto">Most Popular</Badge>
-              )}
-              <CardTitle className="text-2xl mb-2">{pkg.name}</CardTitle>
-              <CardDescription className="mb-4">
-                {pkg.description}
-              </CardDescription>
-              <div className="text-3xl font-bold text-primary">
-                £{pkg.price.toFixed(2)}
-              </div>
-              <p className="text-sm text-muted-foreground">
-                + Companies House fee
-              </p>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {pkg.features.map((feature) => (
-                <div
-                  key={feature.name}
-                  className="flex items-center justify-between py-2 border-b last:border-0"
-                >
-                  <span className="text-sm font-medium">{feature.name}</span>
-                  {feature.included === true ? (
-                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0" />
-                  ) : feature.included === false ? (
-                    <X className="h-5 w-5 text-muted-foreground flex-shrink-0" />
-                  ) : (
-                    <span className="text-sm font-medium text-primary">
-                      {feature.included}
-                    </span>
+    <div className="w-full overflow-x-auto">
+      <table className="w-full min-w-[700px] border-collapse">
+        <thead>
+          <tr>
+            <th className="text-left p-3 font-semibold text-sm w-1/3">
+              Features
+            </th>
+            {packages.map((pkg) => (
+              <th key={pkg.id} className="p-3 text-center">
+                <div className="space-y-1">
+                  {pkg.popular && (
+                    <Badge className="text-xs mx-auto block w-fit">
+                      Most Popular
+                    </Badge>
                   )}
+                  <p className="font-bold text-base">{pkg.name}</p>
+                  <p className="text-2xl font-bold text-primary">
+                    £{pkg.price.toFixed(2)}
+                  </p>
+                  <p className="text-xs text-muted-foreground">+ CH fee</p>
                 </div>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {featureRows.map((row, i) => (
+            <tr key={row.name} className={i % 2 === 0 ? "bg-muted/20" : ""}>
+              <td className="p-3 text-sm">{row.name}</td>
+              {pkgKeys.map((key) => (
+                <td key={key} className="p-3 text-center">
+                  {row[key] ? (
+                    <Check className="h-4 w-4 text-primary mx-auto" />
+                  ) : (
+                    <X className="h-4 w-4 text-muted-foreground/40 mx-auto" />
+                  )}
+                </td>
               ))}
-              <Button
-                onClick={() => handleSelectPackage(pkg.id)}
-                className="w-full mt-4"
-                variant={pkg.popular ? "default" : "outline"}
-              >
-                Select {pkg.name}
-              </Button>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+            </tr>
+          ))}
+          <tr>
+            <td className="p-3" />
+            {packages.map((pkg) => (
+              <td key={pkg.id} className="p-3 text-center">
+                <Button
+                  onClick={() => handleSelectPackage(pkg.id)}
+                  size="sm"
+                  variant={pkg.popular ? "default" : "outline"}
+                  className="w-full"
+                >
+                  Select {pkg.name}
+                </Button>
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }

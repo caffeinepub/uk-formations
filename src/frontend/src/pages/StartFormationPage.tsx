@@ -279,15 +279,15 @@ export default function StartFormationPage() {
                         </div>
                       ) : nameResult?.isAvailable ? (
                         <div
-                          className="flex items-start gap-4 p-5 rounded-lg border-2 border-green-500/40 bg-green-50 dark:bg-green-950/20"
+                          className="flex items-start gap-4 p-5 rounded-lg border-2 border-blue-500/40 bg-blue-50 dark:bg-blue-950/20"
                           data-ocid="name_check.success_state"
                         >
-                          <CheckCircle2 className="h-6 w-6 text-green-600 dark:text-green-400 shrink-0 mt-0.5" />
+                          <CheckCircle2 className="h-6 w-6 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
                           <div>
-                            <p className="font-semibold text-green-700 dark:text-green-400">
+                            <p className="font-semibold text-blue-700 dark:text-blue-400">
                               Name Available!
                             </p>
-                            <p className="text-sm text-green-700/80 dark:text-green-400/80 mt-1">
+                            <p className="text-sm text-blue-700/80 dark:text-blue-400/80 mt-1">
                               {nameResult.message}
                             </p>
                             <p className="text-sm text-muted-foreground mt-2">
@@ -446,7 +446,7 @@ export default function StartFormationPage() {
                         </p>
                         <div className="flex items-center gap-2">
                           <p className="font-semibold">{chosenName}</p>
-                          <span className="inline-flex items-center gap-1 text-xs text-green-600 bg-green-100 dark:bg-green-950/40 dark:text-green-400 px-2 py-0.5 rounded-full">
+                          <span className="inline-flex items-center gap-1 text-xs text-blue-600 bg-blue-100 dark:bg-blue-950/40 dark:text-blue-400 px-2 py-0.5 rounded-full">
                             <CheckCircle2 className="h-3 w-3" /> Verified
                           </span>
                         </div>
@@ -520,7 +520,7 @@ export default function StartFormationPage() {
                       {/* Trust Badges */}
                       <div className="grid grid-cols-2 gap-3">
                         <div className="flex items-center gap-2 p-3 rounded-lg border bg-muted/30">
-                          <ShieldCheck className="h-4 w-4 text-green-600 shrink-0" />
+                          <ShieldCheck className="h-4 w-4 text-blue-600 shrink-0" />
                           <span className="text-xs text-muted-foreground">
                             256-bit SSL Encrypted
                           </span>

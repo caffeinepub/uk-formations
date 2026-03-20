@@ -85,11 +85,11 @@ function StripeSetupBanner() {
   if (isConfigured) {
     return (
       <div
-        className="flex items-center gap-2 mb-6 px-4 py-2.5 rounded-lg border border-green-500/30 bg-green-50 dark:bg-green-950/20 w-fit"
+        className="flex items-center gap-2 mb-6 px-4 py-2.5 rounded-lg border border-blue-500/30 bg-blue-50 dark:bg-blue-950/20 w-fit"
         data-ocid="stripe_setup.success_state"
       >
-        <CheckCircle2 className="h-4 w-4 text-green-600 dark:text-green-400" />
-        <span className="text-sm font-medium text-green-700 dark:text-green-400">
+        <CheckCircle2 className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+        <span className="text-sm font-medium text-blue-700 dark:text-blue-400">
           Stripe Configured
         </span>
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
@@ -97,7 +97,7 @@ function StripeSetupBanner() {
             <Button
               variant="ghost"
               size="sm"
-              className="h-6 px-2 text-xs text-green-700 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-950/40"
+              className="h-6 px-2 text-xs text-blue-700 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-950/40"
               data-ocid="stripe_setup.open_modal_button"
             >
               <Settings className="h-3 w-3 mr-1" />

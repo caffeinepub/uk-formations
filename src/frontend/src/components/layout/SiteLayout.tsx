@@ -3,6 +3,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -14,7 +15,7 @@ import { useGetCallerUserRole } from "../../hooks/useQueries";
 
 export default function SiteLayout() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { identity, clear, login, loginStatus } = useInternetIdentity();
+  const { identity, clear } = useInternetIdentity();
   const navigate = useNavigate();
   const { data: userRole } = useGetCallerUserRole();
 
@@ -26,27 +27,11 @@ export default function SiteLayout() {
     navigate({ to: "/" });
   };
 
-  const handleLogin = async () => {
-    await login();
-  };
-
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/pricing", label: "Pricing" },
     { to: "/faq", label: "FAQ" },
     { to: "/contact", label: "Contact" },
-  ];
-
-  const servicesLinks = [
-    { to: "/services", label: "All Services" },
-    { to: "/services/company-formation", label: "Company Formation" },
-    { to: "/services/registered-office", label: "Registered Office" },
-    { to: "/services/business-support", label: "Business Support" },
-  ];
-
-  const taxComplianceLinks = [
-    { to: "/services/vat-registration", label: "VAT Registration" },
-    { to: "/services/paye-registration", label: "PAYE Registration" },
   ];
 
   const adminLinks = [
@@ -95,42 +80,84 @@ export default function SiteLayout() {
               </Link>
             ))}
 
-            {isAuthenticated && (
-              <Link
-                to="/dashboard"
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                activeProps={{ className: "text-foreground" }}
-                data-ocid="nav.dashboard.link"
-              >
-                My Account
-              </Link>
-            )}
-
             {/* Services Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors outline-none">
                 Services
                 <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                {servicesLinks.map((link) => (
-                  <DropdownMenuItem key={link.to} asChild>
-                    <Link to={link.to} className="w-full cursor-pointer">
-                      {link.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
+              <DropdownMenuContent align="end" className="w-64">
+                {/* Plan Structure */}
+                <DropdownMenuLabel className="text-xs text-muted-foreground uppercase tracking-wide">
+                  Plan Structure
+                </DropdownMenuLabel>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/services/company-formation"
+                    className="w-full cursor-pointer"
+                  >
+                    Company Formation Plans
+                  </Link>
+                </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground">
-                  Tax &amp; Compliance
-                </div>
-                {taxComplianceLinks.map((link) => (
-                  <DropdownMenuItem key={link.to} asChild>
-                    <Link to={link.to} className="w-full cursor-pointer">
-                      {link.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
+                {/* Address Services */}
+                <DropdownMenuLabel className="text-xs text-muted-foreground uppercase tracking-wide">
+                  Address Services
+                </DropdownMenuLabel>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/services/address-services"
+                    className="w-full cursor-pointer"
+                  >
+                    All Address Services
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                {/* Additional Services */}
+                <DropdownMenuLabel className="text-xs text-muted-foreground uppercase tracking-wide">
+                  Additional Services
+                </DropdownMenuLabel>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/services/business-telephone"
+                    className="w-full cursor-pointer"
+                  >
+                    Business Telephone
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/services/additional-services"
+                    className="w-full cursor-pointer"
+                  >
+                    Company Administration
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/services/vat-registration"
+                    className="w-full cursor-pointer"
+                  >
+                    VAT Registration
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/services/paye-registration"
+                    className="w-full cursor-pointer"
+                  >
+                    PAYE Registration
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link
+                    to="/services"
+                    className="w-full cursor-pointer font-medium"
+                  >
+                    View All Services
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
 
@@ -167,17 +194,16 @@ export default function SiteLayout() {
               </>
             ) : (
               <Button
-                onClick={handleLogin}
+                asChild
                 variant="outline"
                 size="sm"
-                disabled={loginStatus === "logging-in"}
                 data-ocid="header.login.button"
               >
-                {loginStatus === "logging-in" ? "Logging in..." : "Login"}
+                <Link to="/account">My Account</Link>
               </Button>
             )}
             <Button asChild size="sm">
-              <Link to="/formation-wizard">Start Formation</Link>
+              <Link to="/start-formation">Start Formation</Link>
             </Button>
           </div>
 
@@ -211,43 +237,64 @@ export default function SiteLayout() {
                 </Link>
               ))}
 
-              {isAuthenticated && (
-                <Link
-                  to="/dashboard"
-                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                  data-ocid="nav.mobile.dashboard.link"
-                >
-                  My Account
-                </Link>
-              )}
-
-              {/* Services submenu in mobile */}
               <div className="border-t pt-2">
-                <p className="text-sm font-semibold mb-2">Services</p>
-                {servicesLinks.map((link) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2 pl-4 block"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <p className="text-xs font-semibold text-muted-foreground mt-3 mb-1 pl-4">
-                  Tax &amp; Compliance
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
+                  Plan Structure
                 </p>
-                {taxComplianceLinks.map((link) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2 pl-4 block"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+                <Link
+                  to="/services/company-formation"
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground py-2 pl-3 block"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Company Formation Plans
+                </Link>
+              </div>
+
+              <div className="border-t pt-2">
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
+                  Address Services
+                </p>
+                <Link
+                  to="/services/address-services"
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground py-2 pl-3 block"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  All Address Services
+                </Link>
+              </div>
+
+              <div className="border-t pt-2">
+                <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">
+                  Additional Services
+                </p>
+                <Link
+                  to="/services/business-telephone"
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground py-2 pl-3 block"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Business Telephone
+                </Link>
+                <Link
+                  to="/services/additional-services"
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground py-2 pl-3 block"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Company Administration
+                </Link>
+                <Link
+                  to="/services/vat-registration"
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground py-2 pl-3 block"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  VAT Registration
+                </Link>
+                <Link
+                  to="/services/paye-registration"
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground py-2 pl-3 block"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  PAYE Registration
+                </Link>
               </div>
 
               {isAdmin && (
@@ -296,21 +343,22 @@ export default function SiteLayout() {
                   </>
                 ) : (
                   <Button
-                    onClick={() => {
-                      handleLogin();
-                      setMobileMenuOpen(false);
-                    }}
+                    asChild
                     variant="outline"
                     className="w-full"
                     size="sm"
-                    disabled={loginStatus === "logging-in"}
                   >
-                    {loginStatus === "logging-in" ? "Logging in..." : "Login"}
+                    <Link
+                      to="/account"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      My Account
+                    </Link>
                   </Button>
                 )}
                 <Button asChild className="w-full" size="sm">
                   <Link
-                    to="/formation-wizard"
+                    to="/start-formation"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     Start Formation
@@ -372,23 +420,31 @@ export default function SiteLayout() {
                     to="/services/company-formation"
                     className="text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    Company Formation
+                    Company Formation Plans
                   </Link>
                 </li>
                 <li>
                   <Link
-                    to="/services/registered-office"
+                    to="/services/address-services"
                     className="text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    Registered Office
+                    Address Services
                   </Link>
                 </li>
                 <li>
                   <Link
-                    to="/services/business-support"
+                    to="/services/business-telephone"
                     className="text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    Business Support
+                    Business Telephone
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/services/additional-services"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Additional Services
                   </Link>
                 </li>
                 <li>
@@ -490,7 +546,6 @@ export default function SiteLayout() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                  aria-label="Facebook"
                 >
                   Facebook
                 </a>
@@ -499,7 +554,6 @@ export default function SiteLayout() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                  aria-label="X (Twitter)"
                 >
                   X
                 </a>
@@ -508,7 +562,6 @@ export default function SiteLayout() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-muted-foreground hover:text-foreground transition-colors text-sm"
-                  aria-label="LinkedIn"
                 >
                   LinkedIn
                 </a>
